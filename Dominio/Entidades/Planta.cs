@@ -6,6 +6,7 @@ namespace Dominio.Entidades
 {
     public class Planta
     {
+        private int id { get; set; }
         private TipoPlanta tipo { get; set; }
         private string nombreCientifico { get; set; }
         private string nombresVulgares { get; set; }
@@ -13,8 +14,7 @@ namespace Dominio.Entidades
         private string ambiente { get; set; }
         private int alturaMaxima { get; set; }
         private string foto { get; set; }
-        private double precio { get; set; }
-        private int id { get; set; }
+        private double precio { get; set; }       
         private Usuario ingresadoPor { get; set; }
     }
 }

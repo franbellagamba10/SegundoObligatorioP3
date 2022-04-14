@@ -7,7 +7,7 @@ namespace Dominio.Entidades
     public class CompraImportacion : Compra
     {
         private static decimal impustoImportacion { get; set; }
-        private bool esSudameriana { get; set; }
+        private bool esSudamericana { get; set; }
         private static decimal tasaArancelaria { get; set; }
         private string medidasSanitarias { get; set; }
 

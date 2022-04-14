@@ -6,34 +6,29 @@ using System.Text;
 
 namespace Datos
 {
-    class RepositorioPlantasMemoria : IRepositorioPlantas
+    class RepositorioTiposADO : IRepositorio<TipoPlanta>
     {
-        public bool Create(Planta obj)
+        public bool Create(TipoPlanta obj)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(Planta obj)
+        public bool Delete(TipoPlanta obj)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Planta> FindById(int id)
+        public IEnumerable<TipoPlanta> FindById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Planta> GetAll()
+        public IEnumerable<TipoPlanta> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(Planta obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Validar()
+        public bool Update(TipoPlanta obj)
         {
             throw new NotImplementedException();
         }

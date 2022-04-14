@@ -8,7 +8,6 @@ namespace Dominio.Entidades
     {
         private decimal IVA { get; set; }
         private bool cobroFlete { get; set; }
-
         private decimal costoEnvio { get; set; }
 
         public override double GetTotal()

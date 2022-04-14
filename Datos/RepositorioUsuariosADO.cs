@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Datos
 {
-    class RepositorioUsuariosMemoria : IRepositorioUsuarios
+    public class RepositorioUsuariosADO : IRepositorioUsuarios
     {
         public bool Create(Usuario obj)
         {

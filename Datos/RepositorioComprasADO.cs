@@ -6,29 +6,31 @@ using System.Text;
 
 namespace Datos
 {
-    public class RepositorioFichasMemoria : IRepositorio<Ficha>
+    class RepositorioComprasADO : IRepositorio<Compra>
     {
-        public bool Create(Ficha obj)
+
+
+        public bool Create(Compra obj)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(Ficha obj)
+        public bool Delete(Compra obj)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Ficha> FindById(int id)
+        public IEnumerable<Compra> FindById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Ficha> GetAll()
+        public IEnumerable<Compra> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(Ficha obj)
+        public bool Update(Compra obj)
         {
             throw new NotImplementedException();
         }

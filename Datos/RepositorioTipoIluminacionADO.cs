@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Datos
 {
-    class RepositorioFrecuenciaRiegoMemoria
+    class RepositorioTipoIluminacionADO
     {
     }
 }
