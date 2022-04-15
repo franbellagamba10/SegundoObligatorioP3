@@ -6,8 +6,8 @@ namespace Dominio.Entidades
 {
 	public class FrecuenciaRiego
 	{
-		private int id { get; set; }
-		private string tiempo { get; set; }
-		private int cantidad { get; set; }
+		public int id { get; set; }
+		public string tiempo { get; set; }
+		public int cantidad { get; set; }
     }
 }

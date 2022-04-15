@@ -7,8 +7,8 @@ namespace Dominio.Entidades
 {
     public class TipoPlanta
     {
-        private int id { get; set; }
-        private string nombre { get; set; }
-        private string descripcion { get; set; }        
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public string descripcion { get; set; }        
     }
 }

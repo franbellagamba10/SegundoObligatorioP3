@@ -6,10 +6,10 @@ namespace Dominio.Entidades
 {
     public class Ficha
     {
-        private int id { get; set; }
-        private FrecuenciaRiego frecuenciaRiego { get; set; }
-        private TipoIluminacion tipoIluminacion { get; set; }
-        private decimal temperatura { get; set; }
+        public int id { get; set; }
+        public FrecuenciaRiego frecuenciaRiego { get; set; }
+        public TipoIluminacion tipoIluminacion { get; set; }
+        public decimal temperatura { get; set; }
 
     }
 }

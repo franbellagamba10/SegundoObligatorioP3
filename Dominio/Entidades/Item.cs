@@ -6,9 +6,9 @@ namespace Dominio.Entidades
 {
     public class Item //es Compra_Planta en la BD
     {
-        private Planta planta { get; set; }
-        private Compra compra { get; set; }
-        private int cantidad { get; set; }
+        public Planta planta { get; set; }
+        public Compra compra { get; set; }
+        public int cantidad { get; set; }
 
         public double GetSubTotal()
         {

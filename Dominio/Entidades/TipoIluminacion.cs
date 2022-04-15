@@ -6,7 +6,7 @@ namespace Dominio.Entidades
 {
     public class TipoIluminacion
     {
-        private int id { get; set; }
-        private string iluminacion { get; set; }
+        public int id { get; set; }
+        public string iluminacion { get; set; }
     }
 }

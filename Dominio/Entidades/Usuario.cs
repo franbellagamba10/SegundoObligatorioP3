@@ -7,9 +7,11 @@ namespace Dominio.Entidades
 {
     public class Usuario
     {
-        private int id { get; set; }
-        private string email { get; set; }
-        private string contrasenia { get; set; }
-        private bool activo { get; set; }
+        public int id { get; set; }
+        public string email { get; set; }
+        public string contrasenia { get; set; }
+        public bool activo { get; set; }
     }
+
+
 }

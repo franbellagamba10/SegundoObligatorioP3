@@ -6,10 +6,10 @@ namespace Dominio.Entidades
 {
     public class CompraImportacion : Compra
     {
-        private static decimal impustoImportacion { get; set; }
-        private bool esSudamericana { get; set; }
-        private static decimal tasaArancelaria { get; set; }
-        private string medidasSanitarias { get; set; }
+        public static decimal impustoImportacion { get; set; }
+        public bool esSudamericana { get; set; }
+        public static decimal tasaArancelaria { get; set; }
+        public string medidasSanitarias { get; set; }
 
         public override double GetTotal()
         {

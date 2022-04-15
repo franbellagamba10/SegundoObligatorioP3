@@ -6,9 +6,9 @@ namespace Dominio.Entidades
 {
     public class CompraPlaza : Compra
     {
-        private decimal IVA { get; set; }
-        private bool cobroFlete { get; set; }
-        private decimal costoEnvio { get; set; }
+        public decimal IVA { get; set; }
+        public bool cobroFlete { get; set; }
+        public decimal costoEnvio { get; set; }
 
         public override double GetTotal()
         {

@@ -6,9 +6,9 @@ namespace Dominio.Entidades
 {
     public abstract class Compra
     {
-        private int id { get; set; }
-        private DateTime fecha { get; set; }
-        private List<String> lineas { get; set; }
+        public int id { get; set; }
+        public DateTime fecha { get; set; }
+        public List<String> lineas { get; set; }
         public abstract double GetTotal();
     }
 }
