@@ -20,7 +20,7 @@ namespace Datos
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Compra> FindById(int id)
+        public Compra FindById(int id)
         {
             throw new NotImplementedException();
         }

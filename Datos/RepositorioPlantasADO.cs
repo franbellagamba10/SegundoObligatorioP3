@@ -11,14 +11,14 @@ namespace Datos
         public bool Create(Planta obj)
         {
             throw new NotImplementedException();
-        }
+        }               
 
-        public bool Delete(Planta obj)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Planta> FindById(int id)
+        public Planta FindById(int id)
         {
             throw new NotImplementedException();
         }
