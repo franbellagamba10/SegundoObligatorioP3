@@ -13,7 +13,7 @@ namespace Datos
             throw new NotImplementedException();
         }
 
-        public bool Delete(Usuario obj)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -31,11 +31,13 @@ namespace Datos
         public bool Update(Usuario obj)
         {
             throw new NotImplementedException();
-        }
+        }   
 
-        public bool Validar()
+        public bool Validar(Usuario obj)
         {
-            throw new NotImplementedException();
+
+
+            return true;
         }
     }
 }

@@ -32,8 +32,8 @@ namespace Datos
         {
             throw new NotImplementedException();
         }
-
-        public bool Validar()
+        
+        public bool Validar(Planta obj)
         {
             throw new NotImplementedException();
         }

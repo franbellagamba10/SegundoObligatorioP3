@@ -15,7 +15,7 @@ namespace Datos
             throw new NotImplementedException();
         }
 
-        public bool Delete(Compra obj)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
