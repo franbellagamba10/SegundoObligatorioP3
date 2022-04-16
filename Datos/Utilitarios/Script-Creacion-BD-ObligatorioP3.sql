@@ -77,10 +77,11 @@ create table Planta( -- !!!! ANTES DE INICIALIZAR PLANTA TIENE QUE EXISTIR TIPO 
 	FOREIGN KEY (ingresadoPor) REFERENCES Usuarios(id),
 )
 
-create table Compra_Planta(
+create table Items(
 	compra int NOT NULL,
 	planta int NOT NULL,
 	cantidad int NOT NULL DEFAULT 1,
+	precioUnidad decimal NOT NULL,
 
 	FOREIGN KEY (compra) REFERENCES Compra(id),
 	FOREIGN KEY (planta) REFERENCES Planta(id),
