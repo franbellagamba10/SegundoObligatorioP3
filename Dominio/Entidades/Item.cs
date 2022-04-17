@@ -4,17 +4,18 @@ using System.Text;
 
 namespace Dominio.Entidades
 {
-    public class Item //es Compra_Planta en la BD
+    public class Item
     {
         public Planta planta { get; set; }
         public Compra compra { get; set; }
         public int cantidad { get; set; }
-
+        public decimal precioUnidad { get; set; }
+                
         public double GetSubTotal()
         {
             double subtotal = 0;
-
+            //va a obtener el precio de donde?
             return subtotal;
-        }
+        }        
     }
 }

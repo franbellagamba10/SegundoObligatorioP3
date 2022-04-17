@@ -16,5 +16,6 @@ namespace Dominio.Entidades
         public string foto { get; set; }
         public double precio { get; set; }
         public Usuario ingresadoPor { get; set; }
+        public Ficha ficha { get; set; }
     }
 }
