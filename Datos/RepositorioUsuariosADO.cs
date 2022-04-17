@@ -24,7 +24,7 @@ namespace Datos
             Usuario usuario = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM USUARIOS WHERE id = "+ id+";";
+            string sql = "SELECT * FROM Usuarios WHERE id = "+ id+";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {

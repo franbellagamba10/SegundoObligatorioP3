@@ -39,7 +39,7 @@ namespace Datos
         }
         public static void CerrarYDesecharConexion(SqlConnection con)
         {
-            Conexion.CerrarConexion(con);
+            CerrarConexion(con);
             con.Dispose();
         }
     }

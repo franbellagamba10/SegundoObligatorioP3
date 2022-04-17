@@ -1,0 +1,12 @@
+Lista de tareas que nos van faltando para tener la base de la solucion
+
+1- Revisar UML: RepositorioItems, IRepositorioItems --> NO hereda de IRepositorio<T> ,IValidate() para repo items,
+	Compra no guarda una lista de lineas, Item guarda id de Planta y Compra. (Casi seguro que faltan mas cosas)
+
+2- Terminar de implementar metodos CRUD de repositorios
+
+3- implementar los IManejadores. como se hace?
+
+4- Controllers
+
+5- Vistas

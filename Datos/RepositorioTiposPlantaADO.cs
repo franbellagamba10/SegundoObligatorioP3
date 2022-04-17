@@ -7,32 +7,24 @@ using System.Text;
 
 namespace Datos
 {
-    public class RepositorioFichasADO : IRepositorio<Ficha>
+    public class RepositorioTiposPlantaADO : IRepositorio<TipoPlanta>
     {
-        RepositorioFrecuenciaRiegoADO repoFrecuenciaRiego;
-        RepositorioTipoIluminacionADO repoTipoIluminacion;
-
-        public RepositorioFichasADO(RepositorioFrecuenciaRiegoADO repoFrecuenciaRiego, RepositorioTipoIluminacionADO repoTipoIluminacion)
-        {
-            this.repoFrecuenciaRiego = repoFrecuenciaRiego;
-            this.repoTipoIluminacion = repoTipoIluminacion;
-        }
-        public bool Create(Ficha obj)
+        public bool Create(TipoPlanta obj)
         {
             throw new NotImplementedException();
-        }
+        }               
 
         public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Ficha FindById(int id)
+        public TipoPlanta FindById(int id)
         {
-            Ficha ficha = null; ;
+            TipoPlanta tipoPlanta = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM Ficha WHERE id = " + id + ";";
+            string sql = "SELECT * FROM TipoPlanta WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -41,12 +33,11 @@ namespace Datos
 
                 if (reader.Read())
                 {
-                    ficha = new Ficha()
+                    tipoPlanta = new TipoPlanta()
                     {
                         id = reader.GetInt32(reader.GetOrdinal("id")),
-                        frecuenciaRiego = repoFrecuenciaRiego.FindById(reader.GetInt32(1)),
-                        tipoIluminacion = repoTipoIluminacion.FindById(reader.GetInt32(2)),
-                        temperatura = reader.GetInt32(3)
+                        nombre = reader.GetString(1),
+                        descripcion = reader.GetString(2),                        
                     };
                 }
             }
@@ -58,15 +49,15 @@ namespace Datos
             {
                 Conexion.CerrarYDesecharConexion(conexion);
             }
-            return ficha;
+            return tipoPlanta;
         }
 
-        public IEnumerable<Ficha> GetAll()
+        public IEnumerable<TipoPlanta> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(Ficha obj)
+        public bool Update(TipoPlanta obj)
         {
             throw new NotImplementedException();
         }
