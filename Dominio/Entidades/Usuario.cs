@@ -11,7 +11,10 @@ namespace Dominio.Entidades
         public string email { get; set; }
         public string contrasenia { get; set; }
         public bool activo { get; set; }
+
+        public Usuario()
+        {
+            activo = true;
+        }
     }
-
-
 }
