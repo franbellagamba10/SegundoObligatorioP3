@@ -21,7 +21,42 @@ namespace Datos
         }
         public bool Create(Planta obj)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            string sql = "INSERT INTO Planta VALUES(@tipo, @nombreCientifico, @nombresVulgares, @descripcion," +
+                " @ambiente, @alturaMaxima, @foto, @precio, @ingresadoPor); " +
+            "SELECT CAST(SCOPE_IDENTITY() AS INT);";
+            SqlCommand com = new SqlCommand(sql, conexion);
+
+            com.Parameters.AddWithValue("@tipo", obj.tipo.id);
+            com.Parameters.AddWithValue("@nombreCientifico", obj.nombreCientifico);
+            com.Parameters.AddWithValue("@nombresVulgares", obj.nombresVulgares);
+            com.Parameters.AddWithValue("@descripcion", obj.descripcion);
+            com.Parameters.AddWithValue("@ambiente", obj.ambiente);
+            com.Parameters.AddWithValue("@alturaMaxima", obj.alturaMaxima);
+            com.Parameters.AddWithValue("@foto", obj.foto);
+            com.Parameters.AddWithValue("@precio", obj.precio);
+            com.Parameters.AddWithValue("@ingresadoPor", obj.ingresadoPor.id);// Session["usuarioId"] ?
+            try
+            {
+                //if (!Validar(obj))
+                    //return false;
+
+                Conexion.AbrirConexion(conexion);
+                int id = (int)com.ExecuteScalar();
+                id = obj.id;
+                Console.WriteLine("Todo OK");
+                Console.ReadKey();
+                return true;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
         }               
 
         public bool Delete(int id)
@@ -57,9 +92,7 @@ namespace Datos
                         ingresadoPor = repoUsuarios.FindById(reader.GetInt32(9)),
                         ficha = repoFichas.FindById(reader.GetInt32(10))
                     };
-                }
-
-                DB.Plantas.Where(x => x.tipo == "unTipoPlanta").FirstOrDefault();
+                }                                
             }
             catch (Exception ex)
             {

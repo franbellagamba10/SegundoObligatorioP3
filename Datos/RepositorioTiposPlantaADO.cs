@@ -12,24 +12,20 @@ namespace Datos
     {
         public bool Create(TipoPlanta obj)
         {
-            SqlConnection conexion = Conexion.ObtenerConexion();
-            
-            //revisar por que Connection stirng no levanta del appsettings
-            //conexion.ConnectionString = "Server=localhost\\SQLEXPRESS;Database=ObligatorioP3;Trusted_Connection=True;";
+            SqlConnection conexion = Conexion.ObtenerConexion();              
             
             
             string sql = "INSERT INTO Tipo VALUES(@nombre, @descripcion); " +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
-
-            //com.Parameters.AddWithValue("@id", obj.id);
+            
             com.Parameters.AddWithValue("@nombre", obj.nombre);
             com.Parameters.AddWithValue("@descripcion", obj.descripcion);            
 
             try
             {
                 //if (!Validar(obj))
-                   // return false;
+                    //return false;
 
                 Conexion.AbrirConexion(conexion);
                 int id = (int)com.ExecuteScalar();
@@ -56,7 +52,7 @@ namespace Datos
             TipoPlanta tipoPlanta = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM TipoPlanta WHERE id = " + id + ";";
+            string sql = "SELECT * FROM Tipo WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {

@@ -11,7 +11,35 @@ namespace Datos
     {
         public bool Create(Usuario obj)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            string sql = "INSERT INTO Usuarios VALUES(@email, @contrasenia, @activo); " +
+            "SELECT CAST(SCOPE_IDENTITY() AS INT);";
+            SqlCommand com = new SqlCommand(sql, conexion);
+
+            com.Parameters.AddWithValue("@email", obj.email);
+            com.Parameters.AddWithValue("@contrasenia", obj.contrasenia);
+            com.Parameters.AddWithValue("@activo", obj.activo);
+
+
+            try
+            {
+                //if (!Validar(obj))
+                    //return false;
+
+                Conexion.AbrirConexion(conexion);
+                int id = (int)com.ExecuteScalar();
+                id = obj.id;
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
         }
 
         public bool Delete(int id)
