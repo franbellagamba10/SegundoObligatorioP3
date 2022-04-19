@@ -19,6 +19,8 @@ namespace Datos
             throw new NotImplementedException();
         }
 
+        //un comentario
+
         public TipoIluminacion FindById(int id)
         {
             TipoIluminacion tipoIluminacion = null; ;
