@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Datos
 {
@@ -21,11 +22,11 @@ namespace Datos
             com.Parameters.AddWithValue("@contrasenia", obj.contrasenia);
             com.Parameters.AddWithValue("@activo", obj.activo);
 
-
+           
             try
             {
-                //if (!Validar(obj))
-                    //return false;
+                if (!Validar(obj))
+                    return false;
 
                 Conexion.AbrirConexion(conexion);
                 int id = (int)com.ExecuteScalar();
@@ -34,6 +35,7 @@ namespace Datos
             }
             catch(Exception ex)
             {
+
                 throw;
             }
             finally
@@ -86,7 +88,7 @@ namespace Datos
             List<Usuario> usuarios = new List<Usuario>();
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM USUARIOS;";
+            string sql = "SELECT * FROM Usuarios;";
             SqlCommand com = new SqlCommand(sql, conexion);
 
             try
@@ -124,9 +126,35 @@ namespace Datos
 
         public bool Validar(Usuario obj)
         {
+            int contadorLetras = 0;
+            bool tieneMayusculas = false;
+            bool tieneMinusculas = false;
+            bool tieneNumeros = false;
 
+            if (obj.contrasenia.Length < 6)
+                return false;            
 
-            return true;
+            while ((!tieneMayusculas || !tieneMinusculas || !tieneNumeros) && !(contadorLetras == obj.contrasenia.Length))
+            {
+                char letra = Convert.ToChar(obj.contrasenia.Substring(contadorLetras,1));                
+                
+                if (Char.IsUpper(letra))
+                {
+                    tieneMayusculas = true;
+                }
+                if (Char.IsLower(letra))
+                {
+                    tieneMinusculas = true;
+                }
+                if (Char.IsDigit(letra))
+                {
+                    tieneNumeros = true;
+                }
+                contadorLetras++;
+            }
+            if (tieneMayusculas && tieneMinusculas && tieneNumeros)
+                return true;           
+            return false;           
         }
     }
 }
