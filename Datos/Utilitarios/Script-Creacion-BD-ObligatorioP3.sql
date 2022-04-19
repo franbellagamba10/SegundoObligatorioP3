@@ -35,11 +35,14 @@ create table CompraPlaza(
 
 
 
-create table Tipo(
+create table Tipo( -- !!!! CAMBIAR TipoPlanta
 	id int IDENTITY(1,1) NOT NULL Primary Key,
 	nombre varchar(20),
 	descripcion varchar(max)
 );
+
+
+
 create table FrecuenciaRiego(
 	id int IDENTITY(1,1) NOT NULL Primary Key,
 	tiempo varchar(20) NOT NULL, -- ??? -----> por que string?
@@ -51,7 +54,7 @@ create table TipoIluminacion(
 	iluminacion varchar(20) NOT NULL
 );	--### podriamos agregarle una descripcion.
 
-create table Ficha( --  !!!  ANTES DE INICIALIZAR FICHA TIENE QUE EXISTIR FRECUENCIARIEGO Y TIPOILUMINACION
+create table Ficha(
 	id int IDENTITY(1,1) NOT NULL Primary Key,
 	frecuenciaRiego int NOT NULL,
 	tipoIluminacion int NOT NULL,
@@ -61,7 +64,7 @@ create table Ficha( --  !!!  ANTES DE INICIALIZAR FICHA TIENE QUE EXISTIR FRECUE
 	FOREIGN KEY (tipoIluminacion) REFERENCES TipoIluminacion(id)	
 );
 
-create table Planta( -- !!!! ANTES DE INICIALIZAR PLANTA TIENE QUE EXISTIR TIPO Y USUARIO
+create table Planta(
 	id int IDENTITY(1,1) NOT NULL Primary Key,
 	tipo int NOT NULL,
 	nombreCientifico varchar(50) NOT NULL,
@@ -69,9 +72,9 @@ create table Planta( -- !!!! ANTES DE INICIALIZAR PLANTA TIENE QUE EXISTIR TIPO 
 	descripcion varchar(max) NOT NULL,
 	ambiente varchar(20) NOT NULL,
 	alturaMaxima int NOT NULL,
-	foto varchar(50), --queremos que acepte NULLS por si todavia no existe la foto en la sln
+	foto varchar(50),
 	precio decimal NOT NULL, -- !!!!! en el UML es DOUBLE, no supe que poner xq double no existe en SQL
-	ingresadoPor int, -- queremos que acepte nulls porque en la carga inicial no va a ser un usuario sino el script el que crea estas plantas
+	ingresadoPor int,
 	
 	FOREIGN KEY (tipo) REFERENCES Tipo(id),
 	FOREIGN KEY (ingresadoPor) REFERENCES Usuarios(id),

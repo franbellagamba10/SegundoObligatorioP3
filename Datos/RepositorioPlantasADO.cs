@@ -1,6 +1,6 @@
 ﻿using Dominio.Entidades;
 using Dominio.Interfaces;
-using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -58,6 +58,8 @@ namespace Datos
                         ficha = repoFichas.FindById(reader.GetInt32(10))
                     };
                 }
+
+                DB.Plantas.Where(x => x.tipo == "unTipoPlanta").FirstOrDefault();
             }
             catch (Exception ex)
             {

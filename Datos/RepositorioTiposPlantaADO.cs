@@ -1,17 +1,49 @@
 ﻿using Dominio.Entidades;
 using Dominio.Interfaces;
-using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
+using System.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Datos
 {
-    public class RepositorioTiposPlantaADO : IRepositorio<TipoPlanta>
+    public class RepositorioTiposPlantaADO : IRepositorio<TipoPlanta>, IValidate<TipoPlanta>
     {
         public bool Create(TipoPlanta obj)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Conexion.ObtenerConexion();
+            
+            //revisar por que Connection stirng no levanta del appsettings
+            //conexion.ConnectionString = "Server=localhost\\SQLEXPRESS;Database=ObligatorioP3;Trusted_Connection=True;";
+            
+            
+            string sql = "INSERT INTO Tipo VALUES(@nombre, @descripcion); " +
+            "SELECT CAST(SCOPE_IDENTITY() AS INT);";
+            SqlCommand com = new SqlCommand(sql, conexion);
+
+            //com.Parameters.AddWithValue("@id", obj.id);
+            com.Parameters.AddWithValue("@nombre", obj.nombre);
+            com.Parameters.AddWithValue("@descripcion", obj.descripcion);            
+
+            try
+            {
+                //if (!Validar(obj))
+                   // return false;
+
+                Conexion.AbrirConexion(conexion);
+                int id = (int)com.ExecuteScalar();
+                id = obj.id;
+                return true;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
         }               
 
         public bool Delete(int id)
@@ -58,6 +90,11 @@ namespace Datos
         }
 
         public bool Update(TipoPlanta obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Validar(TipoPlanta obj)
         {
             throw new NotImplementedException();
         }

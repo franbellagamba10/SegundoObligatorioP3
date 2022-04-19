@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 using System.Data;
 namespace Datos
 {
@@ -11,10 +11,11 @@ namespace Datos
         
         public static string ObtenerConnectionString()
         {
-            string connectionString = string.Empty;
+            string connectionString = "";
 
             IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             connectionString = config.GetConnectionString("miConexion");
+            
             return connectionString;
         }
         public static SqlConnection ObtenerConexion()

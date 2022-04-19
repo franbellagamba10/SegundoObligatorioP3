@@ -28,15 +28,11 @@ namespace ProyectoWeb
             services.AddControllersWithViews();
 
             string tipoRepo = Configuration.GetSection("TipoRepo").Value;
-            services.AddScoped<ManejadorUsuarios, ManejadorUsuarios>();
-            if (tipoRepo == "ADO")
-            {
-                services.AddScoped<IRepositorioUsuarios, RepositorioUsuariosADO>();
-            }
-            else if (tipoRepo == "MEMORIA") //no lo vamos a usar, solo ADO
-            {
-                //services.AddScoped<IRepositorioUsuarios, RepositorioUsuariosMemoria>();
-            }
+           
+            services.AddScoped<ManejadorUsuarios, ManejadorUsuarios>();            
+            services.AddScoped<IRepositorioUsuarios, RepositorioUsuariosADO>();
+            
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

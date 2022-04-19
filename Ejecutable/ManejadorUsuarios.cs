@@ -1,6 +1,8 @@
 ﻿using Dominio.Entidades;
 using Dominio.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Ejecutable
 {
@@ -11,7 +13,7 @@ namespace Ejecutable
         public ManejadorUsuarios(IRepositorioUsuarios repo)
         {
             RepoUsuarios = repo;
-        }       
+        }
 
         public bool AgregarNuevoUsuario(Usuario usuario)
         {

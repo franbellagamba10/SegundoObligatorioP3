@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dominio.Entidades;
+using Dominio.Interfaces;
+using System;
 
 namespace Dominio
 {
@@ -6,7 +8,8 @@ namespace Dominio
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
+            
         }
     }
 }
