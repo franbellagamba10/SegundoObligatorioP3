@@ -40,6 +40,7 @@ namespace Ejecutable
             bool resultadoUser2 = repoUsuarios.Validar(user2);
 
             var haciendoTiempo = 0;
+            //var haciendoTiempo2 = 0;
             //repoUsuarios.Create(user);
 
             //Planta faso = new Planta()
