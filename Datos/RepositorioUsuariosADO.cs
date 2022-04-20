@@ -46,8 +46,32 @@ namespace Datos
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool ok = false;
+
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
+            string sql = "DELETE FROM Usuarios WHERE Id=" + id;
+            SqlCommand com = new SqlCommand(sql, conexion);
+
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                int tuplasAfectadas = com.ExecuteNonQuery();
+                ok = tuplasAfectadas == 1;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+
+            return ok;
         }
+
 
         public Usuario FindById(int id)
         {
