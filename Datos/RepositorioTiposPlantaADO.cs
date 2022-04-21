@@ -15,7 +15,7 @@ namespace Datos
             SqlConnection conexion = Conexion.ObtenerConexion();              
             
             
-            string sql = "INSERT INTO Tipo VALUES(@nombre, @descripcion); " +
+            string sql = "INSERT INTO TipoPlanta VALUES(@nombre, @descripcion); " +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
             
@@ -52,7 +52,7 @@ namespace Datos
             TipoPlanta tipoPlanta = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM Tipo WHERE id = " + id + ";";
+            string sql = "SELECT * FROM TipoPlanta WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {

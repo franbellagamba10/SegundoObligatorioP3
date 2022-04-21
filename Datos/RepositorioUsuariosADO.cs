@@ -25,8 +25,8 @@ namespace Datos
            
             try
             {
-                if (!obj.Validar())
-                    return false;
+                if (!obj.Validar() || !ValidarMail(obj.email))
+                  return false;                                  
 
                 Conexion.AbrirConexion(conexion);
                 int id = (int)com.ExecuteScalar();
@@ -148,8 +148,11 @@ namespace Datos
             throw new NotImplementedException();
         }
 
+       
         public bool ValidarMail(string mail)
         {
+
+
             throw new NotImplementedException();
         }
     }

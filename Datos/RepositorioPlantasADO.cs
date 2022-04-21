@@ -85,12 +85,12 @@ namespace Datos
                         nombreCientifico = reader.GetString(2),
                         nombresVulgares = reader.GetString(3),
                         descripcion = reader.GetString(4),
-                        ambiente = reader.GetString(5),
+                        ambiente = (Planta.Ambiente)reader.GetInt32(5),
                         alturaMaxima = reader.GetInt32(6),
                         foto = reader.GetString(7),
                         precio = Convert.ToDouble(reader.GetDecimal(8)),
                         ingresadoPor = repoUsuarios.FindById(reader.GetInt32(9)),
-                        ficha = repoFichas.FindById(reader.GetInt32(10))
+                        ficha = repoFichas.FindById(reader.GetInt32(10))                        
                     };
                 }                                
             }

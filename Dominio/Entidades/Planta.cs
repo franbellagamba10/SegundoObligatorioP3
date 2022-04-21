@@ -29,13 +29,20 @@ namespace Dominio.Entidades
         public bool Validar()
         {
             if (string.IsNullOrWhiteSpace(nombreCientifico) || string.IsNullOrWhiteSpace(nombresVulgares)
-                || string.IsNullOrWhiteSpace(descripcion) || descripcion.Length > 500|| precio < 1 || string.IsNullOrWhiteSpace(Ambiente)
-                || alturaMaxima < 1 )
+                || string.IsNullOrWhiteSpace(descripcion) || descripcion.Length > 500|| precio < 1 || !ValidarEnum((int)ambiente)
+                || alturaMaxima < 1)
                 return false;
             return true;
         }
 
-        
+        public bool ValidarEnum(int valorEnum)
+        {
+            bool existe = Enum.IsDefined(typeof(Ambiente), valorEnum);
+            if (existe)
+                return true;
+
+            return false;            
+        }
 
 
     }
