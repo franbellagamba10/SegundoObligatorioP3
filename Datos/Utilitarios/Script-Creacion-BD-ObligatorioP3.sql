@@ -101,3 +101,8 @@ create table Constantes(
 	valorInt int
 );
 drop table Constantes;
+
+
+-- ####################################
+-- PRECARGA DE DATOS
+-- ####################################
