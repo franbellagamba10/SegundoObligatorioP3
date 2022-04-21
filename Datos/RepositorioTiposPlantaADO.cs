@@ -24,8 +24,8 @@ namespace Datos
 
             try
             {
-                //if (!Validar(obj))
-                    //return false;
+                if (!obj.Validar() || YaExisteString(obj.nombre))
+                    return false;
 
                 Conexion.AbrirConexion(conexion);
                 int id = (int)com.ExecuteScalar();
@@ -88,6 +88,31 @@ namespace Datos
         public bool Update(TipoPlanta obj)
         {
             throw new NotImplementedException();
-        }                
+        }
+
+        public bool YaExisteString(string cadena)
+        {
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            string sql = "SELECT nombre FROM TipoPlanta WHERE nombre = '" + cadena + "';";
+            SqlCommand com = new SqlCommand(sql, conexion);
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.HasRows)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+        }
     }
 }

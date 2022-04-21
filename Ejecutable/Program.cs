@@ -17,6 +17,19 @@ namespace Ejecutable
             RepositorioFichasADO repoFichas = new RepositorioFichasADO(repoFR, repoTI);
             RepositorioPlantasADO repoPlantas = new RepositorioPlantasADO(repoTipos, repoFichas, repoUsuarios);
 
+            #region Test unitario para YaExisteString(string)
+            if (repoTipos.YaExisteString("una plantita"))
+                Console.WriteLine("Si existe");
+            else
+                Console.WriteLine("NO existe");
+            Console.WriteLine("-----------------------");
+            if (repoTipos.YaExisteString("plantita"))
+                Console.WriteLine("Si existe");
+            else
+                Console.WriteLine("NO existe");
+            #endregion
+
+
             //TipoPlanta tipo = new TipoPlanta()
             //{
             //    nombre = "una plantita",
@@ -25,22 +38,21 @@ namespace Ejecutable
             //repoTipos.Create(tipo);
 
 
-            Usuario user1 = new Usuario()
-            {
-                email = "otroBIEN@gmail.com",
-                contrasenia = "contraBIEN22",
-            };
-            Usuario user2 = new Usuario()
-            {
-                email = "mailmal@gmail.com",
-                contrasenia = "contraMal",
-            };
+            //Usuario user1 = new Usuario()
+            //{
+            //    email = "otroBIEN@gmail.com",
+            //    contrasenia = "contraBIEN22",
+            //};
+            //repoUsuarios.Create(user1);
 
-            bool resultadoUser1 = repoUsuarios.Validar(user1);
-            bool resultadoUser2 = repoUsuarios.Validar(user2);
+            //Usuario user2 = new Usuario()
+            //{
+            //    email = "otromal@gmail.com",
+            //    contrasenia = "contramal22",
+            //};
+            //repoUsuarios.Create(user2);
 
-            var haciendoTiempo = 0;
-            //repoUsuarios.Create(user);
+
 
             //Planta faso = new Planta()
             //{
@@ -48,13 +60,21 @@ namespace Ejecutable
             //    nombreCientifico = "ayahuasca",
             //    nombresVulgares = "la que bajo las torres gemelas",
             //    descripcion = "404",
-            //    ambiente = "donde puedas",
+            //    ambiente = (Planta.Ambiente)0,
             //    alturaMaxima = 300,
             //    foto = "una_Foto2.jpg",
             //    precio = 300,
             //    ingresadoPor = repoUsuarios.FindById(1),
             //};
             //repoPlantas.Create(faso);
+
+            //bool encontreUsuario = repoUsuarios.ExisteMail("otroBIEN22@gmail");
+
+            //bool noEncontreUser = repoUsuarios.ExisteMail("cualquiera");
+
+            //Console.WriteLine("Encontre: " + encontreUsuario);
+            //Console.WriteLine("No encontre: " + noEncontreUser);
+            //Console.ReadKey();
         }
     }
 }

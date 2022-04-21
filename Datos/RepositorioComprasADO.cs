@@ -180,6 +180,11 @@ namespace Datos
         {
             throw new NotImplementedException();
         }
+
+        public bool YaExisteString(string cadena)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

@@ -11,8 +11,7 @@ namespace Datos
     {
         RepositorioTiposPlantaADO repoTiposPlanta { get; set; }
         RepositorioFichasADO repoFichas { get; set; }
-        RepositorioUsuariosADO repoUsuarios { get; set; }
-
+        RepositorioUsuariosADO repoUsuarios { get; set; }       
         public RepositorioPlantasADO(RepositorioTiposPlantaADO repoTipos, RepositorioFichasADO repoFichas, RepositorioUsuariosADO repoUsuarios)
         {
             repoTiposPlanta = repoTipos;
@@ -39,14 +38,12 @@ namespace Datos
             com.Parameters.AddWithValue("@ingresadoPor", obj.ingresadoPor.id);// Session["usuarioId"] ?
             try
             {
-                if (!obj.Validar())
+                if (!obj.Validar() || YaExisteString(obj.nombreCientifico))
                     return false;
 
                 Conexion.AbrirConexion(conexion);
                 int id = (int)com.ExecuteScalar();
-                id = obj.id;
-                Console.WriteLine("Todo OK");
-                Console.ReadKey();
+                id = obj.id;                
                 return true;
             }
             catch
@@ -113,7 +110,11 @@ namespace Datos
         public bool Update(Planta obj)
         {
             throw new NotImplementedException();
-        }              
-        
+        }
+
+        public bool YaExisteString(string cadena)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

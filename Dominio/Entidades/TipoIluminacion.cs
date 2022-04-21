@@ -12,7 +12,9 @@ namespace Dominio.Entidades
 
         public bool Validar()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(iluminacion))
+                return false;
+            return true;
         }
     }
 }

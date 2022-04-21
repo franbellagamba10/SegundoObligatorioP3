@@ -25,7 +25,7 @@ namespace Datos
            
             try
             {
-                if (!obj.Validar() || ExisteMail(obj.email))
+                if (!obj.Validar() || YaExisteString(obj.email))
                   return false;                                  
 
                 Conexion.AbrirConexion(conexion);
@@ -106,7 +106,7 @@ namespace Datos
             }
             return usuario;
         }
-
+        
         public IEnumerable<Usuario> GetAll()
         {
             List<Usuario> usuarios = new List<Usuario>();
@@ -149,7 +149,7 @@ namespace Datos
         }
 
        
-        public bool ExisteMail(string mail)
+        public bool YaExisteString(string mail)
         {            
             SqlConnection conexion = Conexion.ObtenerConexion();
 
@@ -173,5 +173,6 @@ namespace Datos
                 Conexion.CerrarYDesecharConexion(conexion);
             }
         }
+        
     }
 }

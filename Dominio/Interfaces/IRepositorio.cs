@@ -11,6 +11,6 @@ namespace Dominio.Interfaces
         bool Update(T obj);
         IEnumerable<T> GetAll();
         T FindById(int id);
-
+        bool YaExisteString(string cadena);
     }
 }

@@ -20,10 +20,6 @@ namespace Dominio.Interfaces
         public void Logout()
         {
             //----> EDITAR
-        }
-        public bool ExisteMail(string mail);
-        
-
-        
+        }            
     }
 }
