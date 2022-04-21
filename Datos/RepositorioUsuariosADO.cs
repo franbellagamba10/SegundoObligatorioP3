@@ -25,7 +25,7 @@ namespace Datos
            
             try
             {
-                if (!Validar(obj))
+                if (!obj.Validar())
                     return false;
 
                 Conexion.AbrirConexion(conexion);
@@ -146,41 +146,11 @@ namespace Datos
         public bool Update(Usuario obj)
         {
             throw new NotImplementedException();
-        }   
-
-        public bool Validar(Usuario obj)
-        {
-            int contadorLetras = 0;
-            bool tieneMayusculas = false;
-            bool tieneMinusculas = false;
-            bool tieneNumeros = false;
-
-            if (obj.contrasenia.Length < 6)
-                return false;            
-
-            while ((!tieneMayusculas || !tieneMinusculas || !tieneNumeros) && !(contadorLetras == obj.contrasenia.Length))
-            {
-                char letra = Convert.ToChar(obj.contrasenia.Substring(contadorLetras,1));                
-                
-                if (Char.IsUpper(letra))
-                {
-                    tieneMayusculas = true;
-                }
-                if (Char.IsLower(letra))
-                {
-                    tieneMinusculas = true;
-                }
-                if (Char.IsDigit(letra))
-                {
-                    tieneNumeros = true;
-                }
-                contadorLetras++;
-            }
-            if (tieneMayusculas && tieneMinusculas && tieneNumeros)
-                return true;           
-            return false;           
         }
 
-        //un comentario nuevo
+        public bool ValidarMail(string mail)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

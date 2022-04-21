@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Datos
 {
-    public class RepositorioTiposPlantaADO : IRepositorio<TipoPlanta>, IValidate<TipoPlanta>
+    public class RepositorioTiposPlantaADO : IRepositorio<TipoPlanta>
     {
         public bool Create(TipoPlanta obj)
         {
@@ -88,11 +88,6 @@ namespace Datos
         public bool Update(TipoPlanta obj)
         {
             throw new NotImplementedException();
-        }
-
-        public bool Validar(TipoPlanta obj)
-        {
-            throw new NotImplementedException();
-        }
+        }                
     }
 }

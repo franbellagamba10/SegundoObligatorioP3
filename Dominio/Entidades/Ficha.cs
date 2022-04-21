@@ -9,7 +9,6 @@ namespace Dominio.Entidades
         public int id { get; set; }
         public FrecuenciaRiego frecuenciaRiego { get; set; }
         public TipoIluminacion tipoIluminacion { get; set; }
-        public decimal temperatura { get; set; }
-
+        public decimal temperatura { get; set; }       
     }
 }

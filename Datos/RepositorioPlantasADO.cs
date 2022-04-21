@@ -39,8 +39,8 @@ namespace Datos
             com.Parameters.AddWithValue("@ingresadoPor", obj.ingresadoPor.id);// Session["usuarioId"] ?
             try
             {
-                //if (!Validar(obj))
-                    //return false;
+                if (!obj.Validar())
+                    return false;
 
                 Conexion.AbrirConexion(conexion);
                 int id = (int)com.ExecuteScalar();
@@ -113,12 +113,7 @@ namespace Datos
         public bool Update(Planta obj)
         {
             throw new NotImplementedException();
-        }
-        
-        public bool Validar(Planta obj)
-        {
-            throw new NotImplementedException();
-        }
+        }              
         
     }
 }
