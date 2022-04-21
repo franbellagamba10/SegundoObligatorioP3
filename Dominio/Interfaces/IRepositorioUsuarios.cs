@@ -21,7 +21,7 @@ namespace Dominio.Interfaces
         {
             //----> EDITAR
         }
-        public bool ValidarMail(string mail);
+        public bool ExisteMail(string mail);
         
 
         

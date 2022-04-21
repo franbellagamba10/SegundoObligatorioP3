@@ -25,7 +25,7 @@ namespace Datos
            
             try
             {
-                if (!obj.Validar() || !ValidarMail(obj.email))
+                if (!obj.Validar() || ExisteMail(obj.email))
                   return false;                                  
 
                 Conexion.AbrirConexion(conexion);
@@ -75,7 +75,7 @@ namespace Datos
 
         public Usuario FindById(int id)
         {
-            Usuario usuario = null; ;
+            Usuario usuario = null;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
             string sql = "SELECT * FROM Usuarios WHERE id = "+ id+";";
@@ -149,11 +149,29 @@ namespace Datos
         }
 
        
-        public bool ValidarMail(string mail)
-        {
+        public bool ExisteMail(string mail)
+        {            
+            SqlConnection conexion = Conexion.ObtenerConexion();
 
+            string sql = "SELECT email FROM Usuarios WHERE email = '" + mail + "';";
+            SqlCommand com = new SqlCommand(sql, conexion);
+            try
+            {
+                Conexion.AbrirConexion(conexion);                
 
-            throw new NotImplementedException();
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.HasRows)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
         }
     }
 }
