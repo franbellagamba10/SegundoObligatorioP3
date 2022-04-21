@@ -104,5 +104,5 @@ drop table Constantes;
 
 
 -- ####################################
--- PRECARGA DE DATOS
+--			PRECARGA DE DATOS
 -- ####################################
