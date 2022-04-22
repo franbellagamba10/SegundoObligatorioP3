@@ -1,8 +1,6 @@
 Lista de tareas que nos van faltando para tener la base de la solucion
 
 
-1- REVISAR por que Connection Strings no levanta de appsettings.json
-
 2- Revisar UML: RepositorioItems, IRepositorioItems --> NO hereda de IRepositorio<T> ,IValidate() para repo items,
 	Compra no guarda una lista de lineas, Item guarda id de Planta y Compra. (Casi seguro que faltan mas cosas)
 
@@ -13,3 +11,11 @@ Lista de tareas que nos van faltando para tener la base de la solucion
 5 Controllers
 
 6- Vistas
+
+7 - Cambiar nombre de tablas en BD, tienen que ser plurales
+
+8 - Ampliar validacion de Usuario: falta validar formato email
+
+9 - Manejo de excepciones - Preguntar a plinio si hacemos log, console.writeline o solo mensaje
+
+10 - Buscar usuario por email
