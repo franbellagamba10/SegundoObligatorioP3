@@ -74,10 +74,12 @@ create table Planta(
 	alturaMaxima int NOT NULL,
 	foto varchar(50),
 	precio decimal NOT NULL, -- !!!!! en el UML es DOUBLE, no supe que poner xq double no existe en SQL
+	ficha int NOT NULL,
 	ingresadoPor int,
 	
 	FOREIGN KEY (tipo) REFERENCES TipoPlanta(id),
 	FOREIGN KEY (ingresadoPor) REFERENCES Usuarios(id),
+	FOREIGN KEY (ficha) REFERENCES Ficha(id),
 )
 
 create table Items(
