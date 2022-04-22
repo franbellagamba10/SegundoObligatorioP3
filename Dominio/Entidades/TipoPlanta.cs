@@ -22,8 +22,8 @@ namespace Dominio.Entidades
 
         /// <summary>
         /// Valida una cadena de texto segun su codigo ASCII. Si contiene valores representativos distintos a los alfabeticos hispanos devuelve FALSE <br></br>
-        /// ñ  = 164 |  Ñ = 165 | ú = 163 | Ú = 233 | ó = 162 |Ó = 224
-        /// í = 161 | Í = 214 | á = 160 | Á = 181 | é = 130 | É = 144
+        /// | ñ  = 164 |  Ñ = 165 | ú = 163 | Ú = 233 | ó = 162 |Ó = 224 |
+        /// í = 161 | Í = 214 | á = 160 | Á = 181 | é = 130 | É = 144 |
         /// </summary>
         /// <returns></returns>
         public bool TieneSoloLetras()
