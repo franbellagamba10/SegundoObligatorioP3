@@ -50,8 +50,42 @@ Lista de tareas que nos van faltando para tener la base de la solucion
 
 18- Los topes pueden modificarse sin tocar el codigo ??? --> PROFE
 
-19 - FrecuenciaRiego: Cantidad positiva no vacia, NO OBLIGATORIO: unidades de tiempo como entidades. (dias, semanas, meses)
+19- Ver como hacer para que Permita elegir foto y la subirla al servidor.(Ver Clase Profe)
 
-20 - AGREGAR TipoIluminacion a traves de UI
+20- Guardar el nombre de la foto asignando el nombre científico, sustituyendo espacios por underscore y agregando sufijo 001 , 002 ....
+
+21- Utilizar el nombre de la foto como nombre de archivo para subir a la DB.
+
+22- Verifica que la extension de la foto sea JPG y PNG
+--------- -------------- ------------- ---------------- ---------------
+Ficha de cuidados
+
+23- FrecuenciaRiego: Cantidad positiva no vacia, NO OBLIGATORIO: unidades de tiempo como entidades. (dias, semanas, meses)
+
+24- AGREGAR TipoIluminacion a traves de UI
 			- validar
-21 - FICHA admite temperatura < 0			
+25- FICHA admite temperatura < 0	
+
+26- Permite saber si no se pudo guardar y poder verificarlo visualmente (listado y/o mensaje)
+
+--------- -------------- ------------- ---------------- ---------------
+
+Busqueda de plantas 
+
+27- Prmite buscar por coincidencia parcial de texto en el nombre científico o alguno de los vulgares.
+
+28- Permite buscar Por tipo (selecciona un tipo y despliega todas las de ese tipo).
+
+29- Permite buscar por ambiente (selecciona un ambiente y despliega todas las de ese ambiente).
+
+30- Mustra todas las Menores a altura dada.
+
+31- Mustra todas las Mayor o igual a altura dada
+
+32- Que permita mostrar Todas las plantas.
+
+33- Como resultado de la busqueda Despliega: nombre científico, vulgares, descripción, ambiente, altura y miniatura de la foto.
+
+34- Incluye link para visualizar cuidados y los muestra
+
+35- Envía mensaje cuando no hay coincidencias.
