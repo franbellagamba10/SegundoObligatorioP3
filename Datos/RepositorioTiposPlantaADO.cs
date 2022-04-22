@@ -8,14 +8,14 @@ using System.Text;
 
 namespace Datos
 {
-    public class RepositorioTiposPlantaADO : IRepositorio<TipoPlanta>, IValidate<TipoPlanta>
+    public class RepositorioTiposPlantaADO : IRepositorio<TipoPlanta>
     {
         public bool Create(TipoPlanta obj)
         {
             SqlConnection conexion = Conexion.ObtenerConexion();              
             
             
-            string sql = "INSERT INTO Tipo VALUES(@nombre, @descripcion); " +
+            string sql = "INSERT INTO TipoPlanta VALUES(@nombre, @descripcion); " +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
             
@@ -24,8 +24,8 @@ namespace Datos
 
             try
             {
-                //if (!Validar(obj))
-                    //return false;
+                if (!obj.Validar() || YaExisteString(obj.nombre))
+                    return false;
 
                 Conexion.AbrirConexion(conexion);
                 int id = (int)com.ExecuteScalar();
@@ -52,7 +52,7 @@ namespace Datos
             TipoPlanta tipoPlanta = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM Tipo WHERE id = " + id + ";";
+            string sql = "SELECT * FROM TipoPlanta WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -90,9 +90,29 @@ namespace Datos
             throw new NotImplementedException();
         }
 
-        public bool Validar(TipoPlanta obj)
+        public bool YaExisteString(string cadena)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            string sql = "SELECT nombre FROM TipoPlanta WHERE nombre = '" + cadena + "';";
+            SqlCommand com = new SqlCommand(sql, conexion);
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.HasRows)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
         }
     }
 }

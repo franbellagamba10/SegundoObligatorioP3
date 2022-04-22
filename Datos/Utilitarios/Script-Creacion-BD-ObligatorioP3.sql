@@ -35,7 +35,7 @@ create table CompraPlaza(
 
 
 
-create table Tipo( -- !!!! CAMBIAR TipoPlanta
+create table TipoPlanta( -- !!!! CAMBIAR TipoPlanta
 	id int IDENTITY(1,1) NOT NULL Primary Key,
 	nombre varchar(20),
 	descripcion varchar(max)
@@ -67,16 +67,16 @@ create table Ficha(
 create table Planta(
 	id int IDENTITY(1,1) NOT NULL Primary Key,
 	tipo int NOT NULL,
-	nombreCientifico varchar(50) NOT NULL,
+	nombreCientifico varchar(50) NOT NULL UNIQUE,
 	nombresVulgares varchar(max) NOT NULL, --En BD lo manejamos como cadena unica, separados por una coma. pero en la solucion lo recibimos como una lista y la desarmamos.
 	descripcion varchar(max) NOT NULL,
-	ambiente varchar(20) NOT NULL,
+	ambiente int NOT NULL,
 	alturaMaxima int NOT NULL,
 	foto varchar(50),
 	precio decimal NOT NULL, -- !!!!! en el UML es DOUBLE, no supe que poner xq double no existe en SQL
 	ingresadoPor int,
 	
-	FOREIGN KEY (tipo) REFERENCES Tipo(id),
+	FOREIGN KEY (tipo) REFERENCES TipoPlanta(id),
 	FOREIGN KEY (ingresadoPor) REFERENCES Usuarios(id),
 )
 
@@ -101,3 +101,8 @@ create table Constantes(
 	valorInt int
 );
 drop table Constantes;
+
+
+-- ####################################
+--			PRECARGA DE DATOS
+-- ####################################

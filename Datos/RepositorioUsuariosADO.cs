@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Datos
 {
@@ -21,11 +22,11 @@ namespace Datos
             com.Parameters.AddWithValue("@contrasenia", obj.contrasenia);
             com.Parameters.AddWithValue("@activo", obj.activo);
 
-
+           
             try
             {
-                //if (!Validar(obj))
-                    //return false;
+                if (!obj.Validar() || YaExisteString(obj.email))
+                  return false;                                  
 
                 Conexion.AbrirConexion(conexion);
                 int id = (int)com.ExecuteScalar();
@@ -34,6 +35,7 @@ namespace Datos
             }
             catch(Exception ex)
             {
+
                 throw;
             }
             finally
@@ -44,12 +46,36 @@ namespace Datos
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool ok = false;
+
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
+            string sql = "DELETE FROM Usuarios WHERE Id=" + id;
+            SqlCommand com = new SqlCommand(sql, conexion);
+
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                int tuplasAfectadas = com.ExecuteNonQuery();
+                ok = tuplasAfectadas == 1;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+
+            return ok;
         }
+
 
         public Usuario FindById(int id)
         {
-            Usuario usuario = null; ;
+            Usuario usuario = null;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
             string sql = "SELECT * FROM Usuarios WHERE id = "+ id+";";
@@ -80,13 +106,13 @@ namespace Datos
             }
             return usuario;
         }
-
+        
         public IEnumerable<Usuario> GetAll()
         {
             List<Usuario> usuarios = new List<Usuario>();
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM USUARIOS;";
+            string sql = "SELECT * FROM Usuarios;";
             SqlCommand com = new SqlCommand(sql, conexion);
 
             try
@@ -120,13 +146,33 @@ namespace Datos
         public bool Update(Usuario obj)
         {
             throw new NotImplementedException();
-        }   
-
-        public bool Validar(Usuario obj)
-        {
-
-
-            return true;
         }
+
+       
+        public bool YaExisteString(string mail)
+        {            
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            string sql = "SELECT email FROM Usuarios WHERE email = '" + mail + "';";
+            SqlCommand com = new SqlCommand(sql, conexion);
+            try
+            {
+                Conexion.AbrirConexion(conexion);                
+
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.HasRows)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+        }
+        
     }
 }

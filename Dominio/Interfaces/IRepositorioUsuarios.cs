@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio.Interfaces
 {
-    public interface IRepositorioUsuarios : IRepositorio<Usuario>, IValidate<Usuario>
+    public interface IRepositorioUsuarios : IRepositorio<Usuario>
     {
         public Usuario Login(string email, string contrasenia)
         {
@@ -20,10 +20,6 @@ namespace Dominio.Interfaces
         public void Logout()
         {
             //----> EDITAR
-        }
-
-        
-
-        
+        }            
     }
 }

@@ -19,6 +19,8 @@ namespace Datos
             throw new NotImplementedException();
         }
 
+        //un comentario
+
         public TipoIluminacion FindById(int id)
         {
             TipoIluminacion tipoIluminacion = null; ;
@@ -57,6 +59,11 @@ namespace Datos
         }
 
         public bool Update(TipoIluminacion obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool YaExisteString(string cadena)
         {
             throw new NotImplementedException();
         }

@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Dominio.Interfaces
 {
-    public interface IValidate<T>
+    public interface IValidate
     {
-        public bool Validar(T obj);
+        public bool Validar();
+              
     }
 }

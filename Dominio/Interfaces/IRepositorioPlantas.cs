@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio.Interfaces
 {
-    public interface IRepositorioPlantas : IRepositorio<Planta>, IValidate<Planta>
+    public interface IRepositorioPlantas : IRepositorio<Planta>
     {
         public string ObtenerNombreFoto(string nombrePlanta)
         {

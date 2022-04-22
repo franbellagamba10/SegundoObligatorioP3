@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio.Interfaces
 {
-    public interface IRepositorioCompras : IValidate<Item>
+    public interface IRepositorioCompras
     {
         //public bool Create(Item obj);
 
