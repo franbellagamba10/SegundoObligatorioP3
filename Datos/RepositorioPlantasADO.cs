@@ -58,7 +58,30 @@ namespace Datos
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool ok = false;
+
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
+            string sql = "DELETE FROM Planta WHERE Id=" + id;
+            SqlCommand com = new SqlCommand(sql, conexion);
+
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                int tuplasAfectadas = com.ExecuteNonQuery();
+                ok = tuplasAfectadas == 1;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+
+            return ok;
         }
 
         public Planta FindById(int id)
@@ -112,9 +135,29 @@ namespace Datos
             throw new NotImplementedException();
         }
 
-        public bool YaExisteString(string cadena)
+        public bool YaExisteString(string nombreCientifico)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            string sql = "SELECT nombreCientifico FROM Planta WHERE nombreCientifico = '" + nombreCientifico + "';";
+            SqlCommand com = new SqlCommand(sql, conexion);
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.HasRows)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
         }
     }
 }
