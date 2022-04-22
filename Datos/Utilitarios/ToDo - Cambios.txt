@@ -19,3 +19,39 @@ Lista de tareas que nos van faltando para tener la base de la solucion
 9 - Manejo de excepciones - Preguntar a plinio si hacemos log, console.writeline o solo mensaje
 
 10 - Buscar usuario por email
+
+11 - Login/Logout
+
+12 - Controller de TiposPlanta para todo el mantenimiento CRUD con usuario autenticado.
+		-nombre no vacio
+		-solo caracteres alfabeticos
+		-permite espacios embebidos
+		-Trim()
+		-descripcion entre 10 y 200 caracteres
+
+13 - Baja TipoPlanta : Es baja o BORRAR? email a profesor. Si es borrar: NO SE PUEDE BORRAR SI YA UNA PLANTA LA USA,
+		DEBE HACER LA VERIFICACION DE QUE HAY UNA PLANTA USANDO ESTE TIPO PLANTA.
+
+14 - MODIFICAR LA DESCRIPCION DE UNA TIPO PLANTA. BUSCA POR NOMBRE Y MUESTRA DESCRIPCION EN MODO EDICION. MUESTRA OTROS DATOS COMO NO EDITABLES
+	 VALIDA ANTES DE INSERTAR CAMBIOS EN BD
+
+15 - BUSQUEDA DE NOMBRE, ENCUENTRA Y DESPLIEGA CUANDO ENCUENTRA. INDICA SI NO HAY RESULTADOS. VISTA --> TipoPlanta/Details.cshtml
+ 
+ -------- ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
+16 - Mantenimiento de PLANTA
+
+17- Usuario autenticado: puede registrar planta. Minimo un nombre vulgar. Select de Ambiente.
+	-nombreCientifico no vacio solo alfabetico, solo espacios embebidos no a los extremos.
+	-nombreVulgar no vacio solo alfabetico, solo espacios embebidos no a los extremos. Minimo uno
+	-ambiente: uno de los tres permitidos. Select clave/valor
+	-altura maxima > 0
+	-descripcion.length 10 - 500 caracteres
+	-lo
+
+18- Los topes pueden modificarse sin tocar el codigo ??? --> PROFE
+
+19 - FrecuenciaRiego: Cantidad positiva no vacia, NO OBLIGATORIO: unidades de tiempo como entidades. (dias, semanas, meses)
+
+20 - AGREGAR TipoIluminacion a traves de UI
+			- validar
+21 - FICHA admite temperatura < 0			

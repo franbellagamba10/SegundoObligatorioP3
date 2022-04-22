@@ -18,8 +18,8 @@ namespace Datos
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
 
-            com.Parameters.AddWithValue("@email", obj.email);
-            com.Parameters.AddWithValue("@contrasenia", obj.contrasenia);
+            com.Parameters.AddWithValue("@email", obj.email.Trim());
+            com.Parameters.AddWithValue("@contrasenia", obj.contrasenia.Trim());
             com.Parameters.AddWithValue("@activo", obj.activo);
 
            

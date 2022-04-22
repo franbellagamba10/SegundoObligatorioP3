@@ -19,8 +19,8 @@ namespace Datos
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
             
-            com.Parameters.AddWithValue("@nombre", obj.nombre);
-            com.Parameters.AddWithValue("@descripcion", obj.descripcion);            
+            com.Parameters.AddWithValue("@nombre", obj.nombre.Trim());
+            com.Parameters.AddWithValue("@descripcion", obj.descripcion.Trim());            
 
             try
             {
@@ -87,6 +87,7 @@ namespace Datos
 
         public bool Update(TipoPlanta obj)
         {
+            //HAY QUE VALIDAR EL OBJETO IGUAL QUE EN EL CREATE. ENTIDAD Y REPOSITORIO
             throw new NotImplementedException();
         }
 

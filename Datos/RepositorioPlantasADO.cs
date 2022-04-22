@@ -28,12 +28,12 @@ namespace Datos
             SqlCommand com = new SqlCommand(sql, conexion);
 
             com.Parameters.AddWithValue("@tipo", obj.tipo.id);
-            com.Parameters.AddWithValue("@nombreCientifico", obj.nombreCientifico);
-            com.Parameters.AddWithValue("@nombresVulgares", obj.nombresVulgares);
-            com.Parameters.AddWithValue("@descripcion", obj.descripcion);
+            com.Parameters.AddWithValue("@nombreCientifico", obj.nombreCientifico.Trim());
+            com.Parameters.AddWithValue("@nombresVulgares", obj.nombresVulgares.Trim());
+            com.Parameters.AddWithValue("@descripcion", obj.descripcion.Trim());
             com.Parameters.AddWithValue("@ambiente", obj.ambiente);
             com.Parameters.AddWithValue("@alturaMaxima", obj.alturaMaxima);
-            com.Parameters.AddWithValue("@foto", obj.foto);
+            com.Parameters.AddWithValue("@foto", obj.foto.Trim());
             com.Parameters.AddWithValue("@precio", obj.precio);
             com.Parameters.AddWithValue("@ingresadoPor", obj.ingresadoPor.id);// Session["usuarioId"] ?
             try
