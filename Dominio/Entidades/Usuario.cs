@@ -19,6 +19,9 @@ namespace Dominio.Entidades
 
         public bool Validar()
         {
+            if (!ValidarEmail())
+                return false;
+
             int contadorLetras = 0;
             bool tieneMayusculas = false;
             bool tieneMinusculas = false;
@@ -48,6 +51,18 @@ namespace Dominio.Entidades
             if (tieneMayusculas && tieneMinusculas && tieneNumeros)
                 return true;
             return false;
+        }
+
+        private bool ValidarEmail()
+        {
+            if (!email.Contains("@"))
+                  return false;            
+            string[] subCadenas;
+            subCadenas = email.Split("@");
+            if (!subCadenas[1].Contains(".") || string.IsNullOrWhiteSpace(subCadenas[1]) ||
+                string.IsNullOrWhiteSpace(subCadenas[0]) || subCadenas[0].Contains("@") || subCadenas[1].Contains("@"))
+                    return false;            
+            return true;            
         }
     }
 }
