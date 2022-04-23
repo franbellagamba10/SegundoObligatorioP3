@@ -166,7 +166,7 @@ namespace Datos
         {
             bool ok = false;
             SqlConnection con = Conexion.ObtenerConexion();
-            if (obj.Validar())
+            if (!obj.Validar() || YaExisteString(obj.nombreCientifico))
             {
                 string sql =
                 "UPDATE Planta SET id=@id, tipo=@tipo, nombreCientifico=@nombreCientifico, nombresVulgares=@nombresVulgares, descripcion=@descripcion,ambiente=@ambiente, alturaMaxima=@alturaMaxima,foto=@foto,precio=@precio,ingresadoPor=@ingresadoPor ,WHERE Id=@id";
