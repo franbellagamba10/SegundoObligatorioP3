@@ -1,5 +1,7 @@
 ﻿using Dominio.Entidades;
 using Dominio.Interfaces;
+using System.Data.SqlClient;
+using System.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,32 +12,200 @@ namespace Datos
     {
         public bool Create(FrecuenciaRiego obj)
         {
-            throw new NotImplementedException();
+            {
+                SqlConnection conexion = Conexion.ObtenerConexion(); // verificar si es asi o cambiar validaciones
+
+
+                string sql = "INSERT INTO FrecuenciaRiego VALUES(@tiempo, @cantidad); " +
+                "SELECT CAST(SCOPE_IDENTITY() AS INT);";
+                SqlCommand com = new SqlCommand(sql, conexion);
+
+                com.Parameters.AddWithValue("@tiempo", obj.tiempo.Trim());
+                com.Parameters.AddWithValue("@cantidad", obj.cantidad);
+
+                try
+                {
+                    if (!obj.Validar() || YaExisteString(obj.tiempo))
+                        return false;
+
+                    Conexion.AbrirConexion(conexion);
+                    int id = (int)com.ExecuteScalar();
+                    id = obj.id;
+                    return true;
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    Conexion.CerrarYDesecharConexion(conexion);
+                }
+            }
+
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool ok = false;
+
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
+            string sql = "DELETE FROM FrecuenciaRiego WHERE Id=" + id;
+            SqlCommand com = new SqlCommand(sql, conexion);
+
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                int filasAfectadas = com.ExecuteNonQuery();
+                ok = filasAfectadas == 1;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+
+
+            return ok;
         }
 
         public FrecuenciaRiego FindById(int id)
         {
-            throw new NotImplementedException();
+            FrecuenciaRiego frecuenciaRiego = null; ;
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            string sql = "SELECT * FROM FrecuenciaRiego WHERE id = " + id + ";";
+            SqlCommand com = new SqlCommand(sql, conexion);
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                SqlDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    frecuenciaRiego = new FrecuenciaRiego()
+                    {
+                        id = reader.GetInt32(reader.GetOrdinal("id")),
+                        tiempo = reader.GetString(1),
+                        cantidad = reader.GetInt32(2),
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+            return frecuenciaRiego;
         }
+
 
         public IEnumerable<FrecuenciaRiego> GetAll()
         {
-            throw new NotImplementedException();
+            List<FrecuenciaRiego> frecuenciasRiego = new List<FrecuenciaRiego>();
+
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            string sql = "SELECT * FROM FrecuenciaRiego;";
+            SqlCommand com = new SqlCommand(sql, conexion);
+
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                SqlDataReader reader = com.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    FrecuenciaRiego frecuenciaRiego = new FrecuenciaRiego()
+                    {
+                        id = reader.GetInt32(reader.GetOrdinal("id")),
+                        tiempo = reader.GetString(1),
+                        cantidad = reader.GetInt32(2),
+                    };
+
+                    frecuenciasRiego.Add(frecuenciaRiego);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+
+            return frecuenciasRiego;
         }
 
         public bool Update(FrecuenciaRiego obj)
         {
-            throw new NotImplementedException();
+            bool ok = false;
+
+            SqlConnection con = Conexion.ObtenerConexion();
+
+            if (obj.Validar())
+            {
+                string sql =
+                    "UPDATE FrecuenciaRiego SET id=@id, tiempo=@tiempo, cantidad=@cantidad, WHERE Id=@id";
+
+                SqlCommand com = new SqlCommand(sql, con);
+               
+                com.Parameters.AddWithValue("@id", obj.id);
+                com.Parameters.AddWithValue("@tiempo", obj.tiempo.Trim());
+                com.Parameters.AddWithValue("@cantidad", obj.cantidad);
+
+                try
+                {
+                    Conexion.AbrirConexion(con);
+                    int afectadas = com.ExecuteNonQuery();
+                    ok = afectadas == 1;
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    Conexion.CerrarConexion(con);
+                }
+
+            }
+
+            return ok;
         }
 
         public bool YaExisteString(string cadena)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            string sql = "SELECT nombre FROM FrecuenciaRiego WHERE tiempo = '" + cadena + "';";
+            SqlCommand com = new SqlCommand(sql, conexion);
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.HasRows)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
         }
     }
 }
