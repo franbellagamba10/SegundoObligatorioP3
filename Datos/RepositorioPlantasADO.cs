@@ -9,10 +9,10 @@ namespace Datos
 {
     public class RepositorioPlantasADO : IRepositorioPlantas
     {
-        RepositorioTiposPlantaADO repoTiposPlanta { get; set; }
-        RepositorioFichasADO repoFichas { get; set; }
-        RepositorioUsuariosADO repoUsuarios { get; set; }       
-        public RepositorioPlantasADO(RepositorioTiposPlantaADO repoTipos, RepositorioFichasADO repoFichas, RepositorioUsuariosADO repoUsuarios)
+        IRepositorio<TipoPlanta> repoTiposPlanta { get; set; }
+        IRepositorio<Ficha> repoFichas { get; set; }
+        IRepositorioUsuarios repoUsuarios { get; set; }       
+        public RepositorioPlantasADO(IRepositorio<TipoPlanta> repoTipos, IRepositorio<Ficha> repoFichas, IRepositorioUsuarios repoUsuarios)
         {
             repoTiposPlanta = repoTipos;
             this.repoFichas = repoFichas;
@@ -86,7 +86,7 @@ namespace Datos
             Planta planta = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM Plantas WHERE id = " + id + ";";
+            string sql = "SELECT * FROM Planta WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -105,7 +105,7 @@ namespace Datos
                         ambiente = (Planta.Ambiente)reader.GetInt32(5),
                         alturaMaxima = reader.GetInt32(6),
                         foto = reader.GetString(7),
-                        precio = Convert.ToDouble(reader.GetDecimal(8)),
+                        precio = reader.GetDecimal(8),
                         ingresadoPor = repoUsuarios.FindById(reader.GetInt32(9)),
                         ficha = repoFichas.FindById(reader.GetInt32(10))                        
                     };
@@ -144,7 +144,7 @@ namespace Datos
                         ambiente = (Planta.Ambiente)reader.GetInt32(5),
                         alturaMaxima = reader.GetInt32(6),
                         foto = reader.GetString(7),
-                        precio = Convert.ToDouble(reader.GetDecimal(8)),
+                        precio = reader.GetDecimal(8),
                         ingresadoPor = repoUsuarios.FindById(reader.GetInt32(9)),
                         ficha = repoFichas.FindById(reader.GetInt32(10))
                     };
@@ -166,7 +166,7 @@ namespace Datos
         {
             bool ok = false;
             SqlConnection con = Conexion.ObtenerConexion();
-            if (obj.Validar())
+            if (!obj.Validar() || YaExisteString(obj.nombreCientifico))
             {
                 string sql =
                 "UPDATE Planta SET id=@id, tipo=@tipo, nombreCientifico=@nombreCientifico, nombresVulgares=@nombresVulgares, descripcion=@descripcion,ambiente=@ambiente, alturaMaxima=@alturaMaxima,foto=@foto,precio=@precio,ingresadoPor=@ingresadoPor ,WHERE Id=@id";
