@@ -9,15 +9,17 @@ namespace Fachada
     {
 
         public IRepositorioPlantas RepoPlantas { get; set; }
+        public IRepositorio<TipoPlanta> RepoTP { get; set; }
         public IRepositorio<FrecuenciaRiego> RepoFR { get; set; }
         public IRepositorio<TipoIluminacion> RepoTI { get; set; }
         public IRepositorio<Ficha> RepoFichas { get; set; }
-        public ManejadorPlantas(IRepositorioPlantas repoPlanta, IRepositorio<FrecuenciaRiego> repoFrecRiego, IRepositorio<TipoIluminacion> repoTipoIlu, IRepositorio<Ficha> repoFichas)
+        public ManejadorPlantas(IRepositorioPlantas repoPlanta, IRepositorio<FrecuenciaRiego> repoFrecRiego, IRepositorio<TipoIluminacion> repoTipoIlu, IRepositorio<Ficha> repoFichas, IRepositorio<TipoPlanta> repoTP)
         {
             RepoPlantas = repoPlanta;
             RepoFR = repoFrecRiego;
             RepoTI = repoTipoIlu;
             RepoFichas = repoFichas;
+            RepoTP = repoTP;
         }
 
         public bool AgregarNuevaPlanta(Planta planta)
@@ -33,6 +35,16 @@ namespace Fachada
         public IEnumerable<Planta> ObtenerTodasLasPlantas()
         {
             return RepoPlantas.GetAll();
+        }
+
+        public Planta ObtenerPlantaPorId(int id)
+        {
+            return RepoPlantas.FindById(id);
+        }
+
+        public IEnumerable<TipoPlanta> TraerTodosLosTiposDePlanta()
+        {
+            return RepoTP.GetAll();
         }
     }
 }

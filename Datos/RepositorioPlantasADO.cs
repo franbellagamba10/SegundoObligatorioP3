@@ -86,7 +86,7 @@ namespace Datos
             Planta planta = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM Plantas WHERE id = " + id + ";";
+            string sql = "SELECT * FROM Planta WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {

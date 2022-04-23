@@ -12,5 +12,7 @@ namespace Fachada
         bool DarDeBajaPlanta(int id);
 
         IEnumerable<Planta> ObtenerTodasLasPlantas();
+        Planta ObtenerPlantaPorId(int id);
+        IEnumerable<TipoPlanta> TraerTodosLosTiposDePlanta();
     }
 }
