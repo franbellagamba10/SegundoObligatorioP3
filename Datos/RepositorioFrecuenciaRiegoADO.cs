@@ -12,10 +12,7 @@ namespace Datos
     {
         public bool Create(FrecuenciaRiego obj)
         {
-            {
-                SqlConnection conexion = Conexion.ObtenerConexion(); // verificar si es asi o cambiar validaciones
-
-
+                SqlConnection conexion = Conexion.ObtenerConexion(); 
                 string sql = "INSERT INTO FrecuenciaRiego VALUES(@tiempo, @cantidad); " +
                 "SELECT CAST(SCOPE_IDENTITY() AS INT);";
                 SqlCommand com = new SqlCommand(sql, conexion);
@@ -41,7 +38,6 @@ namespace Datos
                 {
                     Conexion.CerrarYDesecharConexion(conexion);
                 }
-            }
 
         }
 
