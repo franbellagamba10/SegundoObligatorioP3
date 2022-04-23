@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Fachada;
+using Dominio.Entidades;
 
 namespace ProyectoWeb
 {
@@ -31,6 +32,21 @@ namespace ProyectoWeb
            
             services.AddScoped<IManejadorUsuarios, ManejadorUsuarios>();            
             services.AddScoped<IRepositorioUsuarios, RepositorioUsuariosADO>();
+            services.AddScoped<IManejadorPlantas, ManejadorPlantas>();
+            services.AddScoped<IRepositorioPlantas, RepositorioPlantasADO>();
+            services.AddScoped<IRepositorio<TipoPlanta>, RepositorioTiposPlantaADO>();
+            services.AddScoped<IRepositorio<Ficha>, RepositorioFichasADO>();
+            services.AddScoped<IRepositorio<TipoIluminacion>, RepositorioTipoIluminacionADO>();
+            services.AddScoped<IRepositorio<FrecuenciaRiego>, RepositorioFrecuenciaRiegoADO>();
+            
+            
+            
+            
+            
+
+
+
+
             services.AddSession();      
             
         }
@@ -56,7 +72,7 @@ namespace ProyectoWeb
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Usuarios}/{action=Login}/{id?}");
             });
                       
         }

@@ -9,10 +9,10 @@ namespace Datos
 {
     public class RepositorioPlantasADO : IRepositorioPlantas
     {
-        RepositorioTiposPlantaADO repoTiposPlanta { get; set; }
-        RepositorioFichasADO repoFichas { get; set; }
-        RepositorioUsuariosADO repoUsuarios { get; set; }       
-        public RepositorioPlantasADO(RepositorioTiposPlantaADO repoTipos, RepositorioFichasADO repoFichas, RepositorioUsuariosADO repoUsuarios)
+        IRepositorio<TipoPlanta> repoTiposPlanta { get; set; }
+        IRepositorio<Ficha> repoFichas { get; set; }
+        IRepositorioUsuarios repoUsuarios { get; set; }       
+        public RepositorioPlantasADO(IRepositorio<TipoPlanta> repoTipos, IRepositorio<Ficha> repoFichas, IRepositorioUsuarios repoUsuarios)
         {
             repoTiposPlanta = repoTipos;
             this.repoFichas = repoFichas;
@@ -105,7 +105,7 @@ namespace Datos
                         ambiente = (Planta.Ambiente)reader.GetInt32(5),
                         alturaMaxima = reader.GetInt32(6),
                         foto = reader.GetString(7),
-                        precio = Convert.ToDouble(reader.GetDecimal(8)),
+                        precio = reader.GetDecimal(8),
                         ingresadoPor = repoUsuarios.FindById(reader.GetInt32(9)),
                         ficha = repoFichas.FindById(reader.GetInt32(10))                        
                     };
@@ -144,7 +144,7 @@ namespace Datos
                         ambiente = (Planta.Ambiente)reader.GetInt32(5),
                         alturaMaxima = reader.GetInt32(6),
                         foto = reader.GetString(7),
-                        precio = Convert.ToDouble(reader.GetDecimal(8)),
+                        precio = reader.GetDecimal(8),
                         ingresadoPor = repoUsuarios.FindById(reader.GetInt32(9)),
                         ficha = repoFichas.FindById(reader.GetInt32(10))
                     };

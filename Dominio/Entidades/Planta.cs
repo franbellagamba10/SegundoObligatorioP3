@@ -15,7 +15,7 @@ namespace Dominio.Entidades
         public Ambiente ambiente { get; set; }
         public int alturaMaxima { get; set; }
         public string foto { get; set; }
-        public double precio { get; set; }
+        public decimal precio { get; set; }
         public Usuario ingresadoPor { get; set; }
         public Ficha ficha { get; set; }
 

@@ -9,10 +9,10 @@ namespace Datos
 {
     public class RepositorioFichasADO : IRepositorio<Ficha>
     {
-        RepositorioFrecuenciaRiegoADO repoFrecuenciaRiego;
-        RepositorioTipoIluminacionADO repoTipoIluminacion;
+        IRepositorio<FrecuenciaRiego> repoFrecuenciaRiego;
+        IRepositorio<TipoIluminacion> repoTipoIluminacion;
 
-        public RepositorioFichasADO(RepositorioFrecuenciaRiegoADO repoFrecuenciaRiego, RepositorioTipoIluminacionADO repoTipoIluminacion)
+        public RepositorioFichasADO(IRepositorio<FrecuenciaRiego> repoFrecuenciaRiego, IRepositorio<TipoIluminacion> repoTipoIluminacion)
         {
             this.repoFrecuenciaRiego = repoFrecuenciaRiego;
             this.repoTipoIluminacion = repoTipoIluminacion;
@@ -97,7 +97,7 @@ namespace Datos
                         id = reader.GetInt32(reader.GetOrdinal("id")),
                         frecuenciaRiego = repoFrecuenciaRiego.FindById(reader.GetInt32(1)),
                         tipoIluminacion = repoTipoIluminacion.FindById(reader.GetInt32(2)),
-                        temperatura = reader.GetInt32(3)
+                        temperatura = reader.GetDecimal(3)
                     };
                 }
             }

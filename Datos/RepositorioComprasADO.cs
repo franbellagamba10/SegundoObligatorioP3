@@ -9,9 +9,9 @@ namespace Datos
 {
     public class RepositorioComprasADO : IRepositorio<Compra>, IRepositorioCompras
     {        
-        RepositorioPlantasADO repoPlantas { get; set; }
+        IRepositorioPlantas repoPlantas { get; set; }
         
-        public RepositorioComprasADO(RepositorioPlantasADO repoPlantas)
+        public RepositorioComprasADO(IRepositorioPlantas repoPlantas)
         {            
             this.repoPlantas = repoPlantas;
         }

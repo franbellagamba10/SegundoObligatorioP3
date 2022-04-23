@@ -37,7 +37,7 @@ namespace ProyectoWeb.Controllers
             {
                 HttpContext.Session.SetInt32("userId", user.id);
                 HttpContext.Session.SetString("userEmail", user.email);
-                return Redirect("Plantas/Index");
+                return RedirectToAction("Index","Plantas");
             }
             //mensaje de error al loguearse?
             return View();
