@@ -28,13 +28,18 @@ namespace Dominio.Entidades
         /// <returns></returns>
         public bool TieneSoloLetras()
         {
-            for (int i = 0; i < nombre.Length; i++)
-            {                
+            int i = 0;
+            bool TieneValorAlfabetico = true;
+            while (i < nombre.Length && TieneValorAlfabetico)
+            {
                 if ((int)nombre[i] >= 65 && (int)nombre[i] <= 90 || (int)nombre[i] >= 97 && (int)nombre[i] <= 122 || (int)nombre[i] >= 160 && (int)nombre[i] <= 165 ||
-                    (int)nombre[i] == 130 || (int)nombre[i] == 144 || (int)nombre[i] == 181 || (int)nombre[i] == 214 || (int)nombre[i] == 224 || (int)nombre[i] == 223)
-                    return true;
+                (int)nombre[i] == 130 || (int)nombre[i] == 144 || (int)nombre[i] == 181 || (int)nombre[i] == 214 || (int)nombre[i] == 224 || (int)nombre[i] == 223)
+                    TieneValorAlfabetico = true;
+                else
+                   TieneValorAlfabetico = false;                
+                i++;
             }
-            return false;
+            return TieneValorAlfabetico;
         }
     }
 }
