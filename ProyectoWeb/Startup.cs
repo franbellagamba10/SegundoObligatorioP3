@@ -31,7 +31,7 @@ namespace ProyectoWeb
            
             services.AddScoped<IManejadorUsuarios, ManejadorUsuarios>();            
             services.AddScoped<IRepositorioUsuarios, RepositorioUsuariosADO>();
-            
+            services.AddSession();      
             
         }
 
@@ -47,17 +47,18 @@ namespace ProyectoWeb
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+                      
         }
 
         public static string ObtenerConexion()

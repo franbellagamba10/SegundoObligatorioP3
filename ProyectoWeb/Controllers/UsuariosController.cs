@@ -24,9 +24,8 @@ namespace ProyectoWeb.Controllers
         }
         [HttpGet]
         public ActionResult Login()
-        {
-            HttpContext.Session.Clear();
-            return Redirect("Login");
+        {            
+            return View("Login");
         }
 
         [HttpPost]
