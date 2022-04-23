@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ejecutable
+namespace Fachada
 {
     public interface IManejadorUsuarios
     {
         bool AgregarNuevoUsuario(Usuario usuario);
 
         bool DarDeBajaUsuario(int id);
+
+        public Usuario BuscarUsuarioPorSuEmail(string email);
     }
 }

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ejecutable
+namespace Fachada
 {
     public class ManejadorUsuarios : IManejadorUsuarios
     {
@@ -23,6 +23,11 @@ namespace Ejecutable
         public bool DarDeBajaUsuario(int id)
         {
             return RepoUsuarios.Delete(id);
+        }
+
+        public Usuario BuscarUsuarioPorSuEmail(string email)
+        {
+            return RepoUsuarios.BuscarUsuarioPorEmail(email);
         }
     }
 }
