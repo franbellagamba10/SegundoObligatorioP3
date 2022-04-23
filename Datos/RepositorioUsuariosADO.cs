@@ -21,7 +21,6 @@ namespace Datos
             com.Parameters.AddWithValue("@email", obj.email.Trim());
             com.Parameters.AddWithValue("@contrasenia", obj.contrasenia.Trim());
             com.Parameters.AddWithValue("@activo", obj.activo);
-
            
             try
             {
@@ -68,10 +67,8 @@ namespace Datos
             {
                 Conexion.CerrarYDesecharConexion(conexion);
             }
-
             return ok;
         }
-
 
         public Usuario FindById(int id)
         {
@@ -111,7 +108,6 @@ namespace Datos
         {
             List<Usuario> usuarios = new List<Usuario>();
             SqlConnection conexion = Conexion.ObtenerConexion();
-
             string sql = "SELECT * FROM Usuarios;";
             SqlCommand com = new SqlCommand(sql, conexion);
 
@@ -145,10 +141,39 @@ namespace Datos
 
         public bool Update(Usuario obj)
         {
-            throw new NotImplementedException();
+            bool ok = false;
+            SqlConnection con = Conexion.ObtenerConexion();
+
+            if (obj.Validar())
+            {
+                string sql =
+                "UPDATE Usuarios SET id=@id, email=@email, contrasenia=@contrasenia, activo=@activo, WHERE Id=@id";
+
+                SqlCommand com = new SqlCommand(sql, con);
+                com.Parameters.AddWithValue("@id", obj.id);
+                com.Parameters.AddWithValue("@email", obj.email.Trim());
+                com.Parameters.AddWithValue("@contrasenia", obj.contrasenia.Trim());
+                com.Parameters.AddWithValue("@activo", obj.activo);
+
+                try
+                {
+                    Conexion.AbrirConexion(con);
+                    int afectadas = com.ExecuteNonQuery();
+                    ok = afectadas == 1;
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    Conexion.CerrarConexion(con);
+                }
+            }
+            return ok;
         }
 
-       
+
         public bool YaExisteString(string mail)
         {            
             SqlConnection conexion = Conexion.ObtenerConexion();
@@ -157,8 +182,7 @@ namespace Datos
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
-                Conexion.AbrirConexion(conexion);                
-
+                Conexion.AbrirConexion(conexion);       
                 SqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                     return true;
@@ -173,6 +197,38 @@ namespace Datos
                 Conexion.CerrarYDesecharConexion(conexion);
             }
         }
-        
+        public Usuario BuscarUsuarioPorEmail(string mail)
+        {
+            SqlConnection conexion = Conexion.ObtenerConexion();
+            Usuario usuarioBuscado = null;
+
+            string sql = "SELECT * FROM Usuarios WHERE email = '" + mail + "';";
+            SqlCommand com = new SqlCommand(sql, conexion);
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.Read())
+                {
+                    usuarioBuscado = new Usuario()
+                    {
+                        id = reader.GetInt32(reader.GetOrdinal("id")),
+                        email = reader.GetString(1),
+                        contrasenia = reader.GetString(2),
+                        activo = reader.GetBoolean(3)
+                    };
+                }
+                return usuarioBuscado;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+        }
+
     }
 }
