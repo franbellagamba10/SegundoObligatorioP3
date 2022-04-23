@@ -10,9 +10,5 @@ namespace Fachada
         bool AgregarNuevaPlanta(Planta planta);
 
         bool DarDeBajaPlanta(int id);
-
-        IEnumerable<Planta> ObtenerTodasLasPlantas();
-        Planta ObtenerPlantaPorId(int id);
-        IEnumerable<TipoPlanta> TraerTodosLosTiposDePlanta();
     }
 }

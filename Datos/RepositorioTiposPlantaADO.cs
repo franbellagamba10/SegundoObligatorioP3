@@ -44,29 +44,7 @@ namespace Datos
 
         public bool Delete(int id)
         {
-            bool ok = false;
-
-            SqlConnection conexion = Conexion.ObtenerConexion();
-
-            //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
-            string sql = "DELETE FROM TipoPlanta WHERE Id=" + id;
-            SqlCommand com = new SqlCommand(sql, conexion);
-
-            try
-            {
-                Conexion.AbrirConexion(conexion);
-                int tuplasAfectadas = com.ExecuteNonQuery();
-                ok = tuplasAfectadas == 1;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                Conexion.CerrarYDesecharConexion(conexion);
-            }
-            return ok;
+            throw new NotImplementedException();
         }
 
         public TipoPlanta FindById(int id)
@@ -78,7 +56,6 @@ namespace Datos
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
-
                 Conexion.AbrirConexion(conexion);
                 SqlDataReader reader = com.ExecuteReader();
 
@@ -105,71 +82,14 @@ namespace Datos
 
         public IEnumerable<TipoPlanta> GetAll()
         {
-            List<TipoPlanta> tipoPlantas = new List<TipoPlanta>();
-            SqlConnection conexion = Conexion.ObtenerConexion();
-            string sql = "SELECT * FROM TipoPlanta;";
-            SqlCommand com = new SqlCommand(sql, conexion);
-            try
-            {
-                Conexion.AbrirConexion(conexion);
-                SqlDataReader reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    TipoPlanta tipoPlanta = new TipoPlanta()
-                    {
-                        id = reader.GetInt32(reader.GetOrdinal("id")),
-                        nombre = reader.GetString(1),
-                        descripcion = reader.GetString(2),
-                    
-                    };
-                    tipoPlantas.Add(tipoPlanta);
-                }
-            }
-            catch (Exception ex)
-            {
-                //log de error
-            }
-            finally
-            {
-                Conexion.CerrarYDesecharConexion(conexion);
-            }
-            return tipoPlantas;
+            throw new NotImplementedException();
         }
 
         public bool Update(TipoPlanta obj)
         {
             //HAY QUE VALIDAR EL OBJETO IGUAL QUE EN EL CREATE. ENTIDAD Y REPOSITORIO
-            bool ok = false;
-            
-            if (!obj.Validar() || YaExisteString(obj.nombre))
-            {
-                SqlConnection con = Conexion.ObtenerConexion();
-                string sql =
-                "UPDATE TipoPlanta SET id=@id, nombre=@nombre, descripcion=@descripcion;";
-                SqlCommand com = new SqlCommand(sql, con);
-
-                com.Parameters.AddWithValue("@id", obj.id);
-                com.Parameters.AddWithValue("@nombre", obj.nombre.Trim());
-                com.Parameters.AddWithValue("@descripcion", obj.descripcion.Trim());
-
-                try
-                {
-                    Conexion.AbrirConexion(con);
-                    int afectadas = com.ExecuteNonQuery();
-                    ok = afectadas == 1;
-                }
-                catch
-                {
-                    throw;
-                }
-                finally
-                {
-                    Conexion.CerrarConexion(con);
-                }
-            }
-            return ok;
+            throw new NotImplementedException();
         }
-    
 
         public bool YaExisteString(string cadena)
         {

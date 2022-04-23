@@ -35,7 +35,7 @@ create table CompraPlaza(
 
 
 
-create table TipoPlanta( 
+create table TipoPlanta( -- !!!! CAMBIAR TipoPlanta
 	id int IDENTITY(1,1) NOT NULL Primary Key,
 	nombre varchar(20) UNIQUE,
 	descripcion varchar(max)

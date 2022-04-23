@@ -1,27 +1,28 @@
 Lista de tareas que nos van faltando para tener la base de la solucion
 
+
 2- Revisar UML: RepositorioItems, IRepositorioItems --> NO hereda de IRepositorio<T> ,IValidate() para repo items,
-	Compra no guarda una lista de lineas, Item guarda id de Planta y Compra. (Casi seguro que faltan mas cosas) #
+	Compra no guarda una lista de lineas, Item guarda id de Planta y Compra. (Casi seguro que faltan mas cosas)
 
-3- Terminar de implementar metodos CRUD de repositorios ---> FALTA PROBAR TODOS PARA CERRAR
+3- Terminar de implementar metodos CRUD de repositorios
 
+4 implementar los IManejadores. como se hace?
 
+5 Controllers
 
-5 Controllers ---> EN PROGRESO (FALTA MUCHO)
+6- Vistas
 
-6- Vistas #
+7 - Cambiar nombre de tablas en BD, tienen que ser plurales
 
-7 - Cambiar nombre de tablas en BD, tienen que ser plurales #
+8 - Ampliar validacion de Usuario: falta validar formato email
 
+9 - Manejo de excepciones - Preguntar a plinio si hacemos log, console.writeline o solo mensaje
 
+10 - Buscar usuario por email
 
-9 - Manejo de excepciones - Preguntar a plinio si hacemos log, console.writeline o solo mensaje #
+11 - Login/Logout
 
-
-
-11 - Login/Logout ---> FALTA PROBAR
-
-12 - Controller de TiposPlanta para todo el mantenimiento CRUD con usuario autenticado. #
+12 - Controller de TiposPlanta para todo el mantenimiento CRUD con usuario autenticado.
 		-nombre no vacio
 		-solo caracteres alfabeticos
 		-permite espacios embebidos
@@ -49,7 +50,7 @@ Lista de tareas que nos van faltando para tener la base de la solucion
 
 18- Los topes pueden modificarse sin tocar el codigo ??? --> PROFE
 
-19- Ver como hacer para que Permita elegir foto y subirla al servidor.(Ver Clase Profe)
+19- Ver como hacer para que Permita elegir foto y la subirla al servidor.(Ver Clase Profe)
 
 20- Guardar el nombre de la foto asignando el nombre científico, sustituyendo espacios por underscore y agregando sufijo 001 , 002 ....
 
@@ -88,17 +89,3 @@ Busqueda de plantas
 34- Incluye link para visualizar cuidados y los muestra
 
 35- Envía mensaje cuando no hay coincidencias.
-
-
-
-
-
-
-
-
-
-############################ PREGUNTAS PROFE ############################
-
-1- nombre de propiedades que llegan por inyeccion de dependencias. Todas con PascalCase?
-2- Los topes pueden modificarse sin tocar el codigo. No entendemos que significa. Modificar Valor del IVA desde una vista, por ejem?
-3- Enumerable AMBIENTE en Planta. Solo el DTO deberia llevarlo, y en Planta.cs(Dominio) guardar el dato como int, o esta bien que ambos usen el enumerable?
