@@ -140,9 +140,10 @@ namespace Datos
         {
             //HAY QUE VALIDAR EL OBJETO IGUAL QUE EN EL CREATE. ENTIDAD Y REPOSITORIO
             bool ok = false;
-            SqlConnection con = Conexion.ObtenerConexion();
-            if (!obj.Validar() || YaExisteString(obj.nombre)) // VALIDACION CORRESPONDE EN ESTA LINEA O LUEGO DE EJECUTAR LOS PARAMETROS
+            
+            if (!obj.Validar() || YaExisteString(obj.nombre))
             {
+                SqlConnection con = Conexion.ObtenerConexion();
                 string sql =
                 "UPDATE TipoPlanta SET id=@id, nombre=@nombre, descripcion=@descripcion;";
                 SqlCommand com = new SqlCommand(sql, con);
