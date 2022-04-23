@@ -33,19 +33,12 @@ namespace Dominio.Entidades
             while ((!tieneMayusculas || !tieneMinusculas || !tieneNumeros) && !(contadorLetras == contrasenia.Length))
             {
                 char letra = Convert.ToChar(contrasenia.Substring(contadorLetras, 1));
-
                 if (Char.IsUpper(letra))
-                {
-                    tieneMayusculas = true;
-                }
+                        tieneMayusculas = true;
                 if (Char.IsLower(letra))
-                {
                     tieneMinusculas = true;
-                }
                 if (Char.IsDigit(letra))
-                {
                     tieneNumeros = true;
-                }
                 contadorLetras++;
             }
             if (tieneMayusculas && tieneMinusculas && tieneNumeros)
@@ -56,13 +49,13 @@ namespace Dominio.Entidades
         private bool ValidarEmail()
         {
             if (!email.Contains("@"))
-                  return false;            
+                  return false;
             string[] subCadenas;
             subCadenas = email.Split("@");
             if (!subCadenas[1].Contains(".") || string.IsNullOrWhiteSpace(subCadenas[1]) ||
                 string.IsNullOrWhiteSpace(subCadenas[0]) || subCadenas[0].Contains("@") || subCadenas[1].Contains("@"))
-                    return false;            
-            return true;            
+                    return false;
+            return true;
         }
     }
 }
