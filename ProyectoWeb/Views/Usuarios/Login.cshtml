@@ -9,7 +9,7 @@
 {
     <fieldset>
         <legend>
-            Capaz borramos esto
+            Bienvenido
         </legend>
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -23,7 +23,7 @@
 
             <tr>
                 <td>@Html.LabelFor(model => model.contrasenia)</td>
-                <td>@Html.TextBoxFor(model => model.contrasenia)</td>
+                <td>@Html.PasswordFor(model => model.contrasenia)</td>
                 <td>@Html.ValidationMessageFor(model => model.contrasenia)</td>
             </tr>
 

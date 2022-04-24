@@ -12,7 +12,8 @@ namespace Dominio.Entidades
         public DateTime fecha { get; set; }
         public List<Item> lineas { get; set; } //En BD guarda un string "1,2,3,4,5,6", se hace .Split(",") y se generan los objetos buscanodo 
         public abstract double GetTotal();
-
+        public Compra()
+        { }
         public bool Validar()
         {
             throw new NotImplementedException();

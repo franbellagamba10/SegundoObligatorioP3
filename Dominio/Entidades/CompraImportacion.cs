@@ -11,6 +11,10 @@ namespace Dominio.Entidades
         public static decimal tasaArancelaria { get; set; }
         public string medidasSanitarias { get; set; }
 
+        public CompraImportacion()
+        {
+            
+        }
         public override double GetTotal()
         {
             double total = 0;

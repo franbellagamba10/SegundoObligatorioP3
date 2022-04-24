@@ -102,3 +102,8 @@ Busqueda de plantas
 1- nombre de propiedades que llegan por inyeccion de dependencias. Todas con PascalCase?
 2- Los topes pueden modificarse sin tocar el codigo. No entendemos que significa. Modificar Valor del IVA desde una vista, por ejem?
 3- Enumerable AMBIENTE en Planta. Solo el DTO deberia llevarlo, y en Planta.cs(Dominio) guardar el dato como int, o esta bien que ambos usen el enumerable?
+4- Que datos no deberiamos permitir que se editen en Planta/Edit ?
+5- SELECTS de EDIT Planta, no podemos hacer que carguen con los valores seleccionados correctos (los que corresponden a la Planta que estamos editando)
+6- TEXTAREA/TEXTFIELD en Planta/Edit, no nos funca
+7- Acoplamiento de Ficha a creacion de planta: Un select con Fichas de plantas ya existentes, o llenar inputs que generen una ficha nueva?
+8-

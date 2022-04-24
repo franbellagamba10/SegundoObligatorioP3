@@ -22,6 +22,9 @@
                 @Html.DisplayNameFor(model => model.nombresVulgares)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.tipo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.descripcion)
             </th>
             <th>
@@ -36,43 +39,52 @@
             <th>
                 @Html.DisplayNameFor(model => model.precio)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ingresadoPor)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombreCientifico)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombresVulgares)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ambiente)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.alturaMaxima)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.foto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.precio)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                </td>
-            </tr>
+        <tr style="max-height:20px">
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreCientifico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombresVulgares)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ambiente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.alturaMaxima)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.foto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.ingresadoPor.email)
+            </th>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
         }
     </tbody>
 </table>

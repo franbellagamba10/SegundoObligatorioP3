@@ -46,5 +46,25 @@ namespace Fachada
         {
             return RepoTP.GetAll();
         }
+
+        public IEnumerable<Ficha> TraerTodasLasFichas()
+        {
+            return RepoFichas.GetAll();
+        }
+
+        public bool ActualizarPlanta(Planta planta)
+        {
+            return RepoPlantas.Update(planta);
+        }
+
+        public Ficha ObtenerFichaPorId(int id)
+        {
+            return RepoFichas.FindById(id);
+        }
+
+        public TipoPlanta ObtenerTipoPlantaPorId(int id)
+        {
+            return RepoTP.FindById(id);
+        }
     }
 }

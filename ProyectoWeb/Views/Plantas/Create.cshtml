@@ -1,25 +1,31 @@
 ﻿@model ProyectoWeb.Models.PlantaViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
-<h4>PlantaDTO</h4>
+<h4>Nueva Planta</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="nombreCientifico" class="control-label">Nombre cientifico</label>
-                <input asp-for="nombreCientifico" class="form-control" readonly value="@Model.nombreCientifico" />
+                <label asp-for="nombreCientifico" class="control-label"></label>
+                <input asp-for="nombreCientifico" class="form-control" />
                 <span asp-validation-for="nombreCientifico" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="nombresVulgares" class="control-label"></label>
+                <input asp-for="nombresVulgares" class="form-control" />
+                <span asp-validation-for="nombresVulgares" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label class="control-label">Tipo:</label>
-                <select asp-for="IdTipoPlantaSeleccionada" value="@Model.TipoPlantaSeleccionado.id">
+                <select asp-for="IdTipoPlantaSeleccionada">
                     @foreach (var tipo in Model.TiposPlanta)
                     {
                         <option value="@tipo.id">@tipo.nombre</option>
@@ -28,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Ficha:</label>
-                <select asp-for="IdFichaSeleccionada" value="@Model.FichaSeleccionada.id">
+                <select asp-for="IdFichaSeleccionada">
                     @foreach (var ficha in Model.Fichas)
                     {
                         <option value="@ficha.id">Luz: @ficha.tipoIluminacion.iluminacion | Riego: @ficha.frecuenciaRiego.cantidad vez por @ficha.frecuenciaRiego.tiempo | Temperatura: @ficha.temperatura °C</option>
@@ -36,19 +42,13 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="nombresVulgares" class="control-label">Nombres vulgares</label>
-                <input asp-for="nombresVulgares" class="form-control" value="@Model.nombresVulgares" />
-                <span asp-validation-for="nombresVulgares" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="descripcion" class="control-label">Descripción</label>
-                <input type="text" asp-for="descripcion" class="form-control" value="@Model.descripcion" />
-                <!-- Html.TextAreaFor(Model => Model.descripcion,Model.descripcion) -->
+                <label asp-for="descripcion" class="control-label"></label>
+                <input asp-for="descripcion" class="form-control" />
                 <span asp-validation-for="descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ambiente" class="control-label">Ambiente</label>
-                <select asp-for="ambiente" value="@Model.FichaSeleccionada.id">
+                <select asp-for="ambiente" value="@Model.ambiente">
                     @foreach (var opcion in Enum.GetValues(typeof(PlantaViewModel.Ambiente)))
                     {
                         int val = (int)opcion;
@@ -57,27 +57,22 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="alturaMaxima" class="control-label">Altura máxima</label>
+                <label asp-for="alturaMaxima" class="control-label"></label>
                 <input asp-for="alturaMaxima" class="form-control" />
                 <span asp-validation-for="alturaMaxima" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="foto" class="control-label">Nombre de foto</label>
+                <label asp-for="foto" class="control-label"></label>
                 <input asp-for="foto" class="form-control" />
                 <span asp-validation-for="foto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="precio" class="control-label">Precio</label>
+                <label asp-for="precio" class="control-label"></label>
                 <input asp-for="precio" class="form-control" />
                 <span asp-validation-for="precio" class="text-danger"></span>
-            </div>
+            </div>            
             <div class="form-group">
-                <label asp-for="ingresadoPor" class="control-label">Autor</label>               
-                <input asp-for="EmailUsuarioAutor"class="form-control" readonly value="@Model.ingresadoPor.email"/>               
-                
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -86,3 +81,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

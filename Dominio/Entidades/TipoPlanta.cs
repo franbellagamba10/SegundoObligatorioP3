@@ -12,6 +12,10 @@ namespace Dominio.Entidades
         public string nombre { get; set; }
         public string descripcion { get; set; }
 
+        public TipoPlanta()
+        {
+            
+        }
         public bool Validar()
         {
             if (descripcion.Length < 10 || descripcion.Length > 200 || string.IsNullOrWhiteSpace(descripcion)

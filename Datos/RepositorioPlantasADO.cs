@@ -23,7 +23,7 @@ namespace Datos
             SqlConnection conexion = Conexion.ObtenerConexion();
 
             string sql = "INSERT INTO Planta VALUES(@tipo, @nombreCientifico, @nombresVulgares, @descripcion," +
-                " @ambiente, @alturaMaxima, @foto, @precio, @ingresadoPor); " +
+                " @ambiente, @alturaMaxima, @foto, @precio,@ficha, @ingresadoPor); " +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
 
@@ -35,6 +35,7 @@ namespace Datos
             com.Parameters.AddWithValue("@alturaMaxima", obj.alturaMaxima);
             com.Parameters.AddWithValue("@foto", obj.foto.Trim());
             com.Parameters.AddWithValue("@precio", obj.precio);
+            com.Parameters.AddWithValue("@ficha",obj.ficha.id);
             com.Parameters.AddWithValue("@ingresadoPor", obj.ingresadoPor.id);// Session["usuarioId"] ?
             try
             {
@@ -46,7 +47,7 @@ namespace Datos
                 id = obj.id;
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 throw;
             }
@@ -105,9 +106,9 @@ namespace Datos
                         ambiente = (Planta.Ambiente)reader.GetInt32(5),
                         alturaMaxima = reader.GetInt32(6),
                         foto = reader.GetString(7),
-                        precio = reader.GetDecimal(8),
-                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(9)),
-                        ficha = repoFichas.FindById(reader.GetInt32(10))
+                        precio = reader.GetDecimal(8),                        
+                        ficha = repoFichas.FindById(reader.GetInt32(9)),
+                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(10)),
                     };
                 }
             }
@@ -144,9 +145,9 @@ namespace Datos
                         ambiente = (Planta.Ambiente)reader.GetInt32(5),
                         alturaMaxima = reader.GetInt32(6),
                         foto = reader.GetString(7),
-                        precio = reader.GetDecimal(8),
-                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(9)),
-                        ficha = repoFichas.FindById(reader.GetInt32(10))
+                        precio = reader.GetDecimal(8),                        
+                        ficha = repoFichas.FindById(reader.GetInt32(9)),
+                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(10)),
                     };
                     plantas.Add(planta);
                 }
@@ -169,7 +170,7 @@ namespace Datos
             if (!obj.Validar() || YaExisteString(obj.nombreCientifico))
             {
                 string sql =
-                "UPDATE Planta SET id=@id, tipo=@tipo, nombreCientifico=@nombreCientifico, nombresVulgares=@nombresVulgares, descripcion=@descripcion,ambiente=@ambiente, alturaMaxima=@alturaMaxima,foto=@foto,precio=@precio,ingresadoPor=@ingresadoPor ,WHERE Id=@id";
+                "UPDATE Planta SET tipo=@tipo, nombreCientifico=@nombreCientifico, nombresVulgares=@nombresVulgares, descripcion=@descripcion,ambiente=@ambiente, alturaMaxima=@alturaMaxima,foto=@foto,precio=@precio,ingresadoPor=@ingresadoPor WHERE id=@id";
                 SqlCommand com = new SqlCommand(sql, con);
 
                 com.Parameters.AddWithValue("@id", obj.id);

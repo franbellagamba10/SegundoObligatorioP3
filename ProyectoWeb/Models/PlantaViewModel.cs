@@ -1,17 +1,18 @@
-﻿using Dominio.Interfaces;
+﻿using Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Dominio.Entidades
+namespace ProyectoWeb.Models
 {
-    public class Planta : IValidate
+    public class PlantaViewModel
     {
         public int id { get; set; }
         [Display(Name = "Tipo de Planta")]
         public TipoPlanta tipo { get; set; }
-        [Display(Name = "Nombre científico")]
+        [Display(Name = "Nombre Cientifico")]
         public string nombreCientifico { get; set; }
         [Display(Name = "Nombres vulgares")]
         public string nombresVulgares { get; set; }
@@ -21,43 +22,27 @@ namespace Dominio.Entidades
         public Ambiente ambiente { get; set; }
         [Display(Name = "Altura máxima")]
         public int alturaMaxima { get; set; }
-        [Display(Name = "Foto")]
+        [Display(Name = "Imágen")]
         public string foto { get; set; }
         [Display(Name = "Precio")]
         public decimal precio { get; set; }
-        [Display(Name = "Usuario autor")]
+        [Display(Name = "Autor")]
         public Usuario ingresadoPor { get; set; }
-        [Display(Name = "Ficha")]
+        [Display(Name = "Ficha de cuidados")]
         public Ficha ficha { get; set; }
-
-        public Planta()
-        {
-            
-        }
+        public IEnumerable<TipoPlanta> TiposPlanta { get; set; }
+        public IEnumerable<Ficha> Fichas { get; set; }
+        public IEnumerable<Ambiente> Ambientes { get; set; }
+        public int IdTipoPlantaSeleccionada { get; set; }        
+        public int IdFichaSeleccionada { get; set; }
+        public string EmailUsuarioAutor { get; set; }
+        public TipoPlanta TipoPlantaSeleccionado { get; set; }
+        public Ficha FichaSeleccionada { get; set; }
         public enum Ambiente
         {
             Exterior,
             Interior,
             Mixta
         }
-        public bool Validar()
-        {
-            if (string.IsNullOrWhiteSpace(nombreCientifico) || string.IsNullOrWhiteSpace(nombresVulgares)
-                || string.IsNullOrWhiteSpace(descripcion) || descripcion.Length > 500 || precio < 1 || !ValidarEnum((int)ambiente)
-                || alturaMaxima < 1)
-                return false;
-            return true;
-        }
-
-        public bool ValidarEnum(int valorEnum)
-        {
-            bool existe = Enum.IsDefined(typeof(Ambiente), valorEnum);
-            if (existe)
-                return true;
-
-            return false;
-        }
-
-
     }
 }
