@@ -12,7 +12,5 @@ namespace Fachada
         bool DarDeBajaUsuario(int id);
 
         public Usuario BuscarUsuarioPorSuEmail(string email);
-
-        public bool ActualizarUsuario(Usuario user);
     }
 }

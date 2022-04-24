@@ -29,10 +29,5 @@ namespace Fachada
         {
             return RepoUsuarios.BuscarUsuarioPorEmail(email);
         }
-
-        public bool ActualizarUsuario(Usuario user)
-        {
-            return RepoUsuarios.Update(user);
-        }
     }
 }
