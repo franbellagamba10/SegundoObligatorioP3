@@ -12,15 +12,15 @@ namespace Datos
     {
         public bool Create(TipoPlanta obj)
         {
-            SqlConnection conexion = Conexion.ObtenerConexion();              
-            
-            
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+
             string sql = "INSERT INTO TipoPlanta VALUES(@nombre, @descripcion); " +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
-            
+
             com.Parameters.AddWithValue("@nombre", obj.nombre.Trim());
-            com.Parameters.AddWithValue("@descripcion", obj.descripcion.Trim());            
+            com.Parameters.AddWithValue("@descripcion", obj.descripcion.Trim());
 
             try
             {
@@ -40,11 +40,33 @@ namespace Datos
             {
                 Conexion.CerrarYDesecharConexion(conexion);
             }
-        }               
+        }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool ok = false;
+
+            SqlConnection conexion = Conexion.ObtenerConexion();
+
+            //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
+            string sql = "DELETE FROM TipoPlanta WHERE Id=" + id;
+            SqlCommand com = new SqlCommand(sql, conexion);
+
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                int tuplasAfectadas = com.ExecuteNonQuery();
+                ok = tuplasAfectadas == 1;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+            return ok;
         }
 
         public TipoPlanta FindById(int id)
@@ -56,6 +78,7 @@ namespace Datos
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
+
                 Conexion.AbrirConexion(conexion);
                 SqlDataReader reader = com.ExecuteReader();
 
@@ -65,7 +88,7 @@ namespace Datos
                     {
                         id = reader.GetInt32(reader.GetOrdinal("id")),
                         nombre = reader.GetString(1),
-                        descripcion = reader.GetString(2),                        
+                        descripcion = reader.GetString(2),
                     };
                 }
             }
@@ -82,14 +105,71 @@ namespace Datos
 
         public IEnumerable<TipoPlanta> GetAll()
         {
-            throw new NotImplementedException();
+            List<TipoPlanta> tipoPlantas = new List<TipoPlanta>();
+            SqlConnection conexion = Conexion.ObtenerConexion();
+            string sql = "SELECT * FROM TipoPlanta;";
+            SqlCommand com = new SqlCommand(sql, conexion);
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                SqlDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    TipoPlanta tipoPlanta = new TipoPlanta()
+                    {
+                        id = reader.GetInt32(reader.GetOrdinal("id")),
+                        nombre = reader.GetString(1),
+                        descripcion = reader.GetString(2),
+
+                    };
+                    tipoPlantas.Add(tipoPlanta);
+                }
+            }
+            catch (Exception ex)
+            {
+                //log de error
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+            return tipoPlantas;
         }
 
         public bool Update(TipoPlanta obj)
         {
             //HAY QUE VALIDAR EL OBJETO IGUAL QUE EN EL CREATE. ENTIDAD Y REPOSITORIO
-            throw new NotImplementedException();
+            bool ok = false;
+
+            if (!obj.Validar() || YaExisteString(obj.nombre))
+            {
+                SqlConnection con = Conexion.ObtenerConexion();
+                string sql =
+                "UPDATE TipoPlanta SET id=@id, nombre=@nombre, descripcion=@descripcion;";
+                SqlCommand com = new SqlCommand(sql, con);
+
+                com.Parameters.AddWithValue("@id", obj.id);
+                com.Parameters.AddWithValue("@nombre", obj.nombre.Trim());
+                com.Parameters.AddWithValue("@descripcion", obj.descripcion.Trim());
+
+                try
+                {
+                    Conexion.AbrirConexion(con);
+                    int afectadas = com.ExecuteNonQuery();
+                    ok = afectadas == 1;
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    Conexion.CerrarConexion(con);
+                }
+            }
+            return ok;
         }
+
 
         public bool YaExisteString(string cadena)
         {

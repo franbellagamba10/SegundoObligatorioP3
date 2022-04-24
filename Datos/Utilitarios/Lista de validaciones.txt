@@ -1,0 +1,26 @@
+          
+          PLANTA
+
+             * descripción entre 10 y 200 caracteres
+             * Su nombre científico (único, no vacío, solo incluye caracteres alfabéticos y espacios embebidos, pero no al principio ni final)
+             * Una descripción, que debe tener un mínimo de 10 caracteres y un máximo de 500. Estos topes podrían
+               cambiar en un futuro, y su cambio no debería implicar cambios en el código.
+             * El ambiente para el que es apta: si es de interior, de exterior o mixta (tanto interior como exterior).
+             * Su altura máxima (en centímetros).
+             * Una foto. La foto será un archivo de imagen de tipo png o jpg, y su nombre será el nombre científico de 
+               la planta. Si el nombre incluye espacios embebidos estos se sustituirán con un sub-guión (underscore). Al 
+               final del nombre se incluirá un secuenciador para permitir que en un futuro se puedan ingresar más 
+               fotos con el mismo nombre. Dado que al momento hay una sola foto por planta, el secuenciador será 
+               001.
+             * Se deberá verificar que las extensiones sean las permitidas y el nombre no
+
+         FICHA
+
+         Se debe adjuntar en cada planta una ficha de cuidados en la que se especificará:
+            o La frecuencia de riego, indicada como la cantidad y la unidad de tiempo, por ejemplo 3 días, 2 
+              semanas, etc.
+            o El tipo de iluminación que requieren: si necesitan luz solar directa, indirecta o sombra (solo se 
+              trabaja con estas 3 opciones, pero quizá se agreguen otras en un futuro, por ejemplo “media 
+              sombra”).
+            o La temperatura a la que se deben mantener, en grados centígrados. 
+             

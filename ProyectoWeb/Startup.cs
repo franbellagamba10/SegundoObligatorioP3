@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Fachada;
+using Dominio.Entidades;
 
 namespace ProyectoWeb
 {
@@ -28,11 +29,26 @@ namespace ProyectoWeb
             services.AddControllersWithViews();
 
             string tipoRepo = Configuration.GetSection("TipoRepo").Value;
-           
-            services.AddScoped<IManejadorUsuarios, ManejadorUsuarios>();            
+
+            services.AddScoped<IManejadorUsuarios, ManejadorUsuarios>();
             services.AddScoped<IRepositorioUsuarios, RepositorioUsuariosADO>();
-            
-            
+            services.AddScoped<IManejadorPlantas, ManejadorPlantas>();
+            services.AddScoped<IRepositorioPlantas, RepositorioPlantasADO>();
+            services.AddScoped<IRepositorio<TipoPlanta>, RepositorioTiposPlantaADO>();
+            services.AddScoped<IRepositorio<Ficha>, RepositorioFichasADO>();
+            services.AddScoped<IRepositorio<TipoIluminacion>, RepositorioTipoIluminacionADO>();
+            services.AddScoped<IRepositorio<FrecuenciaRiego>, RepositorioFrecuenciaRiegoADO>();
+
+
+
+
+
+
+
+
+
+            services.AddSession();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +63,7 @@ namespace ProyectoWeb
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -56,8 +72,9 @@ namespace ProyectoWeb
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Usuarios}/{action=Login}/{id?}");
             });
+
         }
 
         public static string ObtenerConexion()

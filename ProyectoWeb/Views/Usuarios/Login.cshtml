@@ -1,0 +1,37 @@
+﻿@model ProyectoWeb.Models.UsuarioDTO;
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+@using (Html.BeginForm("Login", "Usuarios", FormMethod.Post))
+{
+    <fieldset>
+        <legend>
+            Capaz borramos esto
+        </legend>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <table>
+            <tr>
+                <td>@Html.LabelFor(model => model.email)</td>
+                <td>@Html.TextBoxFor(model => model.email)</td>
+                <td>@Html.ValidationMessageFor(model => model.email)</td>
+            </tr>
+
+            <tr>
+                <td>@Html.LabelFor(model => model.contrasenia)</td>
+                <td>@Html.TextBoxFor(model => model.contrasenia)</td>
+                <td>@Html.ValidationMessageFor(model => model.contrasenia)</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}

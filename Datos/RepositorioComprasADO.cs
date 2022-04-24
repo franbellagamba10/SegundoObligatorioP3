@@ -8,11 +8,11 @@ using System.Text;
 namespace Datos
 {
     public class RepositorioComprasADO : IRepositorio<Compra>, IRepositorioCompras
-    {        
-        RepositorioPlantasADO repoPlantas { get; set; }
-        
-        public RepositorioComprasADO(RepositorioPlantasADO repoPlantas)
-        {            
+    {
+        IRepositorioPlantas repoPlantas { get; set; }
+
+        public RepositorioComprasADO(IRepositorioPlantas repoPlantas)
+        {
             this.repoPlantas = repoPlantas;
         }
 
