@@ -12,7 +12,8 @@ namespace Dominio.Entidades
         public FrecuenciaRiego frecuenciaRiego { get; set; }
         public TipoIluminacion tipoIluminacion { get; set; }
         public decimal temperatura { get; set; }
-
+        public Ficha()
+        { }
         public bool Validar()
         {
             if (temperatura <= 0) // verificar si corresponde esta validacion

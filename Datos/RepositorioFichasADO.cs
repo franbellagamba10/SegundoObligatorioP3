@@ -133,7 +133,7 @@ namespace Datos
                         id = reader.GetInt32(reader.GetOrdinal("id")),
                         frecuenciaRiego = repoFrecuenciaRiego.FindById(reader.GetInt32(1)),
                         tipoIluminacion = repoTipoIluminacion.FindById(reader.GetInt32(2)),
-                        temperatura = reader.GetInt32(3)
+                        temperatura = reader.GetDecimal(3)
                     };
 
                     fichas.Add(ficha);

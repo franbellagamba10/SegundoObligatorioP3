@@ -10,6 +10,10 @@ namespace Dominio.Entidades
         public bool cobroFlete { get; set; }
         public decimal costoEnvio { get; set; }
 
+        public CompraPlaza()
+        {
+            
+        }
         public override double GetTotal()
         {
             double total = 0;

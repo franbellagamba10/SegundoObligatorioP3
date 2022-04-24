@@ -1,6 +1,7 @@
 ﻿using Dominio.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Dominio.Entidades
@@ -8,18 +9,31 @@ namespace Dominio.Entidades
     public class Planta : IValidate
     {
         public int id { get; set; }
+        [Display(Name = "Tipo de Planta")]
         public TipoPlanta tipo { get; set; }
+        [Display(Name = "Nombre científico")]
         public string nombreCientifico { get; set; }
+        [Display(Name = "Nombres vulgares")]
         public string nombresVulgares { get; set; }
+        [Display(Name = "Descripción")]
         public string descripcion { get; set; }
+        [Display(Name = "Ambiente")]
         public Ambiente ambiente { get; set; }
+        [Display(Name = "Altura máxima")]
         public int alturaMaxima { get; set; }
+        [Display(Name = "Foto")]
         public string foto { get; set; }
+        [Display(Name = "Precio")]
         public decimal precio { get; set; }
+        [Display(Name = "Usuario autor")]
         public Usuario ingresadoPor { get; set; }
+        [Display(Name = "Ficha")]
         public Ficha ficha { get; set; }
 
-
+        public Planta()
+        {
+            
+        }
         public enum Ambiente
         {
             Exterior,

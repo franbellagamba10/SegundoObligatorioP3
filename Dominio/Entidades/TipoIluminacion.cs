@@ -10,6 +10,10 @@ namespace Dominio.Entidades
         public int id { get; set; }
         public string iluminacion { get; set; }
 
+        public TipoIluminacion()
+        {
+            
+        }
         public bool Validar()
         {
             if (string.IsNullOrWhiteSpace(iluminacion) || iluminacion.Length > 20) // verificar si corresponde esta validacion

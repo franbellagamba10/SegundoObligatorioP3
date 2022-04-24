@@ -169,7 +169,7 @@ namespace Datos
             if (!obj.Validar() || YaExisteString(obj.nombreCientifico))
             {
                 string sql =
-                "UPDATE Planta SET id=@id, tipo=@tipo, nombreCientifico=@nombreCientifico, nombresVulgares=@nombresVulgares, descripcion=@descripcion,ambiente=@ambiente, alturaMaxima=@alturaMaxima,foto=@foto,precio=@precio,ingresadoPor=@ingresadoPor ,WHERE Id=@id";
+                "UPDATE Planta SET tipo=@tipo, nombreCientifico=@nombreCientifico, nombresVulgares=@nombresVulgares, descripcion=@descripcion,ambiente=@ambiente, alturaMaxima=@alturaMaxima,foto=@foto,precio=@precio,ingresadoPor=@ingresadoPor WHERE id=@id";
                 SqlCommand com = new SqlCommand(sql, con);
 
                 com.Parameters.AddWithValue("@id", obj.id);

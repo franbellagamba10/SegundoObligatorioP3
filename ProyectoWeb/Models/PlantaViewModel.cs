@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoWeb.Models
 {
-    public class PlantaDTO
+    public class PlantaViewModel
     {
         public int id { get; set; }
         public TipoPlanta tipo { get; set; }
@@ -20,7 +20,13 @@ namespace ProyectoWeb.Models
         public Usuario ingresadoPor { get; set; }
         public Ficha ficha { get; set; }
         public IEnumerable<TipoPlanta> TiposPlanta { get; set; }
+        public IEnumerable<Ficha> Fichas { get; set; }
 
+        public int IdTipoPlantaSeleccionada { get; set; }        
+        public int IdFichaSeleccionada { get; set; }
+        public string EmailUsuarioAutor { get; set; }
+        public TipoPlanta TipoPlantaSeleccionado { get; set; }
+        public Ficha FichaSeleccionada { get; set; }
         public enum Ambiente
         {
             Exterior,
