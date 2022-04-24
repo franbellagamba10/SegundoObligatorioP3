@@ -21,7 +21,7 @@ namespace ProyectoWeb.Models
         public Ficha ficha { get; set; }
         public IEnumerable<TipoPlanta> TiposPlanta { get; set; }
         public IEnumerable<Ficha> Fichas { get; set; }
-
+        public IEnumerable<Ambiente> Ambientes { get; set; }
         public int IdTipoPlantaSeleccionada { get; set; }        
         public int IdFichaSeleccionada { get; set; }
         public string EmailUsuarioAutor { get; set; }

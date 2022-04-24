@@ -22,20 +22,55 @@ namespace ProyectoWeb.Controllers
         public IActionResult Index()
         {
             IEnumerable<Planta> plantas = manejadorPlantas.ObtenerTodasLasPlantas();
+            foreach (var planta in plantas)
+            {
+                if (planta.descripcion.Length > 50)
+                {
+                    planta.descripcion = planta.descripcion.Substring(0, 50)+"[...]";
+                }
+            }
             return View(plantas);
         }
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            PlantaViewModel plantaVM = new PlantaViewModel
+            {
+                Fichas = manejadorPlantas.TraerTodasLasFichas(),
+                TiposPlanta = manejadorPlantas.TraerTodosLosTiposDePlanta(),
+            };
+            
+            return View(plantaVM);
         }
         [HttpPost]
-        public ActionResult Create(Planta planta)
+        public ActionResult Create(PlantaViewModel plantaVM)
         {
-            bool pudeCrear = manejadorPlantas.AgregarNuevaPlanta(planta);
-            if(pudeCrear) // ---->  aca mismo se setea la ruta de la foto de la planta
-                RedirectToAction("Plantas/Index");
-            return View(planta); // revisar si le paso este modelo o solo la View
+            try
+            {
+                Planta planta = new Planta
+                {
+                    id = plantaVM.id,
+                    nombreCientifico = plantaVM.nombreCientifico,
+                    nombresVulgares = plantaVM.nombresVulgares,
+                    alturaMaxima = plantaVM.alturaMaxima,
+                    descripcion = plantaVM.descripcion,
+                    ambiente = (Planta.Ambiente)plantaVM.ambiente,
+                    precio = plantaVM.precio,
+                    foto = plantaVM.foto,
+                    ficha = manejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
+                    ingresadoPor = manejadorUsuarios.BuscarUsuarioPorSuEmail(plantaVM.EmailUsuarioAutor),
+                    tipo = manejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
+                };
+
+                bool pudeCrear = manejadorPlantas.AgregarNuevaPlanta(planta);
+                if (pudeCrear) // ---->  aca mismo se setea la ruta de la foto de la planta
+                    View("Index");
+            }
+            catch (Exception ex)
+            {
+                return View(plantaVM);
+            }             
+            return View(plantaVM);
         }
 
 

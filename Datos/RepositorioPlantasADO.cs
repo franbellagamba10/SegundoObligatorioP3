@@ -105,9 +105,9 @@ namespace Datos
                         ambiente = (Planta.Ambiente)reader.GetInt32(5),
                         alturaMaxima = reader.GetInt32(6),
                         foto = reader.GetString(7),
-                        precio = reader.GetDecimal(8),
-                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(9)),
-                        ficha = repoFichas.FindById(reader.GetInt32(10))
+                        precio = reader.GetDecimal(8),                        
+                        ficha = repoFichas.FindById(reader.GetInt32(9)),
+                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(10)),
                     };
                 }
             }
@@ -144,9 +144,9 @@ namespace Datos
                         ambiente = (Planta.Ambiente)reader.GetInt32(5),
                         alturaMaxima = reader.GetInt32(6),
                         foto = reader.GetString(7),
-                        precio = reader.GetDecimal(8),
-                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(9)),
-                        ficha = repoFichas.FindById(reader.GetInt32(10))
+                        precio = reader.GetDecimal(8),                        
+                        ficha = repoFichas.FindById(reader.GetInt32(9)),
+                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(10)),
                     };
                     plantas.Add(planta);
                 }

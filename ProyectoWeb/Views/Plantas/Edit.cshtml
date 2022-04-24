@@ -48,8 +48,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="ambiente" class="control-label">Ambiente</label>
-                <input asp-for="ambiente" class="form-control" />
-                <span asp-validation-for="ambiente" class="text-danger"></span>
+                <select asp-for="ambiente" value="@Model.FichaSeleccionada.id">
+                    @foreach (var opcion in Enum.GetValues(typeof(PlantaViewModel.Ambiente)))
+                    {
+                        int val = (int)opcion;
+                        <option value="@val">@opcion.ToString()</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="alturaMaxima" class="control-label">Altura máxima</label>
@@ -68,8 +73,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="ingresadoPor" class="control-label">Autor</label>               
-                <input asp-for="EmailUsuarioAutor"class="form-control" readonly value="@Model.ingresadoPor.email"/>                
-                <span asp-validation-for="ingresadoPor" class="text-danger"></span>
+                <input asp-for="EmailUsuarioAutor"class="form-control" readonly value="@Model.ingresadoPor.email"/>               
+                
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
