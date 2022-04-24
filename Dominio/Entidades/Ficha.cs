@@ -16,7 +16,7 @@ namespace Dominio.Entidades
         { }
         public bool Validar()
         {
-            if (temperatura <= 0) // verificar si corresponde esta validacion
+            if (frecuenciaRiego == null || tipoIluminacion == null)
                 return false;
             return true;
         }
