@@ -38,8 +38,8 @@ namespace ProyectoWeb.Controllers
             {
                 Fichas = manejadorPlantas.TraerTodasLasFichas(),
                 TiposPlanta = manejadorPlantas.TraerTodosLosTiposDePlanta(),
-            };
-            
+            };         
+
             return View(plantaVM);
         }
         [HttpPost]
@@ -58,13 +58,13 @@ namespace ProyectoWeb.Controllers
                     precio = plantaVM.precio,
                     foto = plantaVM.foto,
                     ficha = manejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
-                    ingresadoPor = manejadorUsuarios.BuscarUsuarioPorSuEmail(plantaVM.EmailUsuarioAutor),
+                    ingresadoPor = manejadorUsuarios.BuscarUsuarioPorSuEmail(HttpContext.Session.GetString("userEmail")),
                     tipo = manejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
                 };
 
                 bool pudeCrear = manejadorPlantas.AgregarNuevaPlanta(planta);
                 if (pudeCrear) // ---->  aca mismo se setea la ruta de la foto de la planta
-                    View("Index");
+                    return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

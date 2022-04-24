@@ -23,7 +23,7 @@ namespace Datos
             SqlConnection conexion = Conexion.ObtenerConexion();
 
             string sql = "INSERT INTO Planta VALUES(@tipo, @nombreCientifico, @nombresVulgares, @descripcion," +
-                " @ambiente, @alturaMaxima, @foto, @precio, @ingresadoPor); " +
+                " @ambiente, @alturaMaxima, @foto, @precio,@ficha, @ingresadoPor); " +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
 
@@ -35,6 +35,7 @@ namespace Datos
             com.Parameters.AddWithValue("@alturaMaxima", obj.alturaMaxima);
             com.Parameters.AddWithValue("@foto", obj.foto.Trim());
             com.Parameters.AddWithValue("@precio", obj.precio);
+            com.Parameters.AddWithValue("@ficha",obj.ficha.id);
             com.Parameters.AddWithValue("@ingresadoPor", obj.ingresadoPor.id);// Session["usuarioId"] ?
             try
             {
@@ -46,7 +47,7 @@ namespace Datos
                 id = obj.id;
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 throw;
             }

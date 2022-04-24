@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>PlantaViewModel</h4>
+<h4>Nueva Planta</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,13 +24,31 @@
                 <span asp-validation-for="nombresVulgares" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label class="control-label">Tipo:</label>
+                <select asp-for="IdTipoPlantaSeleccionada">
+                    @foreach (var tipo in Model.TiposPlanta)
+                    {
+                        <option value="@tipo.id">@tipo.nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Ficha:</label>
+                <select asp-for="IdFichaSeleccionada">
+                    @foreach (var ficha in Model.Fichas)
+                    {
+                        <option value="@ficha.id">Luz: @ficha.tipoIluminacion.iluminacion | Riego: @ficha.frecuenciaRiego.cantidad vez por @ficha.frecuenciaRiego.tiempo | Temperatura: @ficha.temperatura °C</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
                 <label asp-for="descripcion" class="control-label"></label>
                 <input asp-for="descripcion" class="form-control" />
                 <span asp-validation-for="descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ambiente" class="control-label">Ambiente</label>
-                <select asp-for="ambiente" value="@Model.FichaSeleccionada.id">
+                <select asp-for="ambiente" value="@Model.ambiente">
                     @foreach (var opcion in Enum.GetValues(typeof(PlantaViewModel.Ambiente)))
                     {
                         int val = (int)opcion;
@@ -52,22 +70,7 @@
                 <label asp-for="precio" class="control-label"></label>
                 <input asp-for="precio" class="form-control" />
                 <span asp-validation-for="precio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdTipoPlantaSeleccionada" class="control-label"></label>
-                <input asp-for="IdTipoPlantaSeleccionada" class="form-control" />
-                <span asp-validation-for="IdTipoPlantaSeleccionada" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdFichaSeleccionada" class="control-label"></label>
-                <input asp-for="IdFichaSeleccionada" class="form-control" />
-                <span asp-validation-for="IdFichaSeleccionada" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmailUsuarioAutor" class="control-label"></label>
-                <input asp-for="EmailUsuarioAutor" class="form-control" />
-                <span asp-validation-for="EmailUsuarioAutor" class="text-danger"></span>
-            </div>
+            </div>            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
