@@ -15,7 +15,7 @@ namespace Dominio.Entidades
         public Ambiente ambiente { get; set; }
         public int alturaMaxima { get; set; }
         public string foto { get; set; }
-        public double precio { get; set; }
+        public decimal precio { get; set; }
         public Usuario ingresadoPor { get; set; }
         public Ficha ficha { get; set; }
 
@@ -29,7 +29,7 @@ namespace Dominio.Entidades
         public bool Validar()
         {
             if (string.IsNullOrWhiteSpace(nombreCientifico) || string.IsNullOrWhiteSpace(nombresVulgares)
-                || string.IsNullOrWhiteSpace(descripcion) || descripcion.Length > 500|| precio < 1 || !ValidarEnum((int)ambiente)
+                || string.IsNullOrWhiteSpace(descripcion) || descripcion.Length > 500 || precio < 1 || !ValidarEnum((int)ambiente)
                 || alturaMaxima < 1)
                 return false;
             return true;
@@ -41,7 +41,7 @@ namespace Dominio.Entidades
             if (existe)
                 return true;
 
-            return false;            
+            return false;
         }
 
 
