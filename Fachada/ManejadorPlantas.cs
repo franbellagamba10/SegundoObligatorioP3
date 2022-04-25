@@ -69,7 +69,26 @@ namespace Fachada
 
         public Planta ObtenerPlantaPorNombreCientifico(string nombreCientifico)
         {
-            return RepoPlantas.BuscarPlantaPorNombreCientifico(nombreCientifico);
+            return RepoPlantas.FindByName(nombreCientifico);
+        }
+
+        public bool ActualizarTipoPlanta(TipoPlanta tipoPlanta)
+        {
+            return RepoTP.Update(tipoPlanta);
+        }
+        public bool AgregarNuevoTipoPlanta(TipoPlanta tipoPlanta)
+        {
+            return RepoTP.Create(tipoPlanta);
+        }
+
+        public TipoPlanta ObtenerTipoPlantaPorNombre(string nombreTP)
+        {
+            return RepoTP.FindByName(nombreTP);
+        }
+
+        public bool DarDeBajaTipoPlanta(int id)
+        {
+            return RepoTP.Delete(id);
         }
     }
 }

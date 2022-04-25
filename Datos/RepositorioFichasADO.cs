@@ -112,6 +112,11 @@ namespace Datos
             return ficha;
         }
 
+        public Ficha FindByName(string cadena)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Ficha> GetAll()
         {
             List<Ficha> fichas = new List<Ficha>();

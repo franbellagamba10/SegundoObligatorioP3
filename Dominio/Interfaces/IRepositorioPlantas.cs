@@ -9,6 +9,6 @@ namespace Dominio.Interfaces
     {
         public string ObtenerNombreFoto(string nombrePlanta);
         
-        public Planta BuscarPlantaPorNombreCientifico(string nombreCientifico);
+        public Planta FindByName(string nombreCientifico);
     }
 }

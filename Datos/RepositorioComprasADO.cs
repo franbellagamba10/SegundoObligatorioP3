@@ -185,6 +185,11 @@ namespace Datos
         {
             throw new NotImplementedException();
         }
+
+        public Compra FindByName(string cadena)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

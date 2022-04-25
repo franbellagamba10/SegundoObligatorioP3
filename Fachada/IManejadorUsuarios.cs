@@ -14,5 +14,6 @@ namespace Fachada
         public Usuario BuscarUsuarioPorSuEmail(string email);
 
         public bool ActualizarUsuario(Usuario user);
+                
     }
 }

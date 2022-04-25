@@ -5,7 +5,7 @@
 }
 
 <h1>Detalles</h1>
-
+<p style="color:red">@ViewBag.mensaje</p>
 <div>
     <h4>Información</h4>
     <hr />
@@ -91,5 +91,6 @@
 
 <div>
     @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Dar de baja","Delete", new {id = Model.id })
     <a asp-action="Index">Back to List</a>
 </div>

@@ -11,7 +11,7 @@ using System.Web;
 
 namespace ProyectoWeb.Controllers
 {
-    public class UsuariosController : Controller
+    public class UsuariosController : Controller, IValidarSesion
     {
         public IManejadorUsuarios manejadorUsuarios { get; set; }
 
@@ -79,6 +79,8 @@ namespace ProyectoWeb.Controllers
         [HttpGet]
         public ActionResult Edit()
         {
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");
             Usuario user = manejadorUsuarios.BuscarUsuarioPorSuEmail(HttpContext.Session.GetString("userEmail"));
             if (user.id == HttpContext.Session.GetInt32("userId"))
                 return Redirect("Usuarios/Edit");
@@ -103,6 +105,9 @@ namespace ProyectoWeb.Controllers
         [HttpGet]
         public ActionResult Delete()
         {
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");
+
             Usuario user = manejadorUsuarios.BuscarUsuarioPorSuEmail(HttpContext.Session.GetString("userEmail"));
             if (user.id == HttpContext.Session.GetInt32("userId"))
                 return Redirect("Usuarios/Delete");
@@ -123,7 +128,12 @@ namespace ProyectoWeb.Controllers
                 return View(); //deberia volver al formulario edicion de usuario
             }
             return RedirectToAction("Logout"); //  -----> REVISAR, necesitamos que vaya al Indice de plantas
-        }       
+        }
+
+        public bool EstoyLogueado()
+        {
+            return HttpContext.Session.GetInt32("userId") != null;
+        }
     }
 
 

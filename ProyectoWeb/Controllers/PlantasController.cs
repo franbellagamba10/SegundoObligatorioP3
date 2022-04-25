@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoWeb.Controllers
 {
-    public class PlantasController : Controller
+    public class PlantasController : Controller, IValidarSesion
     {
         public IManejadorPlantas manejadorPlantas { get; set; }
         public IManejadorUsuarios manejadorUsuarios { get; set; }
@@ -21,19 +21,15 @@ namespace ProyectoWeb.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Planta> plantas = manejadorPlantas.ObtenerTodasLasPlantas();
-            foreach (var planta in plantas)
-            {
-                if (planta.descripcion.Length > 50)
-                {
-                    planta.descripcion = planta.descripcion.Substring(0, 50)+"[...]";
-                }
-            }
-            return View(plantas);
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");            
+            return View(CargarPlantasIndexFormateado());
         }
         [HttpGet]
         public ActionResult Create()
         {
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");
             PlantaViewModel plantaVM = new PlantaViewModel
             {
                 Fichas = manejadorPlantas.TraerTodasLasFichas(),
@@ -81,6 +77,8 @@ namespace ProyectoWeb.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");
             PlantaViewModel planta = new PlantaViewModel();
             Planta plantaBD = manejadorPlantas.ObtenerPlantaPorId(id);
             #region Conversion para cargar ViewModel
@@ -134,11 +132,46 @@ namespace ProyectoWeb.Controllers
                 return View(); //deberia volver al formulario edicion de usuario
             }            
         }
-
         public ActionResult Details(int id)
         {
-            Planta planta = manejadorPlantas.ObtenerPlantaPorId(id);
-            return View(planta);
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");
+            return View(manejadorPlantas.ObtenerPlantaPorId(id));
+        }
+
+        public ActionResult Delete(int id)
+        {
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");
+            return View(manejadorPlantas.ObtenerPlantaPorId(id));
+             
+        }
+        [HttpPost]
+        public ActionResult Delete(Planta planta)
+        {
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");
+            bool pudeBorrar = manejadorPlantas.DarDeBajaPlanta(planta.id);            
+            if (!pudeBorrar)            
+                ViewBag.mensaje = "No fue posible dar de baja la planta";            
+            return View("Index", CargarPlantasIndexFormateado());
+        }
+
+        public bool EstoyLogueado()
+        {
+            return HttpContext.Session.GetInt32("userId") != null;
+        }
+        public IEnumerable<Planta> CargarPlantasIndexFormateado()
+        {
+            IEnumerable<Planta> plantas = manejadorPlantas.ObtenerTodasLasPlantas();
+            foreach (Planta p in plantas)
+            {
+                if (p.descripcion.Length > 50)
+                {
+                    p.descripcion = p.descripcion.Substring(0, 50) + "[...]";
+                }
+            }
+            return plantas;
         }
     }
 }

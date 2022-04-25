@@ -69,6 +69,7 @@ namespace Datos
                 Conexion.AbrirConexion(conexion);
                 int tuplasAfectadas = com.ExecuteNonQuery();
                 ok = tuplasAfectadas == 1;
+                return ok;
             }
             catch
             {
@@ -77,9 +78,7 @@ namespace Datos
             finally
             {
                 Conexion.CerrarYDesecharConexion(conexion);
-            }
-
-            return ok;
+            }            
         }
 
         public Planta FindById(int id)
@@ -229,7 +228,7 @@ namespace Datos
             throw new NotImplementedException();
         }
 
-        public Planta BuscarPlantaPorNombreCientifico(string nombreCientifico)
+        public Planta FindByName(string nombreCientifico)
         {
             Planta planta = null;
             SqlConnection con = Conexion.ObtenerConexion();

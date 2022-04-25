@@ -47,8 +47,7 @@ namespace Datos
             bool ok = false;
 
             SqlConnection conexion = Conexion.ObtenerConexion();
-
-            //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
+                        
             string sql = "DELETE FROM TipoPlanta WHERE Id=" + id;
             SqlCommand com = new SqlCommand(sql, conexion);
 
@@ -57,16 +56,17 @@ namespace Datos
                 Conexion.AbrirConexion(conexion);
                 int tuplasAfectadas = com.ExecuteNonQuery();
                 ok = tuplasAfectadas == 1;
+                return ok;
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                return false;
             }
             finally
             {
                 Conexion.CerrarYDesecharConexion(conexion);
             }
-            return ok;
+            
         }
 
         public TipoPlanta FindById(int id)
@@ -145,9 +145,8 @@ namespace Datos
             {
                 SqlConnection con = Conexion.ObtenerConexion();
                 string sql =
-                "UPDATE TipoPlanta SET id=@id, nombre=@nombre, descripcion=@descripcion;";
+                "UPDATE TipoPlanta SET nombre=@nombre, descripcion=@descripcion WHERE id = @id;";
                 SqlCommand com = new SqlCommand(sql, con);
-
                 com.Parameters.AddWithValue("@id", obj.id);
                 com.Parameters.AddWithValue("@nombre", obj.nombre.Trim());
                 com.Parameters.AddWithValue("@descripcion", obj.descripcion.Trim());
@@ -170,7 +169,38 @@ namespace Datos
             return ok;
         }
 
+        public TipoPlanta FindByName(string nombreTP)
+        {
+            TipoPlanta tipoPlanta = null; ;
+            SqlConnection conexion = Conexion.ObtenerConexion();
 
+            string sql = "SELECT * FROM TipoPlanta WHERE nombre = " + nombreTP + ";";
+            SqlCommand com = new SqlCommand(sql, conexion);
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                SqlDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    tipoPlanta = new TipoPlanta()
+                    {
+                        id = reader.GetInt32(reader.GetOrdinal("id")),
+                        nombre = reader.GetString(1),
+                        descripcion = reader.GetString(2),
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+            return tipoPlanta;
+        }
         public bool YaExisteString(string cadena)
         {
             SqlConnection conexion = Conexion.ObtenerConexion();

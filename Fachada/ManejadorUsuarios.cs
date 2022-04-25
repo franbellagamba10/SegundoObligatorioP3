@@ -27,12 +27,12 @@ namespace Fachada
 
         public Usuario BuscarUsuarioPorSuEmail(string email)
         {
-            return RepoUsuarios.BuscarUsuarioPorEmail(email);
+            return RepoUsuarios.FindByName(email);
         }
 
         public bool ActualizarUsuario(Usuario user)
         {
             return RepoUsuarios.Update(user);
-        }
+        }        
     }
 }

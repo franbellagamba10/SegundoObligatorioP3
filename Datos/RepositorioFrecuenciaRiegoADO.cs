@@ -103,6 +103,10 @@ namespace Datos
             return frecuenciaRiego;
         }
 
+        public FrecuenciaRiego FindByName(string cadena)
+        {
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<FrecuenciaRiego> GetAll()
         {

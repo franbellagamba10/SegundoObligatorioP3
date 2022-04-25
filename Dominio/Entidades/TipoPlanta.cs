@@ -1,6 +1,7 @@
 ﻿using Dominio.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -9,7 +10,9 @@ namespace Dominio.Entidades
     public class TipoPlanta : IValidate
     {
         public int id { get; set; }
+        [Display(Name = "Nombre")]
         public string nombre { get; set; }
+        [Display(Name = "Descripción")]
         public string descripcion { get; set; }
 
         public TipoPlanta()
