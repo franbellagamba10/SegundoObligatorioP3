@@ -64,7 +64,11 @@ namespace ProyectoWeb.Controllers
 
                 bool pudeCrear = manejadorPlantas.AgregarNuevaPlanta(planta);
                 if (pudeCrear) // ---->  aca mismo se setea la ruta de la foto de la planta
-                    return RedirectToAction("Index");
+                {
+                    planta.id = manejadorPlantas.ObtenerPlantaPorNombreCientifico(planta.nombreCientifico).id;
+                    return RedirectToAction("Details", planta);
+                }
+                    
             }
             catch (Exception ex)
             {
@@ -123,12 +127,12 @@ namespace ProyectoWeb.Controllers
                 bool pudeEditar = manejadorPlantas.ActualizarPlanta(planta);
                 if (!pudeEditar)
                     return View(planta);
+                return RedirectToAction("Details", planta);
             }
             catch (Exception ex)
             {
                 return View(); //deberia volver al formulario edicion de usuario
-            }
-            return RedirectToAction("Index"); //  -----> REVISAR, necesitamos que vaya al Indice de plantas
+            }            
         }
 
         public ActionResult Details(int id)

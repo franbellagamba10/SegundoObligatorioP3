@@ -7,13 +7,8 @@ namespace Dominio.Interfaces
 {
     public interface IRepositorioPlantas : IRepositorio<Planta>
     {
-        public string ObtenerNombreFoto(string nombrePlanta)
-        {
-            string foto = string.Empty;
-
-            //----> EDITAR
-
-            return foto;
-        }
+        public string ObtenerNombreFoto(string nombrePlanta);
+        
+        public Planta BuscarPlantaPorNombreCientifico(string nombreCientifico);
     }
 }

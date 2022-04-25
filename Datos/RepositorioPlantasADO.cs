@@ -224,5 +224,50 @@ namespace Datos
                 Conexion.CerrarYDesecharConexion(conexion);
             }
         }
+        public string ObtenerNombreFoto(string nombrePlanta)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Planta BuscarPlantaPorNombreCientifico(string nombreCientifico)
+        {
+            Planta planta = null;
+            SqlConnection con = Conexion.ObtenerConexion();
+            string sql = "SELECT * FROM Planta WHERE Planta.nombreCientifico = @nombreCientifico;";
+            SqlCommand com = new SqlCommand(sql, con);
+            com.Parameters.AddWithValue("@nombreCientifico", nombreCientifico);
+            try
+            {
+                Conexion.AbrirConexion(con);
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.Read())
+                {
+                    planta = new Planta()
+                    {
+                        id = reader.GetInt32(reader.GetOrdinal("id")),
+                        tipo = repoTiposPlanta.FindById(reader.GetInt32(1)),
+                        nombreCientifico = reader.GetString(2),
+                        nombresVulgares = reader.GetString(3),
+                        descripcion = reader.GetString(4),
+                        ambiente = (Planta.Ambiente)reader.GetInt32(5),
+                        alturaMaxima = reader.GetInt32(6),
+                        foto = reader.GetString(7),
+                        precio = reader.GetDecimal(8),
+                        ficha = repoFichas.FindById(reader.GetInt32(9)),
+                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(10)),
+                    };
+                }
+                return planta;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Conexion.CerrarConexion(con);
+            }
+
+        }
     }
 }

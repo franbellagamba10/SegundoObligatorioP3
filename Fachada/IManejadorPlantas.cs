@@ -16,5 +16,6 @@ namespace Fachada
         TipoPlanta ObtenerTipoPlantaPorId(int id);
         IEnumerable<Ficha> TraerTodasLasFichas();
         Ficha ObtenerFichaPorId(int id);
+        Planta ObtenerPlantaPorNombreCientifico(string nombreCientifico);
     }
 }

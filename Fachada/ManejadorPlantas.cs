@@ -66,5 +66,10 @@ namespace Fachada
         {
             return RepoTP.FindById(id);
         }
+
+        public Planta ObtenerPlantaPorNombreCientifico(string nombreCientifico)
+        {
+            return RepoPlantas.BuscarPlantaPorNombreCientifico(nombreCientifico);
+        }
     }
 }
