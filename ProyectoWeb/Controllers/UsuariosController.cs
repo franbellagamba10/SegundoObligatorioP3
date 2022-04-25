@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
+
 
 namespace ProyectoWeb.Controllers
 {
@@ -24,7 +26,7 @@ namespace ProyectoWeb.Controllers
         }
         [HttpGet]
         public ActionResult Login()
-        {
+        {            
             return View("Login");
         }
 
@@ -36,16 +38,18 @@ namespace ProyectoWeb.Controllers
             if (user != null && user.activo && user.contrasenia == contrasenia)
             {
                 HttpContext.Session.SetInt32("userId", user.id);
+                
                 HttpContext.Session.SetString("userEmail", user.email);
                 return RedirectToAction("Index", "Plantas");
             }
             //mensaje de error al loguearse?
             return View();
         }
-        [HttpPost]
+        
         public ActionResult Logout()
         {
             HttpContext.Session.Clear();
+            var valor = HttpContext.Session.GetInt32("userId");
             return RedirectToAction("Login");
         }
         [HttpGet]
@@ -119,7 +123,7 @@ namespace ProyectoWeb.Controllers
                 return View(); //deberia volver al formulario edicion de usuario
             }
             return RedirectToAction("Logout"); //  -----> REVISAR, necesitamos que vaya al Indice de plantas
-        }
+        }       
     }
 
 
