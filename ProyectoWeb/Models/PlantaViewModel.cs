@@ -1,4 +1,5 @@
 ﻿using Dominio.Entidades;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,6 +39,7 @@ namespace ProyectoWeb.Models
         public string EmailUsuarioAutor { get; set; }
         public TipoPlanta TipoPlantaSeleccionado { get; set; }
         public Ficha FichaSeleccionada { get; set; }
+        public IFormFile imagen { get; set; }
         public enum Ambiente
         {
             Exterior = 1,

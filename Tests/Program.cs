@@ -1,6 +1,7 @@
 ﻿using Datos;
 using Dominio.Entidades;
 using System;
+using System.Linq;
 
 namespace Tests
 {
@@ -122,32 +123,85 @@ namespace Tests
             //#endregion
 
 
-            bool resultado = TieneSoloLetras("ñÑ áéíóú ÁÉÍÓÚ");            
-            Console.WriteLine(resultado);
-            resultado = TieneSoloLetras("aá eé ií oó uú AENBER ");
-            Console.WriteLine(resultado);
-            Console.ReadKey();
-            bool TieneSoloLetras(string nombre)
+            //bool resultado = TieneSoloLetras("ñÑ áéíóú ÁÉÍÓÚ");            
+            //Console.WriteLine(resultado);
+            //resultado = TieneSoloLetras("aá eé ií oó uú AENBER ");
+            //Console.WriteLine(resultado);
+            //Console.ReadKey();
+            //bool TieneSoloLetras(string nombre)
+            //{
+            //    int i = 0;
+            //    bool TieneValorAlfabetico = true;
+            //    while (i < nombre.Length)// && TieneValorAlfabetico)
+            //    {
+            //        var valor = (int)nombre[i];
+
+
+            //        if ((int)nombre[i] >= 65 && (int)nombre[i] <= 90 || (int)nombre[i] >= 97 && (int)nombre[i] <= 122 || (int)nombre[i] >= 160 && (int)nombre[i] <= 165 ||
+            //        (int)nombre[i] == 130 || (int)nombre[i] == 144 || (int)nombre[i] == 181 || (int)nombre[i] == 214 || (int)nombre[i] == 224 || (int)nombre[i] == 223 || (int)nombre[i] == 32)
+            //            TieneValorAlfabetico = true;
+            //        else
+            //            TieneValorAlfabetico = false;
+
+            //        i++;
+            //    }
+            //    return TieneValorAlfabetico;
+            //}
+
+            string cadenaFinal = FormatearNombreArchivo("  SIEREICAE PALIDUS  ", "unaFoto.png", "");
+
+
+            string FormatearNombreArchivo(string nombreCientifico, string fileName, string stringFotoBD)
             {
-                int i = 0;
-                bool TieneValorAlfabetico = true;
-                while (i < nombre.Length)// && TieneValorAlfabetico)
+                string mensajeError = "ERROR";
+                if (string.IsNullOrWhiteSpace(nombreCientifico))
+                    return mensajeError;
+
+                string nombreFormateado = nombreCientifico.Trim();
+                nombreFormateado = nombreFormateado.Replace(" ", "_").ToLower();
+
+                bool esPng = false;
+                bool esJpg = false;
+                int indiceExtension = fileName.IndexOf(".png");
+                if (indiceExtension != 0 && fileName.IndexOf(".png") + 4 == fileName.Length)
+                    esPng = true;
+
+                if (!esPng)
                 {
-                    var valor = (int)nombre[i];
-
-                   
-                    if ((int)nombre[i] >= 65 && (int)nombre[i] <= 90 || (int)nombre[i] >= 97 && (int)nombre[i] <= 122 || (int)nombre[i] >= 160 && (int)nombre[i] <= 165 ||
-                    (int)nombre[i] == 130 || (int)nombre[i] == 144 || (int)nombre[i] == 181 || (int)nombre[i] == 214 || (int)nombre[i] == 224 || (int)nombre[i] == 223 || (int)nombre[i] == 32)
-                        TieneValorAlfabetico = true;
-                    else
-                        TieneValorAlfabetico = false;
-
-                    i++;
+                    indiceExtension = fileName.IndexOf(".jpg");
+                    if (indiceExtension != 0 && fileName.IndexOf(".jpg") + 4 == fileName.Length)
+                        esJpg = true;
                 }
-                return TieneValorAlfabetico;
+                if (!esPng && !esJpg)
+                    return mensajeError;
+
+                int numeracionConvertida = 0;
+                if (string.IsNullOrWhiteSpace(stringFotoBD))
+                    nombreFormateado += "_001";
+                else
+                {
+                    string[] nombresFoto;
+                    nombresFoto = stringFotoBD.Split(",");
+                    string ultimaFoto = nombresFoto[nombresFoto.Count() - 1];
+
+                    string numeracionFoto = ultimaFoto.Substring(ultimaFoto.Length - 7, 3);
+                    numeracionConvertida = Convert.ToInt32(numeracionFoto) + 1;
+                    if (numeracionConvertida < 100 && numeracionConvertida >= 10)
+                        numeracionFoto = "0" + numeracionConvertida.ToString();
+                    else if (numeracionConvertida < 10)
+                        numeracionFoto = "00" + numeracionConvertida.ToString();
+                    else
+                        numeracionFoto = numeracionConvertida.ToString();
+
+                    nombreFormateado = "," + nombreFormateado + "_" + numeracionFoto;
+                }
+
+                if (esPng)
+                    nombreFormateado += ".png";
+                else
+                    nombreFormateado += ".jpg";
+                return nombreFormateado;
             }
-
-
         }
     }
 }

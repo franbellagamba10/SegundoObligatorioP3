@@ -1,5 +1,6 @@
 ﻿using Dominio.Entidades;
 using Fachada;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoWeb.Models;
@@ -7,17 +8,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ProyectoWeb.Controllers
 {
     public class PlantasController : Controller, IValidarSesion
     {
-        public IManejadorPlantas manejadorPlantas { get; set; }
-        public IManejadorUsuarios manejadorUsuarios { get; set; }
-        public PlantasController(IManejadorPlantas manejPlantas, IManejadorUsuarios manejUsuarios)
+        public IManejadorPlantas ManejadorPlantas { get; set; }
+        public IManejadorUsuarios ManejadorUsuarios { get; set; }
+        public IWebHostEnvironment WebHostEnvironment { get; set; }
+        public PlantasController(IManejadorPlantas manejPlantas, IManejadorUsuarios manejUsuarios, IWebHostEnvironment webHostEnv)
         {
-            manejadorPlantas = manejPlantas;
-            manejadorUsuarios = manejUsuarios;
+            ManejadorPlantas = manejPlantas;
+            ManejadorUsuarios = manejUsuarios;
+            WebHostEnvironment = webHostEnv;
         }
         public IActionResult Index()
         {
@@ -32,8 +36,8 @@ namespace ProyectoWeb.Controllers
                 return RedirectToAction("Logout", "Usuarios");
             PlantaViewModel plantaVM = new PlantaViewModel
             {
-                Fichas = manejadorPlantas.ObtenerTodasLasFichas(),
-                TiposPlanta = manejadorPlantas.TraerTodosLosTiposDePlanta(),
+                Fichas = ManejadorPlantas.ObtenerTodasLasFichas(),
+                TiposPlanta = ManejadorPlantas.TraerTodosLosTiposDePlanta(),
             };         
 
             return View(plantaVM);
@@ -43,6 +47,14 @@ namespace ProyectoWeb.Controllers
         {
             try
             {
+                string nombreArchivo = FormatearNombreArchivo(plantaVM.nombreCientifico, plantaVM.imagen.FileName, plantaVM.foto);
+
+                if (nombreArchivo == "ERROR")
+                {
+                    ViewBag.mensaje = "El nombre no puede ser vacío y debe tener una única extension jpg o png";
+                    return View(plantaVM);
+                }                    
+
                 Planta planta = new Planta
                 {
                     id = plantaVM.id,
@@ -52,16 +64,22 @@ namespace ProyectoWeb.Controllers
                     descripcion = plantaVM.descripcion,
                     ambiente = (Planta.Ambiente)plantaVM.ambiente,
                     precio = plantaVM.precio,
-                    foto = plantaVM.foto,
-                    ficha = manejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
-                    ingresadoPor = manejadorUsuarios.BuscarUsuarioPorSuEmail(HttpContext.Session.GetString("userEmail")),
-                    tipo = manejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
+                    foto = plantaVM.foto+ nombreArchivo,
+                    ficha = ManejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
+                    ingresadoPor = ManejadorUsuarios.BuscarUsuarioPorSuEmail(HttpContext.Session.GetString("userEmail")),
+                    tipo = ManejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
                 };
+                
+                string rutaRaizApp = WebHostEnvironment.WebRootPath;
+                rutaRaizApp = Path.Combine(rutaRaizApp, "imagenes");
+                string rutaCompleta = Path.Combine(rutaRaizApp, nombreArchivo);                
+                FileStream archivoStream = new FileStream(rutaCompleta, FileMode.Create);                
+                plantaVM.imagen.CopyTo(archivoStream);
 
-                bool pudeCrear = manejadorPlantas.AgregarNuevaPlanta(planta);
-                if (pudeCrear) // ---->  aca mismo se setea la ruta de la foto de la planta
+                bool pudeCrear = ManejadorPlantas.AgregarNuevaPlanta(planta);
+                if (pudeCrear) // 
                 {
-                    planta.id = manejadorPlantas.ObtenerPlantaPorNombreCientifico(planta.nombreCientifico).id;
+                    planta.id = ManejadorPlantas.ObtenerPlantaPorNombreCientifico(planta.nombreCientifico).id;
                     return RedirectToAction("Details", planta);
                 }
                     
@@ -80,7 +98,7 @@ namespace ProyectoWeb.Controllers
             if (!EstoyLogueado())
                 return RedirectToAction("Logout", "Usuarios");
             PlantaViewModel planta = new PlantaViewModel();
-            Planta plantaBD = manejadorPlantas.ObtenerPlantaPorId(id);
+            Planta plantaBD = ManejadorPlantas.ObtenerPlantaPorId(id);
             #region Conversion para cargar ViewModel
             planta.id = plantaBD.id;
             planta.nombreCientifico = plantaBD.nombreCientifico;
@@ -96,14 +114,14 @@ namespace ProyectoWeb.Controllers
             planta.IdTipoPlantaSeleccionada = plantaBD.tipo.id;
             planta.ingresadoPor = plantaBD.ingresadoPor;
             
-            planta.Fichas = (IEnumerable<Ficha>)manejadorPlantas.ObtenerTodasLasFichas();
-            planta.TiposPlanta = (IEnumerable<TipoPlanta>)manejadorPlantas.TraerTodosLosTiposDePlanta();
+            planta.Fichas = (IEnumerable<Ficha>)ManejadorPlantas.ObtenerTodasLasFichas();
+            planta.TiposPlanta = (IEnumerable<TipoPlanta>)ManejadorPlantas.TraerTodosLosTiposDePlanta();
             #endregion
             return View(planta);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(PlantaViewModel plantaVM) // ----> consultar con Plinio, capaz hay que pasarle usuario completo
+        public ActionResult Edit(PlantaViewModel plantaVM)
         {
             try
             {
@@ -117,12 +135,12 @@ namespace ProyectoWeb.Controllers
                     ambiente = (Planta.Ambiente)plantaVM.ambiente,
                     precio = plantaVM.precio,
                     foto = plantaVM.foto,
-                    ficha = manejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
-                    ingresadoPor = manejadorUsuarios.BuscarUsuarioPorSuEmail(plantaVM.EmailUsuarioAutor),
-                    tipo = manejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
+                    ficha = ManejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
+                    ingresadoPor = ManejadorUsuarios.BuscarUsuarioPorSuEmail(plantaVM.EmailUsuarioAutor),
+                    tipo = ManejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
                 
                 };
-                bool pudeEditar = manejadorPlantas.ActualizarPlanta(planta);
+                bool pudeEditar = ManejadorPlantas.ActualizarPlanta(planta);
                 if (!pudeEditar)
                     return View(planta);
                 return RedirectToAction("Details", planta);
@@ -136,22 +154,26 @@ namespace ProyectoWeb.Controllers
         {
             if (!EstoyLogueado())
                 return RedirectToAction("Logout", "Usuarios");
-            return View(manejadorPlantas.ObtenerPlantaPorId(id));
+            Planta planta = ManejadorPlantas.ObtenerPlantaPorId(id);
+            planta.foto = ObtenerUltimaFoto(planta.foto);                
+            return View(planta);
         }
 
         public ActionResult Delete(int id)
         {
             if (!EstoyLogueado())
                 return RedirectToAction("Logout", "Usuarios");
-            return View(manejadorPlantas.ObtenerPlantaPorId(id));
-             
+            Planta planta = ManejadorPlantas.ObtenerPlantaPorId(id);
+            planta.foto = ObtenerUltimaFoto(planta.foto);
+            return View(planta);
+
         }
         [HttpPost]
         public ActionResult Delete(Planta planta)
         {
             if (!EstoyLogueado())
                 return RedirectToAction("Logout", "Usuarios");
-            bool pudeBorrar = manejadorPlantas.DarDeBajaPlanta(planta.id);            
+            bool pudeBorrar = ManejadorPlantas.DarDeBajaPlanta(planta.id);            
             if (!pudeBorrar)            
                 ViewBag.mensaje = "No fue posible dar de baja la planta";            
             return View("Index", CargarPlantasIndexFormateado());
@@ -162,8 +184,8 @@ namespace ProyectoWeb.Controllers
         {
             PlantaViewModel plantaVM = new PlantaViewModel()
             {
-                Fichas = manejadorPlantas.ObtenerTodasLasFichas(),
-                TiposPlanta = manejadorPlantas.TraerTodosLosTiposDePlanta(),
+                Fichas = ManejadorPlantas.ObtenerTodasLasFichas(),
+                TiposPlanta = ManejadorPlantas.TraerTodosLosTiposDePlanta(),
             };
             return View("Busqueda", plantaVM);
         }
@@ -173,7 +195,7 @@ namespace ProyectoWeb.Controllers
         {
 
             //manejadorPlantas.BusquedaPlantas(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente);
-            return View("Index", manejadorPlantas.BusquedaPlantas(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente));
+            return View("Index", ManejadorPlantas.BusquedaPlantas(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente));
         }
         public bool EstoyLogueado()
         {
@@ -181,15 +203,73 @@ namespace ProyectoWeb.Controllers
         }
         public IEnumerable<Planta> CargarPlantasIndexFormateado()
         {
-            IEnumerable<Planta> plantas = manejadorPlantas.ObtenerTodasLasPlantas();
+            IEnumerable<Planta> plantas = ManejadorPlantas.ObtenerTodasLasPlantas();
             foreach (Planta p in plantas)
             {
                 if (p.descripcion.Length > 50)
                 {
                     p.descripcion = p.descripcion.Substring(0, 50) + "[...]";
                 }
+                p.foto = ObtenerUltimaFoto(p.foto);
             }
             return plantas;
+        }
+
+        public string ObtenerUltimaFoto(string cadenaCompleta)
+        {
+            return cadenaCompleta.Split(",").Last();
+        }
+
+        string FormatearNombreArchivo(string nombreCientifico, string fileName, string stringFotoBD)
+        {
+            string mensajeError = "ERROR";
+            if (string.IsNullOrWhiteSpace(nombreCientifico))
+                return mensajeError;
+
+            string nombreFormateado = nombreCientifico.Trim();
+            nombreFormateado = nombreFormateado.Replace(" ", "_").ToLower();
+
+            bool esPng = false;
+            bool esJpg = false;
+            int indiceExtension = fileName.IndexOf(".png");
+            if (indiceExtension != 0 && fileName.IndexOf(".png") + 4 == fileName.Length)
+                esPng = true;
+
+            if (!esPng)
+            {
+                indiceExtension = fileName.IndexOf(".jpg");
+                if (indiceExtension != 0 && fileName.IndexOf(".jpg") + 4 == fileName.Length)
+                    esJpg = true;
+            }
+            if (!esPng && !esJpg)
+                return mensajeError;
+
+            int numeracionConvertida = 0;
+            if (string.IsNullOrWhiteSpace(stringFotoBD))
+                nombreFormateado += "_001";
+            else
+            {
+                string[] nombresFoto;
+                nombresFoto = stringFotoBD.Split(",");
+                string ultimaFoto = nombresFoto[nombresFoto.Count() - 1];
+
+                string numeracionFoto = ultimaFoto.Substring(ultimaFoto.Length - 7, 3);
+                numeracionConvertida = Convert.ToInt32(numeracionFoto) + 1;
+                if (numeracionConvertida < 100 && numeracionConvertida >= 10)
+                    numeracionFoto = "0" + numeracionConvertida.ToString();
+                else if (numeracionConvertida < 10)
+                    numeracionFoto = "00" + numeracionConvertida.ToString();
+                else
+                    numeracionFoto = numeracionConvertida.ToString();
+
+                nombreFormateado = "," + nombreFormateado+"_" + numeracionFoto;
+            }
+
+            if (esPng)
+                nombreFormateado += ".png";
+            else
+                nombreFormateado += ".jpg";
+            return nombreFormateado;
         }
     }
 }
