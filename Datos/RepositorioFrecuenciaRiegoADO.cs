@@ -13,7 +13,7 @@ namespace Datos
         public bool Create(FrecuenciaRiego obj)
         {
             SqlConnection conexion = Conexion.ObtenerConexion();
-            string sql = "INSERT INTO FrecuenciaRiego VALUES(@tiempo, @cantidad); " +
+            string sql = "INSERT INTO FrecuenciasRiego VALUES(@tiempo, @cantidad); " +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
 
@@ -48,7 +48,7 @@ namespace Datos
             SqlConnection conexion = Conexion.ObtenerConexion();
 
             //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
-            string sql = "DELETE FROM FrecuenciaRiego WHERE Id=" + id;
+            string sql = "DELETE FROM FrecuenciasRiego WHERE Id=" + id;
             SqlCommand com = new SqlCommand(sql, conexion);
 
             try
@@ -75,7 +75,7 @@ namespace Datos
             FrecuenciaRiego frecuenciaRiego = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM FrecuenciaRiego WHERE id = " + id + ";";
+            string sql = "SELECT * FROM FrecuenciasRiego WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -114,7 +114,7 @@ namespace Datos
 
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM FrecuenciaRiego;";
+            string sql = "SELECT * FROM FrecuenciasRiego;";
             SqlCommand com = new SqlCommand(sql, conexion);
 
             try
@@ -155,7 +155,7 @@ namespace Datos
             if (obj.Validar())
             {
                 string sql =
-                    "UPDATE FrecuenciaRiego SET tiempo=@tiempo, cantidad=@cantidad, WHERE Id=@id";
+                    "UPDATE FrecuenciasRiego SET tiempo=@tiempo, cantidad=@cantidad, WHERE Id=@id";
 
                 SqlCommand com = new SqlCommand(sql, con);
 
@@ -187,7 +187,7 @@ namespace Datos
         {
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT nombre FROM FrecuenciaRiego WHERE tiempo = '" + cadena + "';";
+            string sql = "SELECT nombre FROM FrecuenciasRiego WHERE tiempo = '" + cadena + "';";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {

@@ -27,9 +27,7 @@ namespace ProyectoWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-            string tipoRepo = Configuration.GetSection("TipoRepo").Value;
-
+                        
             services.AddScoped<IManejadorUsuarios, ManejadorUsuarios>();
             services.AddScoped<IRepositorioUsuarios, RepositorioUsuariosADO>();
             services.AddScoped<IManejadorPlantas, ManejadorPlantas>();

@@ -20,7 +20,7 @@ namespace Datos
         public bool Create(Ficha obj)
         {
             SqlConnection conexion = Conexion.ObtenerConexion();
-            string sql = "INSERT INTO Ficha VALUES(@frecuenciaRiego, @tipoIluminacion, @temperatura);" +
+            string sql = "INSERT INTO Fichas VALUES(@frecuenciaRiego, @tipoIluminacion, @temperatura);" +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
 
@@ -56,7 +56,7 @@ namespace Datos
             SqlConnection conexion = Conexion.ObtenerConexion();
 
             //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
-            string sql = "DELETE FROM Ficha WHERE Id=" + id;
+            string sql = "DELETE FROM Fichas WHERE Id=" + id;
             SqlCommand com = new SqlCommand(sql, conexion);
 
             try
@@ -83,7 +83,7 @@ namespace Datos
             Ficha ficha = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM Ficha WHERE id = " + id + ";";
+            string sql = "SELECT * FROM Fichas WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -123,7 +123,7 @@ namespace Datos
 
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM Ficha;";
+            string sql = "SELECT * FROM Fichas;";
             SqlCommand com = new SqlCommand(sql, conexion);
 
             try
@@ -165,7 +165,7 @@ namespace Datos
             if (obj.Validar())
             {
                 string sql =
-                    "UPDATE Ficha SET frecuenciaRiego=@frecuenciaRiego, temperatura=@temperatura,tipoIluminacion=@tipoIluminacion, WHERE Id=@id";
+                    "UPDATE Fichas SET frecuenciaRiego=@frecuenciaRiego, temperatura=@temperatura,tipoIluminacion=@tipoIluminacion, WHERE Id=@id";
 
                 SqlCommand com = new SqlCommand(sql, con);
 

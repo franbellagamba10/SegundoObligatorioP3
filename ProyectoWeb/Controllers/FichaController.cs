@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoWeb.Controllers
 {
-    public class FichaController : Controller
+    public class FichaController : Controller, IValidarSesion
     {
         IManejadorPlantas manejadorPlantas { get; set; }
         public FichaController(IManejadorPlantas manejPlantas)
@@ -20,6 +20,8 @@ namespace ProyectoWeb.Controllers
         // GET: FichaController
         public ActionResult Index()
         {
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");
             return View(manejadorPlantas.ObtenerTodasLasFichas());
         }
 
