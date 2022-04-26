@@ -17,8 +17,13 @@ namespace Fachada
         #endregion
 
         #region Ficha
-        IEnumerable<Ficha> TraerTodasLasFichas();
+        IEnumerable<Ficha> ObtenerTodasLasFichas();
         Ficha ObtenerFichaPorId(int id);
+        IEnumerable<TipoIluminacion> ObtenerTodosLosTI();
+        IEnumerable<FrecuenciaRiego> ObtenerTodasLasFR();
+        public bool AgregarNuevaFicha(Ficha ficha);
+        TipoIluminacion ObtenerTIPorId(int id);
+        FrecuenciaRiego ObtenerFRPorId(int id);
         #endregion
 
         #region TipoPlanta
@@ -31,5 +36,8 @@ namespace Fachada
         IEnumerable<Planta> BusquedaPlantas(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente);
         #endregion
 
+        
+        
+        
     }
 }

@@ -32,7 +32,7 @@ namespace ProyectoWeb.Controllers
                 return RedirectToAction("Logout", "Usuarios");
             PlantaViewModel plantaVM = new PlantaViewModel
             {
-                Fichas = manejadorPlantas.TraerTodasLasFichas(),
+                Fichas = manejadorPlantas.ObtenerTodasLasFichas(),
                 TiposPlanta = manejadorPlantas.TraerTodosLosTiposDePlanta(),
             };         
 
@@ -96,7 +96,7 @@ namespace ProyectoWeb.Controllers
             planta.IdTipoPlantaSeleccionada = plantaBD.tipo.id;
             planta.ingresadoPor = plantaBD.ingresadoPor;
             
-            planta.Fichas = (IEnumerable<Ficha>)manejadorPlantas.TraerTodasLasFichas();
+            planta.Fichas = (IEnumerable<Ficha>)manejadorPlantas.ObtenerTodasLasFichas();
             planta.TiposPlanta = (IEnumerable<TipoPlanta>)manejadorPlantas.TraerTodosLosTiposDePlanta();
             #endregion
             return View(planta);
@@ -162,7 +162,7 @@ namespace ProyectoWeb.Controllers
         {
             PlantaViewModel plantaVM = new PlantaViewModel()
             {
-                Fichas = manejadorPlantas.TraerTodasLasFichas(),
+                Fichas = manejadorPlantas.ObtenerTodasLasFichas(),
                 TiposPlanta = manejadorPlantas.TraerTodosLosTiposDePlanta(),
             };
             return View("Busqueda", plantaVM);
