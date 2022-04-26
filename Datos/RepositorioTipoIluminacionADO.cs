@@ -15,7 +15,7 @@ namespace Datos
                 SqlConnection conexion = Conexion.ObtenerConexion();
 
 
-                string sql = "INSERT INTO TipoIluminacion VALUES(@iluminacion); " +
+                string sql = "INSERT INTO TiposIluminacion VALUES(@iluminacion); " +
                 "SELECT CAST(SCOPE_IDENTITY() AS INT);";
                 SqlCommand com = new SqlCommand(sql, conexion);
 
@@ -49,7 +49,7 @@ namespace Datos
             SqlConnection conexion = Conexion.ObtenerConexion();
 
             //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
-            string sql = "DELETE FROM TipoIluminacion WHERE Id=" + id;
+            string sql = "DELETE FROM TiposIluminacion WHERE Id=" + id;
             SqlCommand com = new SqlCommand(sql, conexion);
 
             try
@@ -76,7 +76,7 @@ namespace Datos
             TipoIluminacion tipoIluminacion = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM TipoIluminacion WHERE id = " + id + ";";
+            string sql = "SELECT * FROM TiposIluminacion WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -112,7 +112,7 @@ namespace Datos
         {
             List<TipoIluminacion> tipoIluminaciones = new List<TipoIluminacion>();
             SqlConnection conexion = Conexion.ObtenerConexion();
-            string sql = "SELECT * FROM TipoIluminacion;";
+            string sql = "SELECT * FROM TiposIluminacion;";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -150,7 +150,7 @@ namespace Datos
         {
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT nombre FROM TipoIluminacion WHERE iluminacion = '" + cadena + "';";
+            string sql = "SELECT nombre FROM TiposIluminacion WHERE iluminacion = '" + cadena + "';";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {

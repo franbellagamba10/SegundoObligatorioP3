@@ -15,7 +15,7 @@ namespace Datos
             SqlConnection conexion = Conexion.ObtenerConexion();
 
 
-            string sql = "INSERT INTO TipoPlanta VALUES(@nombre, @descripcion); " +
+            string sql = "INSERT INTO TiposPlantas VALUES(@nombre, @descripcion); " +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
 
@@ -48,7 +48,7 @@ namespace Datos
 
             SqlConnection conexion = Conexion.ObtenerConexion();
                         
-            string sql = "DELETE FROM TipoPlanta WHERE Id=" + id;
+            string sql = "DELETE FROM TiposPlantas WHERE Id=" + id;
             SqlCommand com = new SqlCommand(sql, conexion);
 
             try
@@ -74,7 +74,7 @@ namespace Datos
             TipoPlanta tipoPlanta = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM TipoPlanta WHERE id = " + id + ";";
+            string sql = "SELECT * FROM TiposPlantas WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -107,7 +107,7 @@ namespace Datos
         {
             List<TipoPlanta> tipoPlantas = new List<TipoPlanta>();
             SqlConnection conexion = Conexion.ObtenerConexion();
-            string sql = "SELECT * FROM TipoPlanta;";
+            string sql = "SELECT * FROM TiposPlantas;";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -144,7 +144,7 @@ namespace Datos
             {
                 SqlConnection con = Conexion.ObtenerConexion();
                 string sql =
-                "UPDATE TipoPlanta SET nombre=@nombre, descripcion=@descripcion WHERE id = @id;";
+                "UPDATE TiposPlantas SET nombre=@nombre, descripcion=@descripcion WHERE id = @id;";
                 SqlCommand com = new SqlCommand(sql, con);
                 com.Parameters.AddWithValue("@id", obj.id);
                 com.Parameters.AddWithValue("@nombre", obj.nombre.Trim());
@@ -173,7 +173,7 @@ namespace Datos
             TipoPlanta tipoPlanta = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM TipoPlanta WHERE nombre = '" + nombreTP + "';";
+            string sql = "SELECT * FROM TiposPlantas WHERE nombre = '" + nombreTP + "';";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -204,7 +204,7 @@ namespace Datos
         {
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT nombre FROM TipoPlanta WHERE nombre = '" + cadena + "';";
+            string sql = "SELECT nombre FROM TiposPlantas WHERE nombre = '" + cadena + "';";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {

@@ -22,7 +22,7 @@ namespace Datos
         {
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "INSERT INTO Planta VALUES(@tipo, @nombreCientifico, @nombresVulgares, @descripcion," +
+            string sql = "INSERT INTO Plantas VALUES(@tipo, @nombreCientifico, @nombresVulgares, @descripcion," +
                 " @ambiente, @alturaMaxima, @foto, @precio,@ficha, @ingresadoPor); " +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
@@ -62,7 +62,7 @@ namespace Datos
             bool ok = false;
             SqlConnection conexion = Conexion.ObtenerConexion();
             //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
-            string sql = "DELETE FROM Planta WHERE Id=" + id;
+            string sql = "DELETE FROM Plantas WHERE Id=" + id;
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -86,7 +86,7 @@ namespace Datos
             Planta planta = null; ;
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "SELECT * FROM Planta WHERE id = " + id + ";";
+            string sql = "SELECT * FROM Plantas WHERE id = " + id + ";";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -126,7 +126,7 @@ namespace Datos
         {
             List<Planta> plantas = new List<Planta>();
             SqlConnection conexion = Conexion.ObtenerConexion();
-            string sql = "SELECT * FROM Planta;";
+            string sql = "SELECT * FROM Plantas;";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -169,7 +169,7 @@ namespace Datos
             if (!obj.Validar() || YaExisteString(obj.nombreCientifico))
             {
                 string sql =
-                "UPDATE Planta SET tipo=@tipo, nombreCientifico=@nombreCientifico, nombresVulgares=@nombresVulgares, descripcion=@descripcion,ambiente=@ambiente, alturaMaxima=@alturaMaxima,foto=@foto,precio=@precio,ingresadoPor=@ingresadoPor WHERE id=@id";
+                "UPDATE Plantas SET tipo=@tipo, nombreCientifico=@nombreCientifico, nombresVulgares=@nombresVulgares, descripcion=@descripcion,ambiente=@ambiente, alturaMaxima=@alturaMaxima,foto=@foto,precio=@precio,ingresadoPor=@ingresadoPor WHERE id=@id";
                 SqlCommand com = new SqlCommand(sql, con);
 
                 com.Parameters.AddWithValue("@id", obj.id);
@@ -204,7 +204,7 @@ namespace Datos
         public bool YaExisteString(string nombreCientifico)
         {
             SqlConnection conexion = Conexion.ObtenerConexion();
-            string sql = "SELECT nombreCientifico FROM Planta WHERE nombreCientifico = '" + nombreCientifico + "';";
+            string sql = "SELECT nombreCientifico FROM Plantas WHERE nombreCientifico = '" + nombreCientifico + "';";
             SqlCommand com = new SqlCommand(sql, conexion);
             try
             {
@@ -232,7 +232,7 @@ namespace Datos
         {
             Planta planta = null;
             SqlConnection con = Conexion.ObtenerConexion();
-            string sql = "SELECT * FROM Planta WHERE Planta.nombreCientifico = @nombreCientifico;";
+            string sql = "SELECT * FROM Plantas WHERE Planta.nombreCientifico = @nombreCientifico;";
             SqlCommand com = new SqlCommand(sql, con);
             com.Parameters.AddWithValue("@nombreCientifico", nombreCientifico);
             try
@@ -273,7 +273,7 @@ namespace Datos
             int contador = 0;
             int contadorControl = 0;
             List<Planta> plantas = new List<Planta>();
-            string query = "SELECT * FROM Planta WHERE ";
+            string query = "SELECT * FROM Plantas WHERE ";
 
             if (!String.IsNullOrEmpty(nombre))
             {
@@ -322,7 +322,7 @@ namespace Datos
             }
 
             if (contador == 0)
-                query = "SELECT * from Planta";
+                query = "SELECT * from Plantas";
             query += ";";
             SqlConnection conexion = Conexion.ObtenerConexion();
             SqlCommand com = new SqlCommand(query, conexion);
