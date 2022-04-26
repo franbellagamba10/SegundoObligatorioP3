@@ -51,9 +51,11 @@ namespace ProyectoWeb.Controllers
 
                 if (nombreArchivo == "ERROR")
                 {
-                    ViewBag.mensaje = "El nombre no puede ser vacío y debe tener una única extension jpg o png";
+                    plantaVM.Fichas = ManejadorPlantas.ObtenerTodasLasFichas();
+                    plantaVM.TiposPlanta = ManejadorPlantas.TraerTodosLosTiposDePlanta();
+                    ViewBag.mensaje = "El nombre de la planta no puede ser vacío y su foto debe tener una única extension jpg o png";
                     return View(plantaVM);
-                }                    
+                }
 
                 Planta planta = new Planta
                 {
@@ -140,9 +142,18 @@ namespace ProyectoWeb.Controllers
                     tipo = ManejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
                 
                 };
-                bool pudeEditar = ManejadorPlantas.ActualizarPlanta(planta);
+                bool pudeEditar = ManejadorPlantas.ActualizarPlanta(planta);                
                 if (!pudeEditar)
-                    return View(planta);
+                {
+                    plantaVM.ingresadoPor = ManejadorUsuarios.BuscarUsuarioPorSuEmail(planta.ingresadoPor.email);
+                    plantaVM.FichaSeleccionada = planta.ficha;
+                    plantaVM.IdFichaSeleccionada = planta.ficha.id;
+                    plantaVM.TipoPlantaSeleccionado = planta.tipo;
+                    plantaVM.IdTipoPlantaSeleccionada = planta.tipo.id;
+                    plantaVM.Fichas = (IEnumerable<Ficha>)ManejadorPlantas.ObtenerTodasLasFichas();
+                    plantaVM.TiposPlanta = (IEnumerable<TipoPlanta>)ManejadorPlantas.TraerTodosLosTiposDePlanta();
+                    return View(plantaVM);
+                }  
                 return RedirectToAction("Details", planta);
             }
             catch (Exception ex)
