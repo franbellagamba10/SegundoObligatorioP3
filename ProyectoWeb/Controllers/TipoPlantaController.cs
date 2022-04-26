@@ -12,10 +12,10 @@ namespace ProyectoWeb.Controllers
 {
     public class TipoPlantaController : Controller, IValidarSesion
     {
-        public IManejadorPlantas manejadorPlantas { get; set; }
+        public IManejadorPlantas ManejadorPlantas { get; set; }
         public TipoPlantaController(IManejadorPlantas manejPlantas)
         {
-            manejadorPlantas = manejPlantas;
+            ManejadorPlantas = manejPlantas;
         }
         // GET: TipoPlantasController
         public ActionResult Index()
@@ -30,7 +30,7 @@ namespace ProyectoWeb.Controllers
         {
             if (!EstoyLogueado())
                 return RedirectToAction("Logout", "Usuarios");            
-            TipoPlanta tipoPlanta = manejadorPlantas.ObtenerTipoPlantaPorId(id);
+            TipoPlanta tipoPlanta = ManejadorPlantas.ObtenerTipoPlantaPorId(id);
             return View(tipoPlanta);
         }
 
@@ -58,13 +58,12 @@ namespace ProyectoWeb.Controllers
                     descripcion = tipoPlantaVM.descripcion.Trim(),                    
                 };
 
-                bool pudeCrear = manejadorPlantas.AgregarNuevoTipoPlanta(tipoPlanta);
-                if (pudeCrear) // ---->  aca mismo se setea la ruta de la foto de la planta
+                bool pudeCrear = ManejadorPlantas.AgregarNuevoTipoPlanta(tipoPlanta);
+                if (pudeCrear)
                 {
-                    tipoPlanta.id = manejadorPlantas.ObtenerTipoPlantaPorNombre(tipoPlanta.nombre).id; //obtengo el tTP para ponerle ID despues de creado
+                    tipoPlanta.id = ManejadorPlantas.ObtenerTipoPlantaPorNombre(tipoPlanta.nombre).id;
                     return RedirectToAction("Details", tipoPlanta);
                 }
-
             }
             catch (Exception ex)
             {
@@ -79,7 +78,7 @@ namespace ProyectoWeb.Controllers
             if (!EstoyLogueado())
                 return RedirectToAction("Logout", "Usuarios");
             TipoPlantaViewModel tipoPlanta = new TipoPlantaViewModel();
-            TipoPlanta tipoPlantaBD = manejadorPlantas.ObtenerTipoPlantaPorId(id);
+            TipoPlanta tipoPlantaBD = ManejadorPlantas.ObtenerTipoPlantaPorId(id);
             #region Conversion para cargar ViewModel
                 tipoPlanta.id = tipoPlantaBD.id;
                 tipoPlanta.nombre = tipoPlantaBD.nombre;
@@ -101,15 +100,14 @@ namespace ProyectoWeb.Controllers
                     nombre = tipoPlantaVM.nombre,
                     descripcion = tipoPlantaVM.descripcion,
                 };
-                bool pudeEditar = manejadorPlantas.ActualizarTipoPlanta(tipoPlanta);
+                bool pudeEditar = ManejadorPlantas.ActualizarTipoPlanta(tipoPlanta);                
                 if (!pudeEditar)
                     return View(tipoPlantaVM);
-                return RedirectToAction("Details", tipoPlanta); //Esto explota cuando lo devuelvo a la vista
-                
+                return RedirectToAction("Details", tipoPlanta);                
             }
             catch (Exception ex)
             {
-                return View(tipoPlantaVM); //deberia volver al formulario edicion de usuario
+                return View(tipoPlantaVM);
             }
         }
         [HttpGet]
@@ -117,30 +115,26 @@ namespace ProyectoWeb.Controllers
         {
             if (!EstoyLogueado())
                 return RedirectToAction("Logout", "Usuarios");
-            return View(manejadorPlantas.ObtenerTipoPlantaPorId(id));
-
+            return View(ManejadorPlantas.ObtenerTipoPlantaPorId(id));
         }
         [HttpPost]
         public ActionResult Delete(TipoPlanta tipoPlanta)
         {
             if (!EstoyLogueado())
                 return RedirectToAction("Logout", "Usuarios");
-            bool pudeBorrar = manejadorPlantas.DarDeBajaTipoPlanta(tipoPlanta.id);
+            bool pudeBorrar = ManejadorPlantas.DarDeBajaTipoPlanta(tipoPlanta.id);
             if (!pudeBorrar)            
-                ViewBag.mensaje = "No fue posible dar de baja el tipo de planta";
-            
+                ViewBag.mensaje = "No fue posible dar de baja el tipo de planta";            
             return View("Index", CargarTiposPlantaIndexFormateado());
         }        
 
         public IEnumerable<TipoPlanta> CargarTiposPlantaIndexFormateado()
         {
-            IEnumerable<TipoPlanta> tiposPlantas = manejadorPlantas.TraerTodosLosTiposDePlanta();
+            IEnumerable<TipoPlanta> tiposPlantas = ManejadorPlantas.TraerTodosLosTiposDePlanta();
             foreach (TipoPlanta tp in tiposPlantas)
             {
-                if (tp.descripcion.Length > 50)
-                {
-                    tp.descripcion = tp.descripcion.Substring(0, 50) + "[...]";
-                }
+                if (tp.descripcion.Length > 50)               
+                    tp.descripcion = tp.descripcion.Substring(0, 50) + "[...]";                
             }
             return tiposPlantas;
         }

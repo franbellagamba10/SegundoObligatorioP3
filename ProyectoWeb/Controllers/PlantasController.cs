@@ -51,9 +51,11 @@ namespace ProyectoWeb.Controllers
 
                 if (nombreArchivo == "ERROR")
                 {
-                    ViewBag.mensaje = "El nombre no puede ser vacío y debe tener una única extension jpg o png";
+                    plantaVM.Fichas = ManejadorPlantas.ObtenerTodasLasFichas();
+                    plantaVM.TiposPlanta = ManejadorPlantas.TraerTodosLosTiposDePlanta();
+                    ViewBag.mensaje = "El nombre de la planta no puede ser vacío y su foto debe tener una única extension jpg o png";
                     return View(plantaVM);
-                }                    
+                }
 
                 Planta planta = new Planta
                 {
@@ -68,27 +70,32 @@ namespace ProyectoWeb.Controllers
                     ficha = ManejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
                     ingresadoPor = ManejadorUsuarios.BuscarUsuarioPorSuEmail(HttpContext.Session.GetString("userEmail")),
                     tipo = ManejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
-                };
-                
-                string rutaRaizApp = WebHostEnvironment.WebRootPath;
-                rutaRaizApp = Path.Combine(rutaRaizApp, "imagenes");
-                string rutaCompleta = Path.Combine(rutaRaizApp, nombreArchivo);                
-                FileStream archivoStream = new FileStream(rutaCompleta, FileMode.Create);                
-                plantaVM.imagen.CopyTo(archivoStream);
+                };                
 
                 bool pudeCrear = ManejadorPlantas.AgregarNuevaPlanta(planta);
-                if (pudeCrear) // 
+                if (pudeCrear)
                 {
+                    string rutaRaizApp = WebHostEnvironment.WebRootPath;
+                    rutaRaizApp = Path.Combine(rutaRaizApp, "imagenes");
+                    string rutaCompleta = Path.Combine(rutaRaizApp, nombreArchivo);
+                    FileStream archivoStream = new FileStream(rutaCompleta, FileMode.Create);
+                    plantaVM.imagen.CopyTo(archivoStream);
+
+
                     planta.id = ManejadorPlantas.ObtenerPlantaPorNombreCientifico(planta.nombreCientifico).id;
+                    //planta.foto = plantabuscada.foto;
                     return RedirectToAction("Details", planta);
                 }
-                    
+                return View(plantaVM);
             }
             catch (Exception ex)
             {
+                plantaVM.Fichas = ManejadorPlantas.ObtenerTodasLasFichas();
+                plantaVM.TiposPlanta = ManejadorPlantas.TraerTodosLosTiposDePlanta();
+                ViewBag.mensaje = "Ha ocurrido un error inesperado dando de alta su planta";
                 return View(plantaVM);
             }             
-            return View(plantaVM);
+            
         }
 
 
@@ -140,9 +147,18 @@ namespace ProyectoWeb.Controllers
                     tipo = ManejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
                 
                 };
-                bool pudeEditar = ManejadorPlantas.ActualizarPlanta(planta);
+                bool pudeEditar = ManejadorPlantas.ActualizarPlanta(planta);                
                 if (!pudeEditar)
-                    return View(planta);
+                {
+                    plantaVM.ingresadoPor = ManejadorUsuarios.BuscarUsuarioPorSuEmail(planta.ingresadoPor.email);
+                    plantaVM.FichaSeleccionada = planta.ficha;
+                    plantaVM.IdFichaSeleccionada = planta.ficha.id;
+                    plantaVM.TipoPlantaSeleccionado = planta.tipo;
+                    plantaVM.IdTipoPlantaSeleccionada = planta.tipo.id;
+                    plantaVM.Fichas = (IEnumerable<Ficha>)ManejadorPlantas.ObtenerTodasLasFichas();
+                    plantaVM.TiposPlanta = (IEnumerable<TipoPlanta>)ManejadorPlantas.TraerTodosLosTiposDePlanta();
+                    return View(plantaVM);
+                }  
                 return RedirectToAction("Details", planta);
             }
             catch (Exception ex)
@@ -182,6 +198,8 @@ namespace ProyectoWeb.Controllers
         [HttpGet]
         public ActionResult Busqueda()
         {
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");
             PlantaViewModel plantaVM = new PlantaViewModel()
             {
                 Fichas = ManejadorPlantas.ObtenerTodasLasFichas(),

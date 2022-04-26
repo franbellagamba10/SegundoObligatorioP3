@@ -164,7 +164,7 @@ VALUES
 --(16,3,1,15)
 
 
-INSERT	INTO Plantas
+INSERT INTO Plantas
 VALUES 
 --(0,'tipo','NombreCientifico','NombresVulgares','descripcion',IDAmbiente,alturaMaxima,'foto',precio,IDficha,IDUsuarioquelain),
 (1,'Salix humboldtiana Willd','Sauce Criollo','Porte: Arbol que alcanza hasta 10 metros de altura, dioico, corteza persistente, inerme.

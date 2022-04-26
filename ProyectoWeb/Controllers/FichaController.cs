@@ -12,17 +12,17 @@ namespace ProyectoWeb.Controllers
 {
     public class FichaController : Controller, IValidarSesion
     {
-        IManejadorPlantas manejadorPlantas { get; set; }
+        IManejadorPlantas ManejadorPlantas { get; set; }
         public FichaController(IManejadorPlantas manejPlantas)
         {
-            manejadorPlantas = manejPlantas;
+            ManejadorPlantas = manejPlantas;
         }
         // GET: FichaController
         public ActionResult Index()
         {
             if (!EstoyLogueado())
                 return RedirectToAction("Logout", "Usuarios");
-            return View(manejadorPlantas.ObtenerTodasLasFichas());
+            return View(ManejadorPlantas.ObtenerTodasLasFichas());
         }
 
         // GET: FichaController/Details/5
@@ -38,8 +38,8 @@ namespace ProyectoWeb.Controllers
                 return RedirectToAction("Logout", "Usuarios");
             FichaViewModel fichaVM = new FichaViewModel()
             {
-                frecuenciasRiego = manejadorPlantas.ObtenerTodasLasFR(),
-                tiposIluminacion = manejadorPlantas.ObtenerTodosLosTI(),
+                frecuenciasRiego = ManejadorPlantas.ObtenerTodasLasFR(),
+                tiposIluminacion = ManejadorPlantas.ObtenerTodosLosTI(),
             };
 
             return View(fichaVM);
@@ -55,16 +55,16 @@ namespace ProyectoWeb.Controllers
                 Ficha ficha = new Ficha
                 {
                     id = fichaVM.id,
-                    tipoIluminacion = manejadorPlantas.ObtenerTIPorId(fichaVM.tipoIluminacionSeleccionado),
-                    frecuenciaRiego = manejadorPlantas.ObtenerFRPorId(fichaVM.frecuenciaRiegoSeleccionada),
+                    tipoIluminacion = ManejadorPlantas.ObtenerTIPorId(fichaVM.tipoIluminacionSeleccionado),
+                    frecuenciaRiego = ManejadorPlantas.ObtenerFRPorId(fichaVM.frecuenciaRiegoSeleccionada),
                     temperatura = fichaVM.temperatura,
                 };
 
-                bool pudeCrear = manejadorPlantas.AgregarNuevaFicha(ficha);
+                bool pudeCrear = ManejadorPlantas.AgregarNuevaFicha(ficha);
                 if (pudeCrear) // ---->  aca mismo se setea la ruta de la foto de la planta
                 {
                     //ficha.id = manejadorPlantas.ObtenerTipoPlantaPorNombre(ficha.nombre).id; //obtengo el tTP para ponerle ID despues de creado
-                    return View("Index", manejadorPlantas.ObtenerTodasLasFichas());
+                    return View("Index", ManejadorPlantas.ObtenerTodasLasFichas());
                 }
                 
             }

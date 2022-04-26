@@ -22,8 +22,7 @@ namespace Datos
         {
             SqlConnection conexion = Conexion.ObtenerConexion();
 
-            string sql = "INSERT INTO Plantas VALUES(@tipo, @nombreCientifico, @nombresVulgares, @descripcion," +
-                " @ambiente, @alturaMaxima, @foto, @precio,@ficha, @ingresadoPor); " +
+            string sql = "INSERT INTO Plantas VALUES(@tipo, @nombreCientifico, @nombresVulgares, @descripcion, @ambiente, @alturaMaxima, @foto, @precio,@ficha, @ingresadoPor); " +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
 
@@ -44,7 +43,7 @@ namespace Datos
 
                 Conexion.AbrirConexion(conexion);
                 int id = (int)com.ExecuteScalar();
-                id = obj.id;
+                //id = obj.id;
                 return true;
             }
             catch (Exception ex)
@@ -223,16 +222,13 @@ namespace Datos
                 Conexion.CerrarYDesecharConexion(conexion);
             }
         }
-        public string ObtenerNombreFoto(string nombrePlanta)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public Planta FindByName(string nombreCientifico)
         {
             Planta planta = null;
             SqlConnection con = Conexion.ObtenerConexion();
-            string sql = "SELECT * FROM Plantas WHERE Planta.nombreCientifico = @nombreCientifico;";
+            string sql = "SELECT * FROM Plantas WHERE nombreCientifico = @nombreCientifico;";
             SqlCommand com = new SqlCommand(sql, con);
             com.Parameters.AddWithValue("@nombreCientifico", nombreCientifico);
             try
@@ -258,7 +254,7 @@ namespace Datos
                 }
                 return planta;
             }
-            catch
+            catch(Exception ex)
             {
                 throw;
             }
