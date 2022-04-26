@@ -61,12 +61,10 @@ namespace ProyectoWeb.Controllers
                 };
 
                 bool pudeCrear = ManejadorPlantas.AgregarNuevaFicha(ficha);
-                if (pudeCrear) // ---->  aca mismo se setea la ruta de la foto de la planta
-                {
-                    //ficha.id = manejadorPlantas.ObtenerTipoPlantaPorNombre(ficha.nombre).id; //obtengo el tTP para ponerle ID despues de creado
+                if (pudeCrear)
+                {                    
                     return View("Index", ManejadorPlantas.ObtenerTodasLasFichas());
-                }
-                
+                }                
             }
             catch (Exception ex)
             {

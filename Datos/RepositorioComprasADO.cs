@@ -59,7 +59,7 @@ namespace Datos
                     return false;
 
                 Conexion.AbrirConexion(conexion);
-                com.ExecuteNonQuery();   //porque no espero un valor significante si uso ExecutoScalar(), Item no tiene Id propio
+                com.ExecuteNonQuery(); 
                 return true;
             }
             catch
@@ -140,8 +140,8 @@ namespace Datos
             return detallesCompra;
         }
 
-        public IEnumerable<Item> GetAllItems() //Sirve de algo implementar esto? En algun momento vamos a querer traer todos los detalles? si quisiera el total ganado lo haria a traves de obtener todas las compras y conseguir el total de c/u
-        {                                   //pero ^ podria ser mas costoso que simplemente traerme todo y calcularlo asi. El foreach del caso ^ seria costoso, es mas facil traer todo, pero igualmente no se si necesitamos esto para algo
+        public IEnumerable<Item> GetAllItems() 
+        {                                   
             List<Item> items = new List<Item>();
             SqlConnection conexion = Conexion.ObtenerConexion();
 
@@ -167,7 +167,7 @@ namespace Datos
             }
             catch (Exception ex)
             {
-                //log de error
+                throw;
             }
             finally
             {

@@ -25,7 +25,6 @@ namespace Fachada
         public bool AgregarNuevaPlanta(Planta planta)
         {
             return RepoPlantas.Create(planta);
-
         }
         public bool DarDeBajaPlanta(int id)
         {

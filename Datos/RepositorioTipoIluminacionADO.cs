@@ -47,8 +47,7 @@ namespace Datos
             bool ok = false;
 
             SqlConnection conexion = Conexion.ObtenerConexion();
-
-            //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
+            
             string sql = "DELETE FROM TiposIluminacion WHERE Id=" + id;
             SqlCommand com = new SqlCommand(sql, conexion);
 
@@ -67,9 +66,7 @@ namespace Datos
                 Conexion.CerrarYDesecharConexion(conexion);
             }
             return ok;
-        }
-
-        //un comentario
+        }               
 
         public TipoIluminacion FindById(int id)
         {

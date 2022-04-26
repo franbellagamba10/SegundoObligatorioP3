@@ -6,7 +6,6 @@ namespace Dominio.Interfaces
 {
     public interface IValidate
     {
-        public bool Validar();
-              
+        public bool Validar();              
     }
 }

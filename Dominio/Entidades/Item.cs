@@ -13,8 +13,7 @@ namespace Dominio.Entidades
                 
         public double GetSubTotal()
         {
-            double subtotal = 0;
-            //va a obtener el precio de donde?
+            double subtotal = 0;            
             return subtotal;
         }        
     }

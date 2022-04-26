@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoWeb.Models
 {
-    public class UsuarioDTO
+    public class UsuarioViewModel
     {
         public int id { get; set; }
         public string email { get; set; }

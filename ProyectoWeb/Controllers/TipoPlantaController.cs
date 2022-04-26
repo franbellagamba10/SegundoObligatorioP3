@@ -139,7 +139,10 @@ namespace ProyectoWeb.Controllers
             return tiposPlantas;
         }
 
-
+        public ActionResult Busqueda(string cadena)
+        {            
+            return View("Details",ManejadorPlantas.ObtenerTipoPlantaPorNombre(cadena));
+        }
         public bool EstoyLogueado()
         {
             return HttpContext.Session.GetInt32("userId") != null;

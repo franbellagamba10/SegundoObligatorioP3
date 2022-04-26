@@ -8,12 +8,8 @@ namespace Fachada
     public interface IManejadorUsuarios
     {
         bool AgregarNuevoUsuario(Usuario usuario);
-
         bool DarDeBajaUsuario(int id);
-
         public Usuario BuscarUsuarioPorSuEmail(string email);
-
-        public bool ActualizarUsuario(Usuario user);
-                
+        public bool ActualizarUsuario(Usuario user);                
     }
 }

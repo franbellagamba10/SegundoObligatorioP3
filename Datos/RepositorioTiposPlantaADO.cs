@@ -127,7 +127,7 @@ namespace Datos
             }
             catch (Exception ex)
             {
-                //log de error
+                throw;
             }
             finally
             {
@@ -140,7 +140,7 @@ namespace Datos
         {            
             bool ok = false;
 
-            if (!obj.Validar() || YaExisteString(obj.nombre))
+            if (obj.Validar())
             {
                 SqlConnection con = Conexion.ObtenerConexion();
                 string sql =

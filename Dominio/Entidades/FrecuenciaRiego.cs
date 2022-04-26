@@ -16,7 +16,7 @@ namespace Dominio.Entidades
         }
         public bool Validar()
         {
-            if (string.IsNullOrWhiteSpace(tiempo) || tiempo.Length > 20 || cantidad <= 0) // verificar si corresponde esta validacion
+            if (string.IsNullOrWhiteSpace(tiempo) || tiempo.Length > 20 || cantidad <= 0)
                 return false;
             return true;
         }

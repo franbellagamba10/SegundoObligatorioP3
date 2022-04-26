@@ -48,8 +48,7 @@ namespace Datos
             bool ok = false;
 
             SqlConnection conexion = Conexion.ObtenerConexion();
-
-            //PUEDO NO USAR SQLPARAMETER PORQUE EL ÚNICO DATO ES UN ENTERO
+            
             string sql = "DELETE FROM Usuarios WHERE Id=" + id;
             SqlCommand com = new SqlCommand(sql, conexion);
 
