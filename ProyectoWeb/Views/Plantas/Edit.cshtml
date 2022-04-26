@@ -42,8 +42,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="descripcion" class="control-label">Descripción</label>
-                <input type="text" asp-for="descripcion" class="form-control" value="@Model.descripcion" />
-                <!-- Html.TextAreaFor(Model => Model.descripcion,Model.descripcion) -->
+                <input type="text" asp-for="descripcion" class="form-control" value="@Model.descripcion" minlength="10" />                
                 <span asp-validation-for="descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">

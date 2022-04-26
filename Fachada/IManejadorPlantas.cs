@@ -13,7 +13,8 @@ namespace Fachada
         IEnumerable<Planta> ObtenerTodasLasPlantas();
         Planta ObtenerPlantaPorNombreCientifico(string nombreCientifico);
         bool ActualizarPlanta(Planta planta);
-        Planta ObtenerPlantaPorId(int id);        
+        Planta ObtenerPlantaPorId(int id);
+        IEnumerable<Planta> BusquedaPlantas(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente);
         #endregion
 
         #region Ficha
@@ -33,7 +34,7 @@ namespace Fachada
         bool ActualizarTipoPlanta(TipoPlanta tipoPlanta);
         public bool AgregarNuevoTipoPlanta(TipoPlanta tipoPlanta);
         TipoPlanta ObtenerTipoPlantaPorNombre(string nombreTP);
-        IEnumerable<Planta> BusquedaPlantas(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente);
+        
         #endregion
 
         

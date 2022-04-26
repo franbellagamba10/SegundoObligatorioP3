@@ -98,7 +98,6 @@ namespace ProyectoWeb.Controllers
             
         }
 
-
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -163,7 +162,7 @@ namespace ProyectoWeb.Controllers
             }
             catch (Exception ex)
             {
-                return View(); //deberia volver al formulario edicion de usuario
+                return View();
             }            
         }
         public ActionResult Details(int id)
@@ -210,9 +209,7 @@ namespace ProyectoWeb.Controllers
 
         [HttpPost]
         public ActionResult Busqueda(string nombre, int tipoPlanta,int alturaMaximaDesde, int alturaMaximaHasta, int ambiente)
-        {
-
-            //manejadorPlantas.BusquedaPlantas(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente);
+        {          
             return View("Index", ManejadorPlantas.BusquedaPlantas(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente));
         }
         public bool EstoyLogueado()

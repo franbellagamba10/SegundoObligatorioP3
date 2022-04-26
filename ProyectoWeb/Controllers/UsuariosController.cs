@@ -41,8 +41,7 @@ namespace ProyectoWeb.Controllers
                 
                 HttpContext.Session.SetString("userEmail", user.email);
                 return RedirectToAction("Index", "Plantas");
-            }
-            //mensaje de error al loguearse?
+            }           
             return View();
         }
         
@@ -66,13 +65,13 @@ namespace ProyectoWeb.Controllers
             {
                 bool pudeCrear = manejadorUsuarios.AgregarNuevoUsuario(user);
                 if (!pudeCrear)
-                    return View(user); //deberia volver al formulario de edicion de usuario
+                    return View(user);
             }
             catch (Exception ex)
             {
-                return View(user); //deberia volver al formulario edicion de usuario
+                return View(user);
             }
-            return RedirectToAction("Login"); //  -----> REVISAR, necesitamos que vaya al Indice de plantas
+            return RedirectToAction("Login");
         }
 
 
@@ -88,19 +87,19 @@ namespace ProyectoWeb.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Usuario user) // ----> consultar con Plinio, capaz hay que pasarle usuario completo
+        public ActionResult Edit(Usuario user)
         {
             try
             {
                 bool pudeEditar = manejadorUsuarios.ActualizarUsuario(user);
                 if (!pudeEditar)
-                    return View(); //deberia volver al formulario de edicion de usuario
+                    return View();
             }
             catch (Exception ex)
             {
-                return View(); //deberia volver al formulario edicion de usuario
+                return View();
             }
-            return RedirectToAction("Plantas/Index"); //  -----> REVISAR, necesitamos que vaya al Indice de plantas
+            return RedirectToAction("Plantas/Index");
         }
         [HttpGet]
         public ActionResult Delete()
@@ -121,13 +120,13 @@ namespace ProyectoWeb.Controllers
             {
                 bool pudeBorrar = manejadorUsuarios.DarDeBajaUsuario(user.id);
                 if (!pudeBorrar)
-                    return View(); // ---> Revisar, lo devuelvo a la vista de delete?
+                    return View();
             }
             catch (Exception ex)
             {
-                return View(); //deberia volver al formulario edicion de usuario
+                return View();
             }
-            return RedirectToAction("Logout"); //  -----> REVISAR, necesitamos que vaya al Indice de plantas
+            return RedirectToAction("Logout");
         }
 
         public bool EstoyLogueado()

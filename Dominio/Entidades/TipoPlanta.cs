@@ -38,9 +38,7 @@ namespace Dominio.Entidades
             int i = 0;
             bool TieneValorAlfabetico = true;
             while (i < nombre.Length && TieneValorAlfabetico)
-            {
-                //if (((int)nombre[i] >= 65 && (int)nombre[i] <= 90) || ((int)nombre[i] >= 97 && (int)nombre[i] <= 122) || (int)nombre[i] >= 160 && (int)nombre[i] <= 165 ||
-                //(int)nombre[i] == 130 || (int)nombre[i] == 144 || (int)nombre[i] == 181 || (int)nombre[i] == 214 || (int)nombre[i] == 224 || (int)nombre[i] == 223 || (int)nombre[i] == 32)
+            {                
                 if(((int)nombre[i] >= 65 && (int)nombre[i] <= 90) || ((int)nombre[i] >= 97 && (int)nombre[i] <= 122) || (int)nombre[i] == 241 || (int)nombre[i] == 209 || (int)nombre[i] == 225
                     || (int)nombre[i] == 193 || (int)nombre[i] == 233 || (int)nombre[i] == 201 || (int)nombre[i] == 237 || (int)nombre[i] == 205 || (int)nombre[i] == 243 || (int)nombre[i] == 211
                     || (int)nombre[i] == 250 || (int)nombre[i] == 218 || (int)nombre[i] == 32)
