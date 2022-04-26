@@ -7,6 +7,6 @@ namespace Dominio.Interfaces
 {
     public interface IRepositorioUsuarios : IRepositorio<Usuario>
     {
-        public Usuario FindByName(string mail); //Por email
+        public Usuario FindByName(string mail);
     }
 }

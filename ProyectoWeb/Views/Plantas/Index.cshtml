@@ -3,91 +3,97 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-<h5 style="color:red">@ViewBag.mensaje</h5>
-<p>
-    <a asp-action="Create">Crear nueva planta</a>
-</p>
-<p>
-    <a asp-action="Busqueda">Buscar planta</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombreCientifico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombresVulgares)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tipo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ambiente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.alturaMaxima)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.foto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.precio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ingresadoPor)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr style="max-height:20px">
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombreCientifico)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombresVulgares)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tipo.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ambiente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.alturaMaxima)
-            </td>
-            <td>
-                <img src="~/imagenes/@item.foto" height="120" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.precio)
-            </td>
-            <th>
-                @Html.DisplayFor(modelItem => item.ingresadoPor.email)
-            </th>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id })
-                @Html.ActionLink("Details", "Details", new { id = item.id })
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+@if (Model.Count() != 0)
+{
+    <h1>Index</h1>
+    <h5 style="color:red">@ViewBag.mensaje</h5>
+    <p>
+        <a asp-action="Create">Crear nueva planta</a>
+    </p>
+    <p>
+        <a asp-action="Busqueda">Buscar planta</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nombreCientifico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nombresVulgares)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tipo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ambiente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.alturaMaxima)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.foto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.precio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ingresadoPor)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="max-height:20px">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreCientifico)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombresVulgares)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tipo.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ambiente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.alturaMaxima)
+                    </td>
+                    <td>
+                        <img src="~/imagenes/@item.foto" height="120" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.precio)
+                    </td>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.ingresadoPor.email)
+                    </th>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                        @Html.ActionLink("Details", "Details", new { id = item.id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3 style="color:red">Lo sentimos, no hay plantas para mostrar actualmente.</h3>
+}

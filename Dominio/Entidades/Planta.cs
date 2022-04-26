@@ -43,7 +43,7 @@ namespace Dominio.Entidades
         public bool Validar()
         {
             if (string.IsNullOrWhiteSpace(nombreCientifico) || string.IsNullOrWhiteSpace(nombresVulgares)
-                || string.IsNullOrWhiteSpace(descripcion) || descripcion.Length > 500 || precio < 1 || !ValidarEnum((int)ambiente)
+                || string.IsNullOrWhiteSpace(descripcion) || descripcion.Length < 10 ||descripcion.Length > 500 || precio < 1 || !ValidarEnum((int)ambiente)
                 || alturaMaxima < 1)
                 return false;
             return true;

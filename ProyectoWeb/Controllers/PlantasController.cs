@@ -70,27 +70,32 @@ namespace ProyectoWeb.Controllers
                     ficha = ManejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
                     ingresadoPor = ManejadorUsuarios.BuscarUsuarioPorSuEmail(HttpContext.Session.GetString("userEmail")),
                     tipo = ManejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
-                };
-                
-                string rutaRaizApp = WebHostEnvironment.WebRootPath;
-                rutaRaizApp = Path.Combine(rutaRaizApp, "imagenes");
-                string rutaCompleta = Path.Combine(rutaRaizApp, nombreArchivo);                
-                FileStream archivoStream = new FileStream(rutaCompleta, FileMode.Create);                
-                plantaVM.imagen.CopyTo(archivoStream);
+                };                
 
                 bool pudeCrear = ManejadorPlantas.AgregarNuevaPlanta(planta);
-                if (pudeCrear) // 
+                if (pudeCrear)
                 {
+                    string rutaRaizApp = WebHostEnvironment.WebRootPath;
+                    rutaRaizApp = Path.Combine(rutaRaizApp, "imagenes");
+                    string rutaCompleta = Path.Combine(rutaRaizApp, nombreArchivo);
+                    FileStream archivoStream = new FileStream(rutaCompleta, FileMode.Create);
+                    plantaVM.imagen.CopyTo(archivoStream);
+
+
                     planta.id = ManejadorPlantas.ObtenerPlantaPorNombreCientifico(planta.nombreCientifico).id;
+                    //planta.foto = plantabuscada.foto;
                     return RedirectToAction("Details", planta);
                 }
-                    
+                return View(plantaVM);
             }
             catch (Exception ex)
             {
+                plantaVM.Fichas = ManejadorPlantas.ObtenerTodasLasFichas();
+                plantaVM.TiposPlanta = ManejadorPlantas.TraerTodosLosTiposDePlanta();
+                ViewBag.mensaje = "Ha ocurrido un error inesperado dando de alta su planta";
                 return View(plantaVM);
             }             
-            return View(plantaVM);
+            
         }
 
 
@@ -193,6 +198,8 @@ namespace ProyectoWeb.Controllers
         [HttpGet]
         public ActionResult Busqueda()
         {
+            if (!EstoyLogueado())
+                return RedirectToAction("Logout", "Usuarios");
             PlantaViewModel plantaVM = new PlantaViewModel()
             {
                 Fichas = ManejadorPlantas.ObtenerTodasLasFichas(),
