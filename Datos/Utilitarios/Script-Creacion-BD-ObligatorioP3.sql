@@ -72,7 +72,7 @@ create table Plantas(
 	descripcion varchar(max) NOT NULL,
 	ambiente int NOT NULL,
 	alturaMaxima int NOT NULL,
-	foto varchar(50),
+	foto varchar(max),
 	precio decimal NOT NULL, -- !!!!! en el UML es DOUBLE, no supe que poner xq double no existe en SQL
 	ficha int NOT NULL,
 	ingresadoPor int,
@@ -222,7 +222,7 @@ Flores: inflorescencia amarilla, protegida por una espata le�osa, surcada, gla
 Fruto: drupa eliptica, uniseminada, amarillo rojiza, fibrosa, de 1 cm de diametro. Fructifica en verano y otoño.
 Habitat: montes de quebrada, serrano y ribereio
 Area de dispersion: suroeste del Brasil, norte de la Argentina y casi todo el Uruguay.
-Usos: el fruto es comestible solo para los animales.',1,20000,'syagrus_romanzoffiana_001.jpg',1600,7,1),
+Usos: el fruto es comestible solo para los animales.',1,20000,'syagrus_romanzoffiana_001.jpg,syagrus_romanzoffiana_002.png',1600,7,1),
 (2,'Parapiptadenia rigida','"Angico", "Angico rojo", "Angico cedro", "Angico de los montes"','Porte:  arbol de 18 a 30 metros de altura. Corteza levemente surcada que se desprende en plaquetas. Tronco recto. Inerme.
 Follaje: semipersistente, verde oscuro
 Hojas: compuestas, bipinnadas, 3-9 yugadas, con 21-39 foluolos por pinna, linear-lanceolados.
