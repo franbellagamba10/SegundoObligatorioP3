@@ -5,9 +5,12 @@
 }
 
 <h1>Index</h1>
-
+<h4 style="color:red">@ViewBag.mensaje</h4>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nueva planta</a>
+</p>
+<p>
+    <a asp-action="Busqueda">Buscar planta</a>
 </p>
 <table class="table">
     <thead>
@@ -80,8 +83,8 @@
                 @Html.DisplayFor(modelItem => item.ingresadoPor.email)
             </th>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                @Html.ActionLink("Details", "Details", new { id = item.id })
                 @Html.ActionLink("Delete", "Delete", new { id = item.id })
             </td>
         </tr>

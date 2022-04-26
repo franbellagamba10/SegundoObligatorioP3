@@ -39,16 +39,7 @@ namespace ProyectoWeb
             services.AddScoped<IRepositorio<TipoIluminacion>, RepositorioTipoIluminacionADO>();
             services.AddScoped<IRepositorio<FrecuenciaRiego>, RepositorioFrecuenciaRiegoADO>();
 
-
-
-
-
-
-
-
-
             services.AddSession();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

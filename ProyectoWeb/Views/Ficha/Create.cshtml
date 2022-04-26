@@ -1,0 +1,51 @@
+﻿@model ProyectoWeb.Models.FichaViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>FichaViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Tipo de iluminación:</label>
+                <select asp-for="tipoIluminacionSeleccionado">
+                    @foreach (var tipo in Model.tiposIluminacion)
+                    {
+                        <option value="@tipo.id">@tipo.iluminacion</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Frecuencia de riego:</label>
+                <select asp-for="frecuenciaRiegoSeleccionada">
+                    @foreach (var fr in Model.frecuenciasRiego)
+                    {
+                        <option value="@fr.id">@fr.cantidad cada @fr.tiempo </option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="temperatura" class="control-label"></label>
+                <input type="number" asp-for="temperatura" class="form-control" />
+                <span asp-validation-for="temperatura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -197,7 +197,7 @@ namespace Datos
                 Conexion.CerrarYDesecharConexion(conexion);
             }
         }
-        public Usuario BuscarUsuarioPorEmail(string mail)
+        public Usuario FindByName(string mail) //Por Email
         {
             SqlConnection conexion = Conexion.ObtenerConexion();
             Usuario usuarioBuscado = null;

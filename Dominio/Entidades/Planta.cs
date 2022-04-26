@@ -19,11 +19,11 @@ namespace Dominio.Entidades
         public string descripcion { get; set; }
         [Display(Name = "Ambiente")]
         public Ambiente ambiente { get; set; }
-        [Display(Name = "Altura máxima")]
+        [Display(Name = "Altura máxima (cm)")]
         public int alturaMaxima { get; set; }
         [Display(Name = "Foto")]
         public string foto { get; set; }
-        [Display(Name = "Precio")]
+        [Display(Name = "Precio (UYU)")]
         public decimal precio { get; set; }
         [Display(Name = "Usuario autor")]
         public Usuario ingresadoPor { get; set; }
@@ -36,7 +36,7 @@ namespace Dominio.Entidades
         }
         public enum Ambiente
         {
-            Exterior,
+            Exterior = 1,
             Interior,
             Mixta
         }

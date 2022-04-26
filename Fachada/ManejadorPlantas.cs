@@ -47,7 +47,7 @@ namespace Fachada
             return RepoTP.GetAll();
         }
 
-        public IEnumerable<Ficha> TraerTodasLasFichas()
+        public IEnumerable<Ficha> ObtenerTodasLasFichas()
         {
             return RepoFichas.GetAll();
         }
@@ -65,6 +65,61 @@ namespace Fachada
         public TipoPlanta ObtenerTipoPlantaPorId(int id)
         {
             return RepoTP.FindById(id);
+        }
+
+        public Planta ObtenerPlantaPorNombreCientifico(string nombreCientifico)
+        {
+            return RepoPlantas.FindByName(nombreCientifico);
+        }
+
+        public bool ActualizarTipoPlanta(TipoPlanta tipoPlanta)
+        {
+            return RepoTP.Update(tipoPlanta);
+        }
+        public bool AgregarNuevoTipoPlanta(TipoPlanta tipoPlanta)
+        {
+            return RepoTP.Create(tipoPlanta);
+        }
+
+        public TipoPlanta ObtenerTipoPlantaPorNombre(string nombreTP)
+        {
+            return RepoTP.FindByName(nombreTP);
+        }
+
+        public bool DarDeBajaTipoPlanta(int id)
+        {
+            return RepoTP.Delete(id);
+        }
+
+        public IEnumerable<Planta> BusquedaPlantas(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente)
+        {
+            return RepoPlantas.QuerySearch(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente);
+        }
+
+        
+
+        public IEnumerable<TipoIluminacion> ObtenerTodosLosTI()
+        {
+            return RepoTI.GetAll();
+        }
+
+        public IEnumerable<FrecuenciaRiego> ObtenerTodasLasFR()
+        {
+            return RepoFR.GetAll();
+        }
+        public bool AgregarNuevaFicha(Ficha ficha)
+        {
+            return RepoFichas.Create(ficha);
+        }
+
+        public TipoIluminacion ObtenerTIPorId(int id)
+        {
+            return RepoTI.FindById(id);
+        }
+
+        public FrecuenciaRiego ObtenerFRPorId(int id)
+        {
+            return RepoFR.FindById(id);
         }
     }
 }

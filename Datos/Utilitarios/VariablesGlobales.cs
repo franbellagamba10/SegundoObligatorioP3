@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Datos.Utilitarios
 {
-    public class Constantes
+    public class VariablesGlobales
     {
              
     }  

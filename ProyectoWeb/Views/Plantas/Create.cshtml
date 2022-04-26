@@ -50,10 +50,10 @@
                 <label asp-for="ambiente" class="control-label">Ambiente</label>
                 <select asp-for="ambiente" value="@Model.ambiente">
                     @foreach (var opcion in Enum.GetValues(typeof(PlantaViewModel.Ambiente)))
-                    {
+                     {
                         int val = (int)opcion;
                         <option value="@val">@opcion.ToString()</option>
-                    }
+                     }
                 </select>
             </div>
             <div class="form-group">

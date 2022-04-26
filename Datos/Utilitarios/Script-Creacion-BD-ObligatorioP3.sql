@@ -174,7 +174,7 @@ Hojas: simples, alternas, linearlanceoladas, de borde aserrado, glabras, ï¿½pice
 Flores: aperiantadas, en amentos. Los masculinos de 7 cm. de largo, amarillentos; los femeninos verdes, de 3-3,5 cm. de largo. Florece en primavera.
 Habitat: vive en los bordes de los rï¿½os y arroyos en todo el Uruguay y con mï¿½s frecuencia en el noroeste del paï¿½s.
 Area de dispersiï¿½n: crece en Amï¿½rica subtropical, en la Argentina hasta el norte de la Patagonia, Brasil, Paraguay y Uruguay.
-Usos: la madera es blanda y liviana, se utiliza para la fabricaciï¿½n de envases.',0,1000,'Salix_humboldtiana_Willd_001.JPG',500,1,1),
+Usos: la madera es blanda y liviana, se utiliza para la fabricaciï¿½n de envases.',1,1000,'Salix_humboldtiana_Willd_001.JPG',500,1,1),
 (2,'Inga uruguensis Hooker et Arnott','"Ingï¿½", "Angï¿½", "Inga banana","Pacay"','Porte: arbusto de altura media, entre 4 y 10 metros. Ramas con lenticelas en lï¿½neas transversales, inerme.
 Follaje: perenne, verde oscuro, inerme.
 Hojas: compuestas, 3-7 yugadas, raquis y pecï¿½olo alado de 2-14 cm. de largo, alas en el raquis semiovales de hasta 4 mm. de largo cada una.
@@ -182,7 +182,7 @@ Flores: en espigas axilares, pedunculadas, florï¿½feras en su mitad apical, flor
 Fruto: legumbre afelpada oblonga, poco arqueada, coriï¿½cea de 7- 13 cm. de ancho por 1,5-2,5 cm. de largo, con dos bordes prominentes.
 Habitat: especie heliï¿½fila y selectivamente higrï¿½fita. Se la encuentra en el Alto y Bajo Rï¿½o Uruguay, parece tratarse de una especie exclusiva de las mï¿½rgenes de los rï¿½os.
 Area de dispersiï¿½n: Brasil austral, Paraguay, Uruguay, y nordeste de la Argentina.
-Uso:los frutos son comestibles.',0,1000,'Inga_uruguensis_Hooker_et_Arnott_001.JPG',1100,2,2),
+Uso:los frutos son comestibles.',1,1000,'Inga_uruguensis_Hooker_et_Arnott_001.JPG',1100,2,2),
 (3,'Aloysia gratissima','"Cedrï¿½n de Monte", "Niï¿½arupï¿½", "Reseda del campo"','Porte: arbusto que alcanza una altura mï¿½xima de 3 metros, de aspecto desordenado, con ramas agudo espinosas.
 Follaje: ralo, persistente
 Hojas: simples, opuestas, a veces ternadas, ï¿½ntegras o dentadas, lanceoladas o largamente elï¿½pticas, agudas u obtusas, blandas o subcoriï¿½ceas, verdes en el haz y blanquecinas en el envï¿½s.
@@ -190,7 +190,7 @@ Flores: de color blanco, muy perfumadas, dispuestas en racimos axilares solitari
 Fruto: es una cï¿½psula con dos nï¿½culas en su interior.
 Nombres vulgares: "Cedrï¿½n de Monte", "Niï¿½arupï¿½", "Reseda del campo".
 Habitat: vive en zonas serranas y en las cumbres de las quebradas. Area de dispersiï¿½n: Amï¿½rica del Sur desde Mï¿½xico hasta el Uruguay y Argentina.
-Usos: se la utiliza como hierba medicinal y es de gran importancia como melï¿½fera.',0,300,'Aloysia_gratissima_001.JPG',1200,3,2),
+Usos: se la utiliza como hierba medicinal y es de gran importancia como melï¿½fera.',1,300,'Aloysia_gratissima_001.JPG',1200,3,2),
 (3,'Duranta repens','Tala blanco','Porte: arbusto que no alcanza mï¿½s de cuatro metros de altura, inerme o con pocas espinas, con ramillas cuadrangulares.
 Follaje: semipersistente, mï¿½s o menos compacto.
 Hojas: simples, opuestas, ovoides, obovadas o elï¿½pticas, el borde es dentado en la mitad superior, el pecï¿½olo tiene menos de 1 cm de largo.
@@ -198,7 +198,7 @@ Flores: pequeï¿½as, con pï¿½talos lilacinos, dispuestas en racimos axilares, cï¿
 Fruto: bacciforme de un cm de largo, amarillo anaranjado, unilocular y uniseminado.
 Habitat: vive en montes ribereï¿½os
 Area de dispersiï¿½n: vive en regiones neotropicales de Amï¿½rica del Sur, en nuestro paï¿½s se cita solamente para el norte.
-Usos: no se conocen.',2,400,'Duranta_repens_001.PNG',1300,4,3),
+Usos: no se conocen.',3,400,'Duranta_repens_001.PNG',1300,4,3),
 (4,'Schinus molle','"Anacahuita", "Aguaribay", "Molle", "Pimentero"','Porte: ï¿½rbol que puede alcanzar de 8 a 10 metros de altura, resinoso. Tronco grueso con corteza persistente.
 Follaje: persistente, copa amplia, ramillas colgantes de color verde claro.
 Hojas: compuestas, pinnadas, alternas, glabras. Raquis ligeramente alado. Con 10-12 pares de folï¿½olos sï¿½siles, dentados.
@@ -206,7 +206,7 @@ Flores: amarillentas, dispuestas por lo general en panojas terminales. Florece e
 Fruto: drupa globosa, de color rojizo, reunidos en panojas, uniseminados.
 Habitat: montes de quebrada.
 Area de dispersiï¿½n: comï¿½n en casi toda Amï¿½rica del Sur, en nuestro paï¿½s en la zona norte.
-Usos: los frutos tienen gusto a pimienta, usï¿½ndose como condimento. La infusiï¿½n de las hojas como medicinal.',2,1000,'Schinus_molle_001.PNG',1400,5,4),
+Usos: los frutos tienen gusto a pimienta, usï¿½ndose como condimento. La infusiï¿½n de las hojas como medicinal.',3,1000,'Schinus_molle_001.PNG',1400,5,4),
 (5,'Sebastiania klotzschiana Muell','Blanquillo','Porte: ï¿½rbol que puede alcanzar los 6 metros de altura, de ramas agudo espinosas. Corteza persistente.
 Follaje: semi persistente, de color verde claro con tonalidades rojizas en el otoï¿½o e invierno.
 Hojas: simples, alternas, eliptico-lanceoladas, glabras, con una o tres glï¿½ndulas en la base del limbo. Borde apenas dentado.
@@ -215,7 +215,7 @@ Fruto: cï¿½psula globosa de 8 a 10 mm de diï¿½metro de color marrï¿½n, dehiscent
 Habitat: montes serranos y ribereï¿½os.
 Area de dispersiï¿½n: Amï¿½rica subtropical.
 Usos: no se conocen.
-',0,600,'Sebastiania_klotzschiana_Muell_001.JPG',1500,6,5),
+',1,600,'Sebastiania_klotzschiana_Muell_001.JPG',1500,6,5),
 (6,'Syagrus romanzoffiana','"Pindï¿½", "Chirivï¿½", "Jerivï¿½"','Porte: palmera que puede alcanzar hasta 20 metros de altura, estï¿½pite recto de 15 a 30 cm de diï¿½metro, anillado, grisï¿½ceo.
 Follaje: persistente, verde intenso, brillante.
 Hojas: pinnaticompuestas, con pï¿½nulas verde intenso, insertas en varios planos con respecto al raquis. Pecï¿½olo de 1 a 1,5 metros de largo, inerme.
@@ -223,7 +223,7 @@ Flores: inflorescencia amarilla, protegida por una espata leï¿½osa, surcada, gla
 Fruto: drupa elï¿½ptica, uniseminada, amarillo rojiza, fibrosa, de 1 cm de diï¿½metro. Fructifica en verano y otoï¿½o.
 Habitat: montes de quebrada, serrano y ribereï¿½o
 Area de dispersiï¿½n: suroeste del Brasil, norte de la Argentina y casi todo el Uruguay.
-Usos: el fruto es comestible solo para los animales.',0,20000,'Syagrus_romanzoffiana_001.JPG',1600,7,1),
+Usos: el fruto es comestible solo para los animales.',1,20000,'Syagrus_romanzoffiana_001.JPG',1600,7,1),
 (2,'Parapiptadenia rigida','"Angico", "Angico rojo", "Angico cedro", "Angico de los montes"','Porte:  ï¿½rbol de 18 a 30 metros de altura. Corteza levemente surcada que se desprende en plaquetas. Tronco recto. Inerme.
 Follaje: semipersistente, verde oscuro
 Hojas: compuestas, bipinnadas, 3-9 yugadas, con 21-39 folï¿½olos por pinna, linear-lanceolados.
@@ -231,14 +231,14 @@ Flores: en espigas axilares cilï¿½ndricas de 5-9 cm de largo, amarillo-verdosas.
 Fruto: legumbre papirï¿½cea o subcoriï¿½cea de 9-16 cm de largo. Las semillas son aplanadas, ovalado-orbiculares, castaï¿½as, sin lï¿½nea fisural.
 Habitat: acompaï¿½a los cursos de rï¿½os.
 Area de dispersiï¿½n: Brasil austral, Paraguay, norte de la Argentina y del Uruguay.
-Usos: Se usa para vigas de puentes porque soporta la intemperie. Tiene propiedades medicinales.',0,30000,'Parapiptadenia_rigida_001.JPG',1700,8,3),
+Usos: Se usa para vigas de puentes porque soporta la intemperie. Tiene propiedades medicinales.',1,30000,'Parapiptadenia_rigida_001.JPG',1700,8,3),
 (7,'Xylosma warburgii','Espina corona','Porte: arbusto espinoso de dos a cuatro metros de altura. Follaje: caduco, verde intenso que se torna rojizo en otoï¿½o. Ramillas en zig-zag rojizas con lenticelas blancuzcas destacadas, Con espinas simples, rectas, axilares, una por nudo de hasta 5 cm de largo.
 Hojas: simples, ovales, oblongo elï¿½pticas, de borde crenado, glabras.
 Flores: unisexuadas en fascï¿½culos, 3-8 floros, con numerosas brï¿½cteas. Flores masculinas con estambres numerosos con filamentos libres. Femeninas con ovario globoso sï¿½pero unilocular. Florece en primavera.
 Fruto: baya subglobosa de 4-5 mm de diï¿½metro, de color negro. Con 2-5 semillas en su interior.
 Habitat: montes serranos y ribereï¿½os.
 Area de dispersiï¿½n: sureste de Brasil, Corrientes y Entre Rï¿½os, en Argentina y Uruguay.
-Usos: desconocidos.',2,400,'Xylosma_warburgii_001.JPG',1800,9,4),
+Usos: desconocidos.',3,400,'Xylosma_warburgii_001.JPG',1800,9,4),
 (8,'Terminalia australis','"Palo amarillo", "Amarillo"','Porte: ï¿½rbol de 7 a 8 metros de altura. Generalmente ramificado desde la base. Inerme.
 Follaje: ramas muy flexibles de leï¿½o amarillo. Follaje caduco, verde amarillento.
 Hojas: simples, alternas, lanceoladas, 3-6 cm de largo. Pecï¿½olo corto.
@@ -246,7 +246,7 @@ Flores: pequeï¿½as, verduzcas, unisexuadas. Masculinas con 10 estambres. Femenin
 Fruto: ovoide, aplanado, 2-3 cm de largo, uniseminado, rojizo
 Habitat: orillas de cursos de agua.
 Area de dispersiï¿½n: Sur del Brasil, noreste de la Argentina, mï¿½s comï¿½n en el litoral oeste del Uruguay
-Usos: con sus ramas flexibles se hacen canastos para vivero de peces.',1,800,'Terminalia_australis_001.JPG',1900,10,2),
+Usos: con sus ramas flexibles se hacen canastos para vivero de peces.',2,800,'Terminalia_australis_001.JPG',1900,10,2),
 (5,'Sapium montevidense Klotzsch','"Curupï¿½", "Arbol de la leche"','Porte: ï¿½rbol de 7 a 9 metros de altura, inerme. Tronco algo tortuoso de color grisï¿½ceo. Laticï¿½fero.
 Follaje: semi persistente, de color verde claro.
 Hojas: Simples de hasta 10 cm de largo, lanceoladas. Borde finamente aserrado. Pecï¿½olo de 1 cm, con dos glï¿½ndulas cï¿½nicas, en la base de la lï¿½mina.
@@ -254,7 +254,7 @@ Flores: pequeï¿½as, en espigas, de 8-10 cm de largo, amarillas. Florece en prima
 Fruto: tricoco de 1 cm de diï¿½metro. Castaï¿½o rojizo en la madurez, con tres semillas en su interior. Dehiscente.
 Habitat: lugares bajos y hï¿½medos, orillas de rï¿½os, arroyos, lagunas y baï¿½ados.
 Area de dispersiï¿½n: especie propia del sur de Brasil. Uruguay en todo el paï¿½s.
-Usos: el lï¿½tex se usa para cazar pï¿½jaros, como adhesivo ("pega-pega").',1,900,'Sapium_montevidense_Klotzsch_001.PNG',1000,11,1),
+Usos: el lï¿½tex se usa para cazar pï¿½jaros, como adhesivo ("pega-pega").',2,900,'Sapium_montevidense_Klotzsch_001.PNG',1000,11,1),
 (3,'Vitex megapotamicus','Tarumï¿½n sin espinas','Porte: arbusto de hasta 6 metros de altura, inerme.
 Follaje: persistente, verde brillante.
 Hojas: compuestas, quinquefoliadas. Folï¿½olos elï¿½pticos de 4 a 14 cm de largo, por 4 a 5 cm de ancho, de borde ï¿½ntegro
@@ -262,4 +262,4 @@ Flores: lilacinas, pequeï¿½as, en cimas axilares. Florece en primavera.
 Fruto: drupa ovobada, negruzca, brillante, de 1 cm de diï¿½metro.
 Habitat: monte serrano.
 Area de dispersiï¿½n: Brasil y Uruguay.
-Usos: desconocidos.',1,600,'Vitex_megapotamicus_001.JPG',1200,12,2);
+Usos: desconocidos.',2,600,'Vitex_megapotamicus_001.JPG',1200,12,2);

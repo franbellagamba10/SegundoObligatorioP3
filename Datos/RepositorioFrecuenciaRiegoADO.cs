@@ -103,6 +103,10 @@ namespace Datos
             return frecuenciaRiego;
         }
 
+        public FrecuenciaRiego FindByName(string cadena)
+        {
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<FrecuenciaRiego> GetAll()
         {
@@ -151,7 +155,7 @@ namespace Datos
             if (obj.Validar())
             {
                 string sql =
-                    "UPDATE FrecuenciaRiego SET id=@id, tiempo=@tiempo, cantidad=@cantidad, WHERE Id=@id";
+                    "UPDATE FrecuenciaRiego SET tiempo=@tiempo, cantidad=@cantidad, WHERE Id=@id";
 
                 SqlCommand com = new SqlCommand(sql, con);
 

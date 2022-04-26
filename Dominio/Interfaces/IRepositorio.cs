@@ -12,5 +12,6 @@ namespace Dominio.Interfaces
         IEnumerable<T> GetAll();
         T FindById(int id);
         bool YaExisteString(string cadena);
+        T FindByName(string cadena);
     }
 }

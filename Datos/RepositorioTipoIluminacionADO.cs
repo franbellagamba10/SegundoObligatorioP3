@@ -103,6 +103,11 @@ namespace Datos
             return tipoIluminacion;
         }
 
+        public TipoIluminacion FindByName(string cadena)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<TipoIluminacion> GetAll()
         {
             List<TipoIluminacion> tipoIluminaciones = new List<TipoIluminacion>();

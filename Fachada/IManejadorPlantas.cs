@@ -7,14 +7,37 @@ namespace Fachada
 {
     public interface IManejadorPlantas
     {
+        #region Plantas
         bool AgregarNuevaPlanta(Planta planta);
         bool DarDeBajaPlanta(int id);
         IEnumerable<Planta> ObtenerTodasLasPlantas();
+        Planta ObtenerPlantaPorNombreCientifico(string nombreCientifico);
         bool ActualizarPlanta(Planta planta);
-        Planta ObtenerPlantaPorId(int id);
+        Planta ObtenerPlantaPorId(int id);        
+        #endregion
+
+        #region Ficha
+        IEnumerable<Ficha> ObtenerTodasLasFichas();
+        Ficha ObtenerFichaPorId(int id);
+        IEnumerable<TipoIluminacion> ObtenerTodosLosTI();
+        IEnumerable<FrecuenciaRiego> ObtenerTodasLasFR();
+        public bool AgregarNuevaFicha(Ficha ficha);
+        TipoIluminacion ObtenerTIPorId(int id);
+        FrecuenciaRiego ObtenerFRPorId(int id);
+        #endregion
+
+        #region TipoPlanta
         IEnumerable<TipoPlanta> TraerTodosLosTiposDePlanta();
         TipoPlanta ObtenerTipoPlantaPorId(int id);
-        IEnumerable<Ficha> TraerTodasLasFichas();
-        Ficha ObtenerFichaPorId(int id);
+        bool DarDeBajaTipoPlanta(int id);
+        bool ActualizarTipoPlanta(TipoPlanta tipoPlanta);
+        public bool AgregarNuevoTipoPlanta(TipoPlanta tipoPlanta);
+        TipoPlanta ObtenerTipoPlantaPorNombre(string nombreTP);
+        IEnumerable<Planta> BusquedaPlantas(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente);
+        #endregion
+
+        
+        
+        
     }
 }

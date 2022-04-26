@@ -20,13 +20,13 @@ namespace Datos
         public bool Create(Ficha obj)
         {
             SqlConnection conexion = Conexion.ObtenerConexion();
-            string sql = "INSERT INTO Ficha VALUES(@frecuenciaRiego, @temperatura, @tipoIluminacion); " +
+            string sql = "INSERT INTO Ficha VALUES(@frecuenciaRiego, @tipoIluminacion, @temperatura);" +
             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             SqlCommand com = new SqlCommand(sql, conexion);
 
-            com.Parameters.AddWithValue("@frecuenciaRiego", obj.frecuenciaRiego);
+            com.Parameters.AddWithValue("@frecuenciaRiego", obj.frecuenciaRiego.id);            
+            com.Parameters.AddWithValue("@tipoIluminacion", obj.tipoIluminacion.id);
             com.Parameters.AddWithValue("@temperatura", obj.temperatura);
-            com.Parameters.AddWithValue("@tipoIluminacion", obj.tipoIluminacion);
 
             try
             {
@@ -38,7 +38,7 @@ namespace Datos
                 id = obj.id;
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
                 throw;
             }
@@ -112,6 +112,11 @@ namespace Datos
             return ficha;
         }
 
+        public Ficha FindByName(string cadena)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Ficha> GetAll()
         {
             List<Ficha> fichas = new List<Ficha>();
@@ -160,7 +165,7 @@ namespace Datos
             if (obj.Validar())
             {
                 string sql =
-                    "UPDATE Ficha SET id=@id, frecuenciaRiego=@frecuenciaRiego, temperatura=@temperatura,tipoIluminacion=@tipoIluminacion, WHERE Id=@id";
+                    "UPDATE Ficha SET frecuenciaRiego=@frecuenciaRiego, temperatura=@temperatura,tipoIluminacion=@tipoIluminacion, WHERE Id=@id";
 
                 SqlCommand com = new SqlCommand(sql, con);
 
