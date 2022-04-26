@@ -28,6 +28,7 @@ namespace Fachada
         bool ActualizarTipoPlanta(TipoPlanta tipoPlanta);
         public bool AgregarNuevoTipoPlanta(TipoPlanta tipoPlanta);
         TipoPlanta ObtenerTipoPlantaPorNombre(string nombreTP);
+        IEnumerable<Planta> BusquedaPlantas(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente);
         #endregion
 
     }

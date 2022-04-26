@@ -54,14 +54,14 @@ namespace ProyectoWeb.Controllers
                 TipoPlanta tipoPlanta = new TipoPlanta
                 {
                     id = tipoPlantaVM.id,
-                    nombre = tipoPlantaVM.nombre,
-                    descripcion = tipoPlantaVM.descripcion,                    
+                    nombre = tipoPlantaVM.nombre.Trim(),
+                    descripcion = tipoPlantaVM.descripcion.Trim(),                    
                 };
 
                 bool pudeCrear = manejadorPlantas.AgregarNuevoTipoPlanta(tipoPlanta);
                 if (pudeCrear) // ---->  aca mismo se setea la ruta de la foto de la planta
                 {
-                    tipoPlanta.id = manejadorPlantas.ObtenerPlantaPorNombreCientifico(tipoPlanta.nombre).id; //obtengo el tTP para ponerle ID despues de creado
+                    tipoPlanta.id = manejadorPlantas.ObtenerTipoPlantaPorNombre(tipoPlanta.nombre).id; //obtengo el tTP para ponerle ID despues de creado
                     return RedirectToAction("Details", tipoPlanta);
                 }
 

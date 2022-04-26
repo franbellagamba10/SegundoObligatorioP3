@@ -157,6 +157,24 @@ namespace ProyectoWeb.Controllers
             return View("Index", CargarPlantasIndexFormateado());
         }
 
+        [HttpGet]
+        public ActionResult Busqueda()
+        {
+            PlantaViewModel plantaVM = new PlantaViewModel()
+            {
+                Fichas = manejadorPlantas.TraerTodasLasFichas(),
+                TiposPlanta = manejadorPlantas.TraerTodosLosTiposDePlanta(),
+            };
+            return View("Busqueda", plantaVM);
+        }
+
+        [HttpPost]
+        public ActionResult Busqueda(string nombre, int tipoPlanta,int alturaMaximaDesde, int alturaMaximaHasta, int ambiente)
+        {
+
+            //manejadorPlantas.BusquedaPlantas(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente);
+            return View("Index", manejadorPlantas.BusquedaPlantas(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente));
+        }
         public bool EstoyLogueado()
         {
             return HttpContext.Session.GetInt32("userId") != null;

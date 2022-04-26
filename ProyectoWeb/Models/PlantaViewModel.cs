@@ -40,7 +40,7 @@ namespace ProyectoWeb.Models
         public Ficha FichaSeleccionada { get; set; }
         public enum Ambiente
         {
-            Exterior,
+            Exterior = 1,
             Interior,
             Mixta
         }

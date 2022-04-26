@@ -102,24 +102,52 @@ namespace Tests
             //Console.ReadKey();
 
 
-            #region Test unitario para BuscarUsuarioPorMail
-            Console.WriteLine("Validacion correcta (tiene que existir en BD):");
-            Usuario user = repoUsuarios.BuscarUsuarioPorEmail("francesco@ort.edu.uy");
-            Console.WriteLine(user?.ToString());
-            if (user == null)
-                Console.WriteLine("No hay usuario 1");
-            else
-                Console.WriteLine("encontre usuario 1");
-            Console.WriteLine("====================================");
-            Console.WriteLine("Validacion incorrecto:");
-            user = repoUsuarios.BuscarUsuarioPorEmail("mail@algo.com");
-            Console.WriteLine(user?.ToString());
-            if (user == null)
-                Console.WriteLine("No hay usuario 2");
-            else
-            Console.WriteLine("encontre usuario 2");
+            //#region Test unitario para BuscarUsuarioPorMail
+            //Console.WriteLine("Validacion correcta (tiene que existir en BD):");
+            //Usuario user = repoUsuarios.BuscarUsuarioPorEmail("francesco@ort.edu.uy");
+            //Console.WriteLine(user?.ToString());
+            //if (user == null)
+            //    Console.WriteLine("No hay usuario 1");
+            //else
+            //    Console.WriteLine("encontre usuario 1");
+            //Console.WriteLine("====================================");
+            //Console.WriteLine("Validacion incorrecto:");
+            //user = repoUsuarios.BuscarUsuarioPorEmail("mail@algo.com");
+            //Console.WriteLine(user?.ToString());
+            //if (user == null)
+            //    Console.WriteLine("No hay usuario 2");
+            //else
+            //Console.WriteLine("encontre usuario 2");
+            //Console.ReadKey();
+            //#endregion
+
+
+            bool resultado = TieneSoloLetras("ñÑ áéíóú ÁÉÍÓÚ");            
+            Console.WriteLine(resultado);
+            resultado = TieneSoloLetras("aá eé ií oó uú AENBER ");
+            Console.WriteLine(resultado);
             Console.ReadKey();
-            #endregion
+            bool TieneSoloLetras(string nombre)
+            {
+                int i = 0;
+                bool TieneValorAlfabetico = true;
+                while (i < nombre.Length)// && TieneValorAlfabetico)
+                {
+                    var valor = (int)nombre[i];
+
+                   
+                    if ((int)nombre[i] >= 65 && (int)nombre[i] <= 90 || (int)nombre[i] >= 97 && (int)nombre[i] <= 122 || (int)nombre[i] >= 160 && (int)nombre[i] <= 165 ||
+                    (int)nombre[i] == 130 || (int)nombre[i] == 144 || (int)nombre[i] == 181 || (int)nombre[i] == 214 || (int)nombre[i] == 224 || (int)nombre[i] == 223 || (int)nombre[i] == 32)
+                        TieneValorAlfabetico = true;
+                    else
+                        TieneValorAlfabetico = false;
+
+                    i++;
+                }
+                return TieneValorAlfabetico;
+            }
+
+
         }
     }
 }

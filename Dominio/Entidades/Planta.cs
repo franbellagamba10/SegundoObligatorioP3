@@ -36,7 +36,7 @@ namespace Dominio.Entidades
         }
         public enum Ambiente
         {
-            Exterior,
+            Exterior = 1,
             Interior,
             Mixta
         }

@@ -268,5 +268,101 @@ namespace Datos
             }
 
         }
+        public IEnumerable<Planta> QuerySearch(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente)
+        {
+            int contador = 0;
+            int contadorControl = 0;
+            List<Planta> plantas = new List<Planta>();
+            string query = "SELECT * FROM Planta WHERE ";
+
+            if (!String.IsNullOrEmpty(nombre))
+            {
+                query += "nombreCientifico LIKE @nombre or nombresVulgares LIKE @nombre";
+                contador++;                          
+            }
+            if (tipoPlanta != 0)
+            {
+                if (contador > contadorControl)
+                {
+                    query += " and";
+                    contadorControl++;
+                }
+                query += " tipo = @tipoPlanta";
+                contador++;
+            }
+            if (alturaMaximaDesde != 0)
+            {
+                if (contador != contadorControl)
+                {
+                    query += " and";
+                    contadorControl++;
+                }
+                query += " alturaMaxima >= @alturaMaximaDesde";
+                contador++;
+            }
+            if (alturaMaximaHasta != 0)
+            {
+                if (contador != contadorControl)
+                {
+                    query += " and";
+                    contadorControl++;
+                }
+                query += " alturaMaxima < @alturaMaximaHasta";
+                contador++;
+            }
+            if (ambiente != 0)
+            {
+                if (contador != contadorControl)
+                {
+                    query += " and";
+                    contadorControl++;
+                }
+                query += " ambiente = @ambiente";
+                contador++;
+            }
+
+            if (contador == 0)
+                query = "SELECT * from Planta";
+            query += ";";
+            SqlConnection conexion = Conexion.ObtenerConexion();
+            SqlCommand com = new SqlCommand(query, conexion);
+            com.Parameters.AddWithValue("@nombre","%"+nombre+"%");
+            com.Parameters.AddWithValue("@tipoPlanta",tipoPlanta);
+            com.Parameters.AddWithValue("@alturaMaximaDesde", alturaMaximaDesde);
+            com.Parameters.AddWithValue("@alturaMaximaHasta",alturaMaximaHasta);
+            com.Parameters.AddWithValue("@ambiente",ambiente);
+            try
+            {
+                Conexion.AbrirConexion(conexion);
+                SqlDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Planta planta = new Planta()
+                    {
+                        id = reader.GetInt32(reader.GetOrdinal("id")),
+                        tipo = repoTiposPlanta.FindById(reader.GetInt32(1)),
+                        nombreCientifico = reader.GetString(2),
+                        nombresVulgares = reader.GetString(3),
+                        descripcion = reader.GetString(4),
+                        ambiente = (Planta.Ambiente)reader.GetInt32(5),
+                        alturaMaxima = reader.GetInt32(6),
+                        foto = reader.GetString(7),
+                        precio = reader.GetDecimal(8),
+                        ficha = repoFichas.FindById(reader.GetInt32(9)),
+                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(10)),
+                    };
+                    plantas.Add(planta);
+                }
+            }
+            catch (Exception ex)
+            {
+                //log de error
+            }
+            finally
+            {
+                Conexion.CerrarYDesecharConexion(conexion);
+            }
+            return plantas;
+        }
     }
 }

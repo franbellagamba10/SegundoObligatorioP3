@@ -90,5 +90,10 @@ namespace Fachada
         {
             return RepoTP.Delete(id);
         }
+
+        public IEnumerable<Planta> BusquedaPlantas(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente)
+        {
+            return RepoPlantas.QuerySearch(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente);
+        }
     }
 }
