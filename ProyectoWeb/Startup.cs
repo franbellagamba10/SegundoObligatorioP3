@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Fachada;
 using Dominio.Entidades;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProyectoWeb
 {
@@ -38,6 +39,9 @@ namespace ProyectoWeb
             services.AddScoped<IRepositorio<FrecuenciaRiego>, RepositorioFrecuenciaRiegoADO>();
 
             services.AddSession();
+
+            services.AddDbContext<ViveroContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("miConexion")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
