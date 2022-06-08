@@ -11,9 +11,12 @@
 |		- TipoIluminacion -> Revisar cantidad minima, uso rango de 0 a infinito positivo, ver que pasa con valores <= 0
 |!!!!   - Compra -> No existe un DataAnnotation para controlar la fecha, necesitariamos que no se puedan poner fechas a futuro. Se puede hacer uno personalizado heredando de clase ValidationAttribute
 |!!!!	- Item -> Revisar Precio. [Range(0,(double)decimal.MaxValue)] -> el tipo de dato es decimal, pero necesita ser casteado porque no puedo hacer decimal.MaxValue
-|	2- Implementar clases que no manejamos en primer obligatorio con sus data annotations
+|	
+|   2- Implementar clases que no manejamos en primer obligatorio con sus data annotations
 |
-|	3- Crear migracion una vez (1) este terminado
+|	3- Refactorizar metodos de repositorios para implementar Entity Framework
+|
+|	4- Crear migracion una vez (1) este terminado
 |
 |
 |
