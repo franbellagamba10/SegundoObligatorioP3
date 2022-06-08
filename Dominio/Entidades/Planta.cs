@@ -6,29 +6,51 @@ using System.Text;
 
 namespace Dominio.Entidades
 {
-    public class Planta : IValidate
+    public class Planta
     {
+        [Key]
         public int id { get; set; }
+
+        [Required]
         [Display(Name = "Tipo de Planta")]
         public TipoPlanta tipo { get; set; }
+
+        [Required]
         [Display(Name = "Nombre científico")]
         public string nombreCientifico { get; set; }
+
+        [Required]
         [Display(Name = "Nombres vulgares")]
         public string nombresVulgares { get; set; }
+
+        [Required]
+        [StringLength(500, ErrorMessage = "La descripción debe tener entre {2} y {0} caracteres.",MinimumLength = 10)]
         [Display(Name = "Descripción")]
         public string descripcion { get; set; }
+
+        [Required]
         [Display(Name = "Ambiente")]
         public Ambiente ambiente { get; set; }
+
+        [Required]
         [Display(Name = "Altura máxima (cm)")]
         public int alturaMaxima { get; set; }
+
         [Display(Name = "Foto")]
         public string foto { get; set; }
+
+        [Required]
+        [Range(0.0, Double.MaxValue, ErrorMessage = "Precio inválido")]
         [Display(Name = "Precio (UYU)")]
         public decimal precio { get; set; }
+
         [Display(Name = "Usuario autor")]
         public Usuario ingresadoPor { get; set; }
+
+        [Required]
         [Display(Name = "Ficha")]
         public Ficha ficha { get; set; }
+
 
         public Planta()
         {
@@ -39,24 +61,6 @@ namespace Dominio.Entidades
             Exterior = 1,
             Interior,
             Mixta
-        }
-        public bool Validar()
-        {
-            if (string.IsNullOrWhiteSpace(nombreCientifico) || string.IsNullOrWhiteSpace(nombresVulgares)
-                || string.IsNullOrWhiteSpace(descripcion) || descripcion.Length < 10 ||descripcion.Length > 500 || precio < 1 || !ValidarEnum((int)ambiente)
-                || alturaMaxima < 1)
-                return false;
-            return true;
-        }
-
-        public bool ValidarEnum(int valorEnum)
-        {
-            bool existe = Enum.IsDefined(typeof(Ambiente), valorEnum);
-            if (existe)
-                return true;
-
-            return false;
-        }
-        
+        }        
     }
 }
