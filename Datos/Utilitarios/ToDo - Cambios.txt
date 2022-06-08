@@ -1,101 +1,44 @@
-Lista de tareas que nos van faltando para tener la base de la solucion
 
-2- Revisar UML: RepositorioItems, IRepositorioItems --> NO hereda de IRepositorio<T> ,IValidate() para repo items,
-	Compra no guarda una lista de lineas, Item guarda id de Planta y Compra. (Casi seguro que faltan mas cosas) #
-
-
-
-5 Controllers ---> EN PROGRESO (FALTAN METODOS ESPECIFICOS)
-
-
-
-7 - Cambiar nombre de tablas en BD, tienen que ser plurales #
-
-
-
-9 - Manejo de excepciones - Preguntar a plinio si hacemos log, console.writeline o solo mensaje #
-
-
-
-11 - Implementar y testear Logout
-
-
-
-13 - Baja TipoPlanta : Es baja o BORRAR? email a profesor. Si es borrar: NO SE PUEDE BORRAR SI YA UNA PLANTA LA USA,
-		DEBE HACER LA VERIFICACION DE QUE HAY UNA PLANTA USANDO ESTE TIPO PLANTA.
-
-
-14 - Agregar Vista EDIT TipoPlanta, no se puede editar el nombre del TipoPlanta, solo la descripcion -->  
-	MODIFICAR LA DESCRIPCION DE UNA TIPO PLANTA. BUSCA POR NOMBRE Y MUESTRA DESCRIPCION EN MODO EDICION. MUESTRA OTROS DATOS COMO NO EDITABLES
-	 VALIDA ANTES DE INSERTAR CAMBIOS EN BD
-
-15 - BUSQUEDA DE NOMBRE, ENCUENTRA Y DESPLIEGA CUANDO ENCUENTRA. INDICA SI NO HAY RESULTADOS. VISTA --> TipoPlanta/Details.cshtml
- 
- -------- ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
-16 - Mantenimiento de PLANTA
-
-18- Los topes pueden modificarse sin tocar el codigo ??? --> PROFE
-
-19- Ver como hacer para que Permita elegir foto y subirla al servidor.(Ver Clase Profe)
-20- Guardar el nombre de la foto asignando el nombre científico, sustituyendo espacios por underscore y agregando sufijo 001 , 002 ....
-21- Utilizar el nombre de la foto como nombre de archivo para subir a la DB.
-22- Verifica que la extension de la foto sea JPG y PNG
-
---------- -------------- ------------- ---------------- ---------------
-Ficha de cuidados
-
-24- AGREGAR TipoIluminacion a traves de UI
-			- validar
-26- Permite saber si no se pudo guardar y poder verificarlo visualmente (listado y/o mensaje)
-
---------- -------------- ------------- ---------------- ---------------
-
-Busqueda de plantas 
-
-27- Prmite buscar por coincidencia parcial de texto en el nombre científico o alguno de los vulgares.
-
-28- Permite buscar Por tipo (selecciona un tipo y despliega todas las de ese tipo).
-
-29- Permite buscar por ambiente (selecciona un ambiente y despliega todas las de ese ambiente).
-
-30- Mustra todas las Menores a altura dada.
-
-31- Mustra todas las Mayor o igual a altura dada
-
-32- Que permita mostrar Todas las plantas.
-
-33- Como resultado de la busqueda Despliega: nombre científico, vulgares, descripción, ambiente, altura y miniatura de la foto.
-
-34- Incluye link para visualizar cuidados y los muestra
-
-35- Envía mensaje cuando no hay coincidencias.
-
-
-
-
-
-
-
-
-
-############################ PREGUNTAS PROFE ############################
-
-1- nombre de propiedades que llegan por inyeccion de dependencias. Todas con PascalCase? SI
-
-2- Los topes pueden modificarse sin tocar el codigo. No entendemos que significa. Modificar Valor del IVA desde una vista, por ejem?
-	No tenemos que hacer la UI, pero si que el acceso a los valores sea a traves de BD (Constantes.cs)
-
-
-4- Que datos no deberiamos permitir que se editen en Planta/Edit ?
-
-
-
-6- TEXTAREA/TEXTFIELD en Planta/Edit, no nos funca
-
-
-
-
-
-
-
-10- Tenemos un metodo EstoyLogueado() que comprueba si la Session tiene contenido. Donde deberia ir? Pensamos que deberia ser un metodo de la interfaz IManejadorUsuarios que no llama a ningun repositorio
+====================================================================================================================
+|	REFACTOR DE ADO.NET A ENTITY FRAMEWORK
+|
+|	1-	DATA ANNOTATIONS de clases que manejamos en primero obligatorio ---> Borramos Validaciones de clase (IValidate y metodos) y reemplazamos por data annotations
+|		- Usuario	 -> Contraseña -> Usar REGEX?
+|		- Planta	 -> No estabamos controlando la ficha como obligatoria, ahora se le puso [Required] pero revisar si es necesario
+|					 -> UsuarioAutor no se controla (tiene sentido porque se aplica cuando se crea, pero revisar igual por las dudas)
+|					 -> Precio -> testear bien rango de precio, estamos usando Double.MaxValue para un valor que es Decimal, puede darnos problemas
+|		- TipoPlanta -> Revisar que admita letras ñ y Ñ, tambien que no permita espacios en blanco y blanks (ASCII 32)
+|		- TipoIluminacion -> Revisar cantidad minima, uso rango de 0 a infinito positivo, ver que pasa con valores <= 0
+|!!!!   - Compra -> No existe un DataAnnotation para controlar la fecha, necesitariamos que no se puedan poner fechas a futuro. Se puede hacer uno personalizado heredando de clase ValidationAttribute
+|!!!!	- Item -> Revisar Precio. [Range(0,(double)decimal.MaxValue)] -> el tipo de dato es decimal, pero necesita ser casteado porque no puedo hacer decimal.MaxValue
+|	2- Implementar clases que no manejamos en primer obligatorio con sus data annotations
+|
+|	3- Crear migracion una vez (1) este terminado
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
