@@ -30,18 +30,18 @@ namespace ProyectoWeb
             services.AddControllersWithViews();
                         
             services.AddScoped<IManejadorUsuarios, ManejadorUsuarios>();
-            services.AddScoped<IRepositorioUsuarios, RepositorioUsuariosADO>();
+            services.AddScoped<IRepositorioUsuarios, RepositorioUsuariosEF>();
             services.AddScoped<IManejadorPlantas, ManejadorPlantas>();
-            services.AddScoped<IRepositorioPlantas, RepositorioPlantasADO>();
-            services.AddScoped<IRepositorio<TipoPlanta>, RepositorioTiposPlantaADO>();
-            services.AddScoped<IRepositorio<Ficha>, RepositorioFichasADO>();
-            services.AddScoped<IRepositorio<TipoIluminacion>, RepositorioTipoIluminacionADO>();
-            services.AddScoped<IRepositorio<FrecuenciaRiego>, RepositorioFrecuenciaRiegoADO>();
-
+            services.AddScoped<IRepositorioPlantas, RepositorioPlantasEF>();
+            services.AddScoped<IRepositorio<TipoPlanta>, RepositorioTiposPlantaEF>();
+            services.AddScoped<IRepositorio<Ficha>, RepositorioFichasEF>();
+            services.AddScoped<IRepositorio<TipoIluminacion>, RepositorioTipoIluminacionEF>();
+            services.AddScoped<IRepositorio<FrecuenciaRiego>, RepositorioFrecuenciaRiegoEF>();
+         
             services.AddSession();
 
             services.AddDbContext<ViveroContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("miConexion")));
+            options.UseSqlServer(Configuration.GetConnectionString("ConexionBDEntityFramework")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,14 +68,6 @@ namespace ProyectoWeb
                     pattern: "{controller=Usuarios}/{action=Login}/{id?}");
             });
 
-        }
-
-        public static string ObtenerConexion()
-        {
-            string cadenaConexion = string.Empty;
-            IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            cadenaConexion = config.GetConnectionString("conexion");
-            return cadenaConexion;
-        }
+        }        
     }
 }

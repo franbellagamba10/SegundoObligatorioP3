@@ -9,7 +9,8 @@ namespace Datos
     public class ViveroContext : DbContext
     {
         #region DBSets
-        //public DbSet<Item> Items { get; set; }  no se si vamos a almacenar Items en la BD
+        
+        public DbSet<Item> Items { get; set; }
         public DbSet<Compra> Compras { get; set; }
         public DbSet<CompraImportacion> ComprasImportacion { get; set; }
         public DbSet<CompraPlaza> ComprasPlaza { get; set; }
@@ -25,5 +26,10 @@ namespace Datos
         {
             
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Item>().HasKey(a => new { a.idPlanta, a.idCompra });
+        }    
+
     }
 }

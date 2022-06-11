@@ -18,17 +18,23 @@
 |
 |	4- Crear migracion una vez (1) este terminado
 |
+|	5-  FindByName() de TipoIluminacion devuelve un objeto unico. No deberia devolver un Enumerable? Pueden haber varias coincidencias porque nombre no es Key
+|		Todos los FindByName() Validar en el INPUT que la cadena enviada para el metodo no sea vacia
 |
+|	6- Revisar ExisteString() de todos los repositorios, algunos lo implementan pero no se si los necesitan. Lo necesitamos?
 |
+|	7- Comprobar si en RepoFichas hay que agregarle get y set a inyeccion de dependencias de los otros repos
 |
+|	8- USUARIOS - CREATE --> Validar que el email no exista, no existe un Data Annotation que valide UNIQUE sin ser PK. Hay que hacer por metodo
 |
+|	9- Idea: hacer un objeto Respuesta que tenga codigo y descripcion para devolver mensajes especificos sobre resultados.
+		Esto llevaria un enumerable de descripcion y codigos de respuesta. Llevaria tiempo pero es buena idea para manejar
+		errores y excepciones
 |
+|	10 -REVISAR REPOSITORIOS --> que este todo el crud apuntando a las tablas correctas en todos los metodos, nombres de variables
+					y si hay que validar algo que no cubren las DataAnnotations
 |
-|
-|
-|
-|
-|
+|	11 - Falta todo el repo de Compra !!
 |
 |
 |
