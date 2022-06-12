@@ -6,8 +6,7 @@ using System.Text;
 namespace Dominio.Interfaces
 {
     public interface IRepositorioPlantas : IRepositorio<Planta>
-    {
-        public Planta FindByName(string nombreCientifico);
+    {        
         public IEnumerable<Planta> QuerySearch(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente);
     }
 }

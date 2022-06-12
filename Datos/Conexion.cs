@@ -14,7 +14,7 @@ namespace Datos
             string connectionString = "";
 
             IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            connectionString = config.GetConnectionString("miConexion");
+            connectionString = config.GetConnectionString("ConexionBDEntityFramework");
             
             return connectionString;
         }

@@ -10,8 +10,7 @@ namespace Dominio.Interfaces
         bool Delete(int id);
         bool Update(T obj);
         IEnumerable<T> GetAll();
-        T FindById(int id);
-        bool YaExisteString(string cadena);
+        T FindById(int id);        
         T FindByName(string cadena);
     }
 }
