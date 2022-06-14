@@ -37,7 +37,7 @@
 |	11 - Falta todo el repo de Compra !!
 |
 |
-|
+|	12 - WEB API -  public IActionResult Get() obtiene una lista de plantas, uso null para ver si la lista tiene algo. Usar null o count == 0?
 |
 |
 |
