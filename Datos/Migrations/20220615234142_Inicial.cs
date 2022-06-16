@@ -73,9 +73,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    email = table.Column<string>(maxLength: 50, nullable: false),
-                    contrasenia = table.Column<string>(maxLength: 20, nullable: false),
-                    activo = table.Column<bool>(nullable: false)
+                    Email = table.Column<string>(maxLength: 50, nullable: false),
+                    Contrasenia = table.Column<string>(maxLength: 20, nullable: false),
+                    Activo = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,7 +110,9 @@ namespace Datos.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     frecuenciaRiegoid = table.Column<int>(nullable: false),
+                    idFrecuenciaRiego = table.Column<int>(nullable: false),
                     tipoIluminacionid = table.Column<int>(nullable: false),
+                    idTipoIluminacion = table.Column<int>(nullable: false),
                     temperatura = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
@@ -136,7 +138,7 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    tipoid = table.Column<int>(nullable: false),
+                    TipoPlantaId = table.Column<int>(nullable: false),
                     nombreCientifico = table.Column<string>(nullable: false),
                     nombresVulgares = table.Column<string>(nullable: false),
                     descripcion = table.Column<string>(maxLength: 500, nullable: false),
@@ -144,28 +146,28 @@ namespace Datos.Migrations
                     alturaMaxima = table.Column<int>(nullable: false),
                     foto = table.Column<string>(nullable: true),
                     precio = table.Column<decimal>(nullable: false),
-                    ingresadoPorid = table.Column<int>(nullable: true),
-                    fichaid = table.Column<int>(nullable: false)
+                    UsuarioId = table.Column<int>(nullable: false),
+                    FichaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Plantas", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Plantas_Fichas_fichaid",
-                        column: x => x.fichaid,
+                        name: "FK_Plantas_Fichas_FichaId",
+                        column: x => x.FichaId,
                         principalTable: "Fichas",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Plantas_Usuarios_ingresadoPorid",
-                        column: x => x.ingresadoPorid,
-                        principalTable: "Usuarios",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Plantas_TiposPlanta_tipoid",
-                        column: x => x.tipoid,
+                        name: "FK_Plantas_TiposPlanta_TipoPlantaId",
+                        column: x => x.TipoPlantaId,
                         principalTable: "TiposPlanta",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Plantas_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -186,19 +188,19 @@ namespace Datos.Migrations
                 column: "Compraid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plantas_fichaid",
+                name: "IX_Plantas_FichaId",
                 table: "Plantas",
-                column: "fichaid");
+                column: "FichaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plantas_ingresadoPorid",
+                name: "IX_Plantas_TipoPlantaId",
                 table: "Plantas",
-                column: "ingresadoPorid");
+                column: "TipoPlantaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plantas_tipoid",
+                name: "IX_Plantas_UsuarioId",
                 table: "Plantas",
-                column: "tipoid");
+                column: "UsuarioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -216,10 +218,10 @@ namespace Datos.Migrations
                 name: "Fichas");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "TiposPlanta");
 
             migrationBuilder.DropTable(
-                name: "TiposPlanta");
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "FrecuenciasRiego");

@@ -14,7 +14,7 @@ namespace Dominio.Entidades
 
         [Required]
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "El nombre admite únicamente letras")]
-        [Display(Name = "Nombre")]
+        [Display(Name = "Tipo de planta")]
         public string nombre { get; set; }
 
         [Required]

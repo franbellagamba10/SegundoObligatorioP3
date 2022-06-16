@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label for="ambiente" class="control-label">Ambiente</label>
                 <select name="ambiente" value="@Model.ambiente">
-                    <option value="0">Todos</option>
+                    <option value="0">Seleccione un ambiente</option>
                     @foreach (var opcion in Enum.GetValues(typeof(PlantaViewModel.Ambiente)))
                     {
                         int val = (int)opcion;
@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label class="control-label">Tipo:</label>
                 <select name="tipoPlanta">
-                    <option value="0">Todos</option>
+                    <option value="0">Seleccione un Tipo de planta</option>
                     @foreach (var tipo in Model.TiposPlanta)
                     {
                         <option value="@tipo.id">@tipo.nombre</option>

@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Dominio.Entidades
 {
+    [Table("Plantas")]
     public class Planta
     {
         [Key]
@@ -13,7 +15,8 @@ namespace Dominio.Entidades
 
         [Required]
         [Display(Name = "Tipo de Planta")]
-        public TipoPlanta tipo { get; set; }
+        public TipoPlanta TipoPlanta { get; set; }
+        public int TipoPlantaId { get; set; }
 
         [Required]
         [Display(Name = "Nombre científico")]
@@ -44,12 +47,14 @@ namespace Dominio.Entidades
         [Display(Name = "Precio (UYU)")]
         public decimal precio { get; set; }
 
-        [Display(Name = "Usuario autor")]
-        public Usuario ingresadoPor { get; set; }
+        [Display(Name = "Usuario autor")]        
+        public Usuario Usuario { get; set; }
+        public int UsuarioId { get; set; }
 
-        [Required]
-        [Display(Name = "Ficha")]
-        public Ficha ficha { get; set; }
+        [Required]        
+        [Display(Name = "Ficha")]        
+        public Ficha Ficha { get; set; }
+        public int FichaId { get; set; }
 
 
         public Planta()
