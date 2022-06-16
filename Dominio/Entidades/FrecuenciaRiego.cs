@@ -18,6 +18,7 @@ namespace Dominio.Entidades
         [Required]
         [Range(0, Double.PositiveInfinity,ErrorMessage = "Valor ingresado inválido")]
         public int cantidad { get; set; }
+        public List<Ficha> Fichas { get; set; }
         public FrecuenciaRiego()
         {
             

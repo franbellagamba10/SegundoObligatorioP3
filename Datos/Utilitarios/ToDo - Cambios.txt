@@ -2,6 +2,14 @@
 ====================================================================================================================
 |	REFACTOR DE ADO.NET A ENTITY FRAMEWORK
 |
+
+
+!!!!   SE ESTAN BORRANDO PLANTAS CON PKS DE TIPO PLANTA EXISTENTES, CONTROLAR ANTES DE BORRAR
+!!!!   SEGURAMENTE PASA CON OTROS OBJETOS: FICHA, TIPOILU, USUARIO ETC
+		Revisar el .Include cuando obtengo la planta para borrar
+
+
+
 |	1-	DATA ANNOTATIONS de clases que manejamos en primero obligatorio ---> Borramos Validaciones de clase (IValidate y metodos) y reemplazamos por data annotations
 |		- Usuario	 -> Contraseña -> Usar REGEX?
 |		- Planta	 -> No estabamos controlando la ficha como obligatoria, ahora se le puso [Required] pero revisar si es necesario

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Datos
 {
@@ -65,7 +66,9 @@ namespace Datos
             Ficha unaFicha = null;
             try
             {
-                unaFicha = Db.Fichas.Find(id);
+                unaFicha = Db.Fichas.Include(f=>f.frecuenciaRiego)
+                                    .Include(f=>f.tipoIluminacion)
+                                    .Where(f=>f.id == id).SingleOrDefault();
             }
             catch (Exception ex)
             {
@@ -85,7 +88,8 @@ namespace Datos
 
         public IEnumerable<Ficha> GetAll()
         {
-            return Db.Fichas.ToList();
+            var fichas = Db.Fichas.Select(x=>x).Include(f => f.frecuenciaRiego).Include(f => f.tipoIluminacion).ToList();
+            return fichas;
         }
 
         public bool Update(Ficha obj)

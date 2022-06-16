@@ -43,7 +43,9 @@ namespace Fachada
 
         public IEnumerable<TipoPlanta> TraerTodosLosTiposDePlanta()
         {
-            return RepoTP.GetAll();
+            var tiposPlanta = RepoTP.GetAll();
+                return tiposPlanta;
+            //return RepoTP.GetAll();
         }
 
         public IEnumerable<Ficha> ObtenerTodasLasFichas()
@@ -90,7 +92,7 @@ namespace Fachada
             return RepoTP.Delete(id);
         }
 
-        public IEnumerable<Planta> BusquedaPlantas(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente)
+        public IEnumerable<Planta> BusquedaPlantas(string nombre, TipoPlanta tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente)
         {
             return RepoPlantas.QuerySearch(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente);
         }

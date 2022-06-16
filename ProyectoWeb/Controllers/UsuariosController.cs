@@ -35,11 +35,11 @@ namespace ProyectoWeb.Controllers
         {
             Usuario user = null;
             user = manejadorUsuarios.BuscarUsuarioPorSuEmail(email);
-            if (user != null && user.activo && user.contrasenia == contrasenia)
+            if (user != null && user.Activo && user.Contrasenia == contrasenia)
             {
                 HttpContext.Session.SetInt32("userId", user.id);
                 
-                HttpContext.Session.SetString("userEmail", user.email);
+                HttpContext.Session.SetString("userEmail", user.Email);
                 return RedirectToAction("Index", "Plantas");
             }           
             return View();

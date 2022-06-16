@@ -24,7 +24,7 @@ namespace Datos
             bool resultado = false;            
             try
             {
-                Usuario unUser = FindByName(obj.email);
+                Usuario unUser = FindByName(obj.Email);
                 if (unUser != null)
                     return resultado;
 
@@ -80,10 +80,10 @@ namespace Datos
         
         public IEnumerable<Usuario> GetAll()
         {
-            List<Usuario> users = null;
+            IQueryable<Usuario> users = null;
             try
             {
-                users = Db.Usuarios.ToList();
+                users = Db.Usuarios;
             }
             catch (Exception ex)
             {
@@ -112,7 +112,7 @@ namespace Datos
                
         public Usuario FindByName(string mail) //Por Email
         {
-            return Db.Usuarios.Where(x => x.email.Equals(mail)).SingleOrDefault();
+            return Db.Usuarios.Where(x => x.Email.Equals(mail)).SingleOrDefault();
         }
 
         public bool YaExisteString(string cadena)

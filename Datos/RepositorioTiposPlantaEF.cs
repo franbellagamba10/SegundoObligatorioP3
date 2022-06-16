@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Datos
 {
@@ -40,11 +41,11 @@ namespace Datos
             bool resultado = false;
             try
             {
-                TipoPlanta unTP = Db.TiposPlanta.Find(id);
+                TipoPlanta unTP = FindById(id);
                 if (unTP == null)
                     return resultado;
 
-                Db.TiposPlanta.Remove(unTP);
+                Db.TiposPlanta.Remove(unTP); //validar que ninguna planta tenga este TP antes de borrar. Revisar como se valida correctamente
                 Db.SaveChanges();
                 resultado = true;
             }
@@ -80,7 +81,7 @@ namespace Datos
             TipoPlanta unTP = null;
             try
             {
-                unTP = Db.TiposPlanta.Find(id);
+                unTP = Db.TiposPlanta.Where(x=>x.id == id).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -92,7 +93,7 @@ namespace Datos
 
         public IEnumerable<TipoPlanta> GetAll()
         {
-            return Db.TiposPlanta.ToList();
+            return Db.TiposPlanta;
         }
 
         

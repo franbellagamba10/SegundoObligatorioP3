@@ -14,7 +14,7 @@ namespace Fachada
         Planta ObtenerPlantaPorNombreCientifico(string nombreCientifico);
         bool ActualizarPlanta(Planta planta);
         Planta ObtenerPlantaPorId(int id);
-        IEnumerable<Planta> BusquedaPlantas(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente);
+        IEnumerable<Planta> BusquedaPlantas(string nombre, TipoPlanta tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente);
         #endregion
 
         #region Ficha

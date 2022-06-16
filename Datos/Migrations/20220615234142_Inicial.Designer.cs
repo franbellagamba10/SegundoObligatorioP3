@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    [Migration("20220611220855_Inicial")]
+    [Migration("20220615234142_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,12 @@ namespace Datos.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("frecuenciaRiegoid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idFrecuenciaRiego")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idTipoIluminacion")
                         .HasColumnType("int");
 
                     b.Property<decimal>("temperatura")
@@ -118,6 +124,15 @@ namespace Datos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("FichaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoPlantaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
                     b.Property<int>("alturaMaxima")
                         .HasColumnType("int");
 
@@ -129,14 +144,8 @@ namespace Datos.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<int>("fichaid")
-                        .HasColumnType("int");
-
                     b.Property<string>("foto")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ingresadoPorid")
-                        .HasColumnType("int");
 
                     b.Property<string>("nombreCientifico")
                         .IsRequired()
@@ -149,16 +158,13 @@ namespace Datos.Migrations
                     b.Property<decimal>("precio")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("tipoid")
-                        .HasColumnType("int");
-
                     b.HasKey("id");
 
-                    b.HasIndex("fichaid");
+                    b.HasIndex("FichaId");
 
-                    b.HasIndex("ingresadoPorid");
+                    b.HasIndex("TipoPlantaId");
 
-                    b.HasIndex("tipoid");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Plantas");
                 });
@@ -208,15 +214,15 @@ namespace Datos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("activo")
+                    b.Property<bool>("Activo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("contrasenia")
+                    b.Property<string>("Contrasenia")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
-                    b.Property<string>("email")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
@@ -258,13 +264,13 @@ namespace Datos.Migrations
             modelBuilder.Entity("Dominio.Entidades.Ficha", b =>
                 {
                     b.HasOne("Dominio.Entidades.FrecuenciaRiego", "frecuenciaRiego")
-                        .WithMany()
+                        .WithMany("Fichas")
                         .HasForeignKey("frecuenciaRiegoid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Entidades.TipoIluminacion", "tipoIluminacion")
-                        .WithMany()
+                        .WithMany("Fichas")
                         .HasForeignKey("tipoIluminacionid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -279,19 +285,21 @@ namespace Datos.Migrations
 
             modelBuilder.Entity("Dominio.Entidades.Planta", b =>
                 {
-                    b.HasOne("Dominio.Entidades.Ficha", "ficha")
-                        .WithMany()
-                        .HasForeignKey("fichaid")
+                    b.HasOne("Dominio.Entidades.Ficha", "Ficha")
+                        .WithMany("Plantas")
+                        .HasForeignKey("FichaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Entidades.Usuario", "ingresadoPor")
+                    b.HasOne("Dominio.Entidades.TipoPlanta", "TipoPlanta")
                         .WithMany()
-                        .HasForeignKey("ingresadoPorid");
+                        .HasForeignKey("TipoPlantaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Dominio.Entidades.TipoPlanta", "tipo")
-                        .WithMany()
-                        .HasForeignKey("tipoid")
+                    b.HasOne("Dominio.Entidades.Usuario", "Usuario")
+                        .WithMany("PlantasIngresadas")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

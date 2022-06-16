@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using static Dominio.Entidades.Planta;
+using Microsoft.EntityFrameworkCore;
 
 namespace Datos
 {
@@ -68,17 +70,25 @@ namespace Datos
 
         public Planta FindById(int id)
         {
-            Planta user = null;
+            Planta plantaBD = null;
             try
             {
-                user = Db.Plantas.Find(id);
+               
+
+                //plantaBD = Db.Plantas.Include(x=>x.Ficha).ThenInclude(f=>f.tipoIluminacion)
+                //                  .Include(x=>x.Ficha).ThenInclude(f=>f.frecuenciaRiego)
+                //                  .Include(x=>x.TipoPlanta)
+                //                  .Where(x=>x.id == id).SingleOrDefault();
+                
+                plantaBD = Db.Plantas.Include(x=>x.Ficha.tipoIluminacion).Include(x => x.Ficha.frecuenciaRiego).Include(x => x.TipoPlanta).Include(x=>x.Usuario).Where(x => x.id == id).FirstOrDefault();
+
             }
             catch (Exception ex)
             {
                 //log de error
                 //notificacion               
             }
-            return user;
+            return plantaBD;
         }
 
         public IEnumerable<Planta> GetAll()
@@ -86,7 +96,7 @@ namespace Datos
             List<Planta> plantas = null;
             try
             {
-                plantas = Db.Plantas.ToList();
+                plantas = Db.Plantas.Include(x => x.Ficha.tipoIluminacion).Include(x => x.Ficha.frecuenciaRiego).Include(x => x.TipoPlanta).Include(x => x.Usuario).ToList();
             }
             catch (Exception ex)
             {
@@ -115,103 +125,38 @@ namespace Datos
 
         public Planta FindByName(string nombreCientifico)
         {
-            return Db.Plantas.Where(x => x.nombreCientifico.Equals(nombreCientifico)).SingleOrDefault();
+            return Db.Plantas.Include(x => x.Ficha.tipoIluminacion).Include(x => x.Ficha.frecuenciaRiego).Include(x => x.TipoPlanta).Include(x => x.Usuario).Where(x => x.nombreCientifico.Equals(nombreCientifico)).SingleOrDefault();
         }
-        public IEnumerable<Planta> QuerySearch(string nombre, int tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente)
+        
+
+        public IEnumerable<Planta> QuerySearch(string nombre, TipoPlanta tipoPlanta, int alturaMaximaDesde, int alturaMaximaHasta, int ambiente)
         {
-            int contador = 0;
-            int contadorControl = 0;
-            List<Planta> plantas = new List<Planta>();
-            string query = "SELECT * FROM Plantas WHERE ";
-
-            if (!String.IsNullOrEmpty(nombre))
-            {
-                query += "nombreCientifico LIKE @nombre or nombresVulgares LIKE @nombre";
-                contador++;                          
-            }
-            if (tipoPlanta != 0)
-            {
-                if (contador > contadorControl)
-                {
-                    query += " and";
-                    contadorControl++;
-                }
-                query += " tipo = @tipoPlanta";
-                contador++;
-            }
-            if (alturaMaximaDesde != 0)
-            {
-                if (contador != contadorControl)
-                {
-                    query += " and";
-                    contadorControl++;
-                }
-                query += " alturaMaxima >= @alturaMaximaDesde";
-                contador++;
-            }
-            if (alturaMaximaHasta != 0)
-            {
-                if (contador != contadorControl)
-                {
-                    query += " and";
-                    contadorControl++;
-                }
-                query += " alturaMaxima < @alturaMaximaHasta";
-                contador++;
-            }
-            if (ambiente != 0)
-            {
-                if (contador != contadorControl)
-                {
-                    query += " and";
-                    contadorControl++;
-                }
-                query += " ambiente = @ambiente";
-                contador++;
-            }
-
-            if (contador == 0)
-                query = "SELECT * from Plantas";
-            query += ";";
-            SqlConnection conexion = Conexion.ObtenerConexion();
-            SqlCommand com = new SqlCommand(query, conexion);
-            com.Parameters.AddWithValue("@nombre","%"+nombre+"%");
-            com.Parameters.AddWithValue("@tipoPlanta",tipoPlanta);
-            com.Parameters.AddWithValue("@alturaMaximaDesde", alturaMaximaDesde);
-            com.Parameters.AddWithValue("@alturaMaximaHasta",alturaMaximaHasta);
-            com.Parameters.AddWithValue("@ambiente",ambiente);
+            var plantas = GetAll();
+            
             try
-            {
-                Conexion.AbrirConexion(conexion);
-                SqlDataReader reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    Planta planta = new Planta()
-                    {
-                        id = reader.GetInt32(reader.GetOrdinal("id")),
-                        tipo = repoTiposPlanta.FindById(reader.GetInt32(1)),
-                        nombreCientifico = reader.GetString(2),
-                        nombresVulgares = reader.GetString(3),
-                        descripcion = reader.GetString(4),
-                        ambiente = (Planta.Ambiente)reader.GetInt32(5),
-                        alturaMaxima = reader.GetInt32(6),
-                        foto = reader.GetString(7),
-                        precio = reader.GetDecimal(8),
-                        ficha = repoFichas.FindById(reader.GetInt32(9)),
-                        ingresadoPor = repoUsuarios.FindById(reader.GetInt32(10)),
-                    };
-                    plantas.Add(planta);
-                }
+            {                
+                if (!string.IsNullOrWhiteSpace(nombre))
+                    plantas = plantas.Where(x => x.nombresVulgares.Contains(nombre) || x.nombreCientifico.Contains(nombre));
+                
+                if (tipoPlanta != null)
+                    plantas = plantas.Select(x => x).Where(x => x.TipoPlanta == tipoPlanta);
+
+                if (alturaMaximaDesde > 0)
+                    plantas = plantas.Where(x => x.alturaMaxima >= alturaMaximaDesde);
+
+                if (alturaMaximaHasta > 0)
+                    plantas = plantas.Where(x => x.alturaMaxima < alturaMaximaHasta);
+
+                if (ambiente != 0)
+                    plantas = plantas.Where(x => x.ambiente == (Ambiente)ambiente);               
             }
-            catch (Exception ex)
+            catch
             {
-                //log de error
-            }
-            finally
-            {
-                Conexion.CerrarYDesecharConexion(conexion);
+                return null;
             }
             return plantas;
         }
+
+
     }
 }

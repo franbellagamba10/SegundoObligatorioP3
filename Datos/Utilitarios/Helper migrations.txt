@@ -1,0 +1,3 @@
+﻿Cambiar migration en BD y en Consola --> Update-Database Inicial
+
+Remove-migration luego de cambiar y se borra la ultima

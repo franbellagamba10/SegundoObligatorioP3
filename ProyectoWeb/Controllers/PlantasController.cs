@@ -67,9 +67,9 @@ namespace ProyectoWeb.Controllers
                     ambiente = (Planta.Ambiente)plantaVM.ambiente,
                     precio = plantaVM.precio,
                     foto = plantaVM.foto+ nombreArchivo,
-                    ficha = ManejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
-                    ingresadoPor = ManejadorUsuarios.BuscarUsuarioPorSuEmail(HttpContext.Session.GetString("userEmail")),
-                    tipo = ManejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
+                    Ficha = ManejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
+                    Usuario = ManejadorUsuarios.BuscarUsuarioPorSuEmail(HttpContext.Session.GetString("userEmail")),
+                    TipoPlanta = ManejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
                 };                
 
                 bool pudeCrear = ManejadorPlantas.AgregarNuevaPlanta(planta);
@@ -114,14 +114,14 @@ namespace ProyectoWeb.Controllers
             planta.ambiente = (PlantaViewModel.Ambiente)plantaBD.ambiente;
             planta.precio = plantaBD.precio;
             planta.foto = plantaBD.foto;
-            planta.FichaSeleccionada = plantaBD.ficha;
-            planta.IdFichaSeleccionada = plantaBD.ficha.id;
-            planta.TipoPlantaSeleccionado = plantaBD.tipo;
-            planta.IdTipoPlantaSeleccionada = plantaBD.tipo.id;
-            planta.ingresadoPor = plantaBD.ingresadoPor;
+            planta.FichaSeleccionada = plantaBD.Ficha;
+            planta.IdFichaSeleccionada = plantaBD.Ficha.id;
+            planta.TipoPlantaSeleccionado = plantaBD.TipoPlanta;
+            planta.IdTipoPlantaSeleccionada = plantaBD.TipoPlanta.id;
+            planta.ingresadoPor = plantaBD.Usuario;
             
-            planta.Fichas = (IEnumerable<Ficha>)ManejadorPlantas.ObtenerTodasLasFichas();
-            planta.TiposPlanta = (IEnumerable<TipoPlanta>)ManejadorPlantas.TraerTodosLosTiposDePlanta();
+            planta.Fichas = ManejadorPlantas.ObtenerTodasLasFichas();
+            planta.TiposPlanta = ManejadorPlantas.TraerTodosLosTiposDePlanta();
             #endregion
             return View(planta);
         }
@@ -141,19 +141,19 @@ namespace ProyectoWeb.Controllers
                     ambiente = (Planta.Ambiente)plantaVM.ambiente,
                     precio = plantaVM.precio,
                     foto = plantaVM.foto,
-                    ficha = ManejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
-                    ingresadoPor = ManejadorUsuarios.BuscarUsuarioPorSuEmail(plantaVM.EmailUsuarioAutor),
-                    tipo = ManejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
+                    Ficha = ManejadorPlantas.ObtenerFichaPorId(plantaVM.IdFichaSeleccionada),
+                    Usuario = ManejadorUsuarios.BuscarUsuarioPorSuEmail(plantaVM.EmailUsuarioAutor),
+                    TipoPlanta = ManejadorPlantas.ObtenerTipoPlantaPorId(plantaVM.IdTipoPlantaSeleccionada),
                 
                 };
                 bool pudeEditar = ManejadorPlantas.ActualizarPlanta(planta);                
                 if (!pudeEditar)
                 {
-                    plantaVM.ingresadoPor = ManejadorUsuarios.BuscarUsuarioPorSuEmail(planta.ingresadoPor.email);
-                    plantaVM.FichaSeleccionada = planta.ficha;
-                    plantaVM.IdFichaSeleccionada = planta.ficha.id;
-                    plantaVM.TipoPlantaSeleccionado = planta.tipo;
-                    plantaVM.IdTipoPlantaSeleccionada = planta.tipo.id;
+                    plantaVM.ingresadoPor = ManejadorUsuarios.BuscarUsuarioPorSuEmail(planta.Usuario.Email);
+                    plantaVM.FichaSeleccionada = planta.Ficha;
+                    plantaVM.IdFichaSeleccionada = planta.Ficha.id;
+                    plantaVM.TipoPlantaSeleccionado = planta.TipoPlanta;
+                    plantaVM.IdTipoPlantaSeleccionada = planta.TipoPlanta.id;
                     plantaVM.Fichas = (IEnumerable<Ficha>)ManejadorPlantas.ObtenerTodasLasFichas();
                     plantaVM.TiposPlanta = (IEnumerable<TipoPlanta>)ManejadorPlantas.TraerTodosLosTiposDePlanta();
                     return View(plantaVM);
@@ -210,7 +210,8 @@ namespace ProyectoWeb.Controllers
         [HttpPost]
         public ActionResult Busqueda(string nombre, int tipoPlanta,int alturaMaximaDesde, int alturaMaximaHasta, int ambiente)
         {          
-            return View("Index", ManejadorPlantas.BusquedaPlantas(nombre, tipoPlanta, alturaMaximaDesde, alturaMaximaHasta, ambiente));
+
+            return View("Index", ManejadorPlantas.BusquedaPlantas(nombre, ManejadorPlantas.ObtenerTipoPlantaPorId(tipoPlanta), alturaMaximaDesde, alturaMaximaHasta, ambiente));
         }
         public bool EstoyLogueado()
         {

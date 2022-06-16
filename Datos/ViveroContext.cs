@@ -29,7 +29,20 @@ namespace Datos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Item>().HasKey(a => new { a.idPlanta, a.idCompra });
-        }    
+            modelBuilder.Entity<TipoIluminacion>().HasMany(ti => ti.Fichas).WithOne(f=>f.tipoIluminacion);
+            modelBuilder.Entity<FrecuenciaRiego>().HasMany(ti => ti.Fichas).WithOne(f => f.frecuenciaRiego);
+            
+            /*
+             * modelBuilder.Entity<Company>()
+             .HasMany(c => c.Employees)
+                 .WithOne(e => e.Company);
+             */
 
-    }
+
+            base.OnModelCreating(modelBuilder);
+        
+        }
+    }    
+
 }
+
