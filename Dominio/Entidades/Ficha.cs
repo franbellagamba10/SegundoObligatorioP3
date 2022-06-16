@@ -22,7 +22,7 @@ namespace Dominio.Entidades
         public int tipoIluminacionId { get; set; }
         [Required]
         public decimal temperatura { get; set; }
-        public IEnumerable<Planta>Plantas {get; set;} 
+        public List<Planta>Plantas {get; set;}
         public Ficha()
         {
 

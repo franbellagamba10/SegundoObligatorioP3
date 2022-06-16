@@ -29,15 +29,12 @@ namespace Datos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Item>().HasKey(a => new { a.idPlanta, a.idCompra });
-            modelBuilder.Entity<TipoIluminacion>().HasMany(ti => ti.Fichas).WithOne(f=>f.tipoIluminacion);
-            modelBuilder.Entity<FrecuenciaRiego>().HasMany(ti => ti.Fichas).WithOne(f => f.frecuenciaRiego);
-            
-            /*
-             * modelBuilder.Entity<Company>()
-             .HasMany(c => c.Employees)
-                 .WithOne(e => e.Company);
-             */
 
+            modelBuilder.Entity<TipoIluminacion>().HasMany(ti => ti.Fichas).WithOne(f => f.tipoIluminacion).OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<FrecuenciaRiego>().HasMany(ti => ti.Fichas).WithOne(f => f.frecuenciaRiego).OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<TipoPlanta>().HasMany(p => p.Plantas).WithOne(f => f.TipoPlanta).OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<Ficha>().HasMany(p => p.Plantas).WithOne(f => f.Ficha).OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<Usuario>().HasMany(p => p.PlantasIngresadas).WithOne(u => u.Usuario).OnDelete(DeleteBehavior.ClientCascade);
 
             base.OnModelCreating(modelBuilder);
         

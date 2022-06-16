@@ -258,13 +258,13 @@ namespace Datos.Migrations
                     b.HasOne("Dominio.Entidades.FrecuenciaRiego", "frecuenciaRiego")
                         .WithMany("Fichas")
                         .HasForeignKey("frecuenciaRiegoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Entidades.TipoIluminacion", "tipoIluminacion")
                         .WithMany("Fichas")
                         .HasForeignKey("tipoIluminacionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 
@@ -280,19 +280,19 @@ namespace Datos.Migrations
                     b.HasOne("Dominio.Entidades.Ficha", "Ficha")
                         .WithMany("Plantas")
                         .HasForeignKey("FichaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Entidades.TipoPlanta", "TipoPlanta")
-                        .WithMany()
+                        .WithMany("Plantas")
                         .HasForeignKey("TipoPlantaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Entidades.Usuario", "Usuario")
                         .WithMany("PlantasIngresadas")
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
