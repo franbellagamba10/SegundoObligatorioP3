@@ -42,15 +42,14 @@
 =======================================================================================================================================
 
 	Lista nueva Jueves 16/6
-
+	0. Hacer repo, y manejador de compras <-----------
+		PROBAR METODOS DE CLASE VARIABLESGLOBALES !!!!
 	1- Precarga de Usuarios con link en vista de Login.
 		Genera 3 usuarios que siga reglas de validez --> Si ya existen 3, genera 3 con nuevos ids, etc.
 
 	2- Input de Descripcion de TipoPlanta (en create) solo permite 30 caracteres, ampliar a maximo. Usar textfield?
 
-	3- Buscar TipoPlanta usar Contains(), actualmente busca cadena exacta.
-
-	4- Buscar Planta usar Contains(), actualmente busca cadena exacta.
+	
 
 	5- !!!! ALTA COMPRAS CON WebAPI, no requiere usuario logueado porque no tenemos API Token
 		Respuestas HTTP especificas!!
@@ -70,5 +69,7 @@
 	1. Podemos borrar el comportamiento de borrado en el MigrationSnapshot?
 			Nos permitiria controlar que cuando se borre una Compra, tambien se borre el item, pero cuando se borre una planta, no se borre el item
 			y quede como un recibo.
+
+	2. Que tipo de dato deberiamos usar para los impuestos, aranceles, bonificaciones? decimal o double? decimal no nos admite 
 
 	

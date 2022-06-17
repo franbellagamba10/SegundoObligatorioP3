@@ -32,6 +32,7 @@ namespace ProyectoWeb.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            
             if (!EstoyLogueado())
                 return RedirectToAction("Logout", "Usuarios");
             PlantaViewModel plantaVM = new PlantaViewModel

@@ -137,7 +137,7 @@ namespace Datos
             {                
                 if (!string.IsNullOrWhiteSpace(nombre))
                     plantas = plantas.Where(x => x.nombresVulgares.Contains(nombre) || x.nombreCientifico.Contains(nombre));
-                
+
                 if (tipoPlanta != null)
                     plantas = plantas.Select(x => x).Where(x => x.TipoPlanta == tipoPlanta);
 
@@ -148,7 +148,7 @@ namespace Datos
                     plantas = plantas.Where(x => x.alturaMaxima < alturaMaximaHasta);
 
                 if (ambiente != 0)
-                    plantas = plantas.Where(x => x.ambiente == (Ambiente)ambiente);               
+                    plantas = plantas.Where(x => x.ambiente == (Ambiente)ambiente);
             }
             catch
             {

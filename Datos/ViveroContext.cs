@@ -1,4 +1,5 @@
-﻿using Dominio.Entidades;
+﻿using Datos.Utilitarios;
+using Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Datos
     public class ViveroContext : DbContext
     {
         #region DBSets
-        
+
         public DbSet<Item> Items { get; set; }
         public DbSet<Compra> Compras { get; set; }
         public DbSet<CompraImportacion> ComprasImportacion { get; set; }
@@ -20,6 +21,7 @@ namespace Datos
         public DbSet<TipoIluminacion> TiposIluminacion { get; set; }
         public DbSet<TipoPlanta> TiposPlanta { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<VariablesGlobales> VariablesGlobales{ get; set; }
         #endregion
 
         public ViveroContext(DbContextOptions<ViveroContext> opciones) : base(opciones)
@@ -28,8 +30,8 @@ namespace Datos
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Item>().HasKey(a => new { a.PlantaId, a.CompraId }).IsClustered(); 
-
+            modelBuilder.Entity<Item>().HasKey(a => new { a.PlantaId, a.CompraId }).IsClustered();
+            modelBuilder.Entity<VariablesGlobales>().HasNoKey();
             modelBuilder.Entity<TipoIluminacion>().HasMany(ti => ti.Fichas).WithOne(f => f.tipoIluminacion).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<FrecuenciaRiego>().HasMany(ti => ti.Fichas).WithOne(f => f.frecuenciaRiego).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<TipoPlanta>().HasMany(p => p.Plantas).WithOne(f => f.TipoPlanta).OnDelete(DeleteBehavior.ClientCascade);
