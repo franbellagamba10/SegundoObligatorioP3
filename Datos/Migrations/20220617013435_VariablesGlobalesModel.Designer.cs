@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datos.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    [Migration("20220615234702_CorreccionModel1")]
-    partial class CorreccionModel1
+    [Migration("20220617013435_VariablesGlobalesModel")]
+    partial class VariablesGlobalesModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,20 @@ namespace Datos.Migrations
                 .HasAnnotation("ProductVersion", "3.1.25")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Datos.Utilitarios.VariablesGlobales", b =>
+                {
+                    b.Property<decimal>("IVA")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ImpuestoImportacion")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TasaArancelaria")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("VariablesGlobales");
+                });
 
             modelBuilder.Entity("Dominio.Entidades.Compra", b =>
                 {
@@ -89,13 +103,10 @@ namespace Datos.Migrations
 
             modelBuilder.Entity("Dominio.Entidades.Item", b =>
                 {
-                    b.Property<int>("idPlanta")
+                    b.Property<int>("PlantaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("idCompra")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Compraid")
+                    b.Property<int>("CompraId")
                         .HasColumnType("int");
 
                     b.Property<int>("cantidad")
@@ -104,9 +115,10 @@ namespace Datos.Migrations
                     b.Property<decimal>("precioUnidad")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("idPlanta", "idCompra");
+                    b.HasKey("PlantaId", "CompraId")
+                        .HasAnnotation("SqlServer:Clustered", true);
 
-                    b.HasIndex("Compraid");
+                    b.HasIndex("CompraId");
 
                     b.ToTable("Items");
                 });
@@ -233,8 +245,14 @@ namespace Datos.Migrations
                     b.Property<bool>("esSudamericana")
                         .HasColumnType("bit");
 
+                    b.Property<decimal>("impuestoImportacion")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("medidasSanitarias")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("tasaArancelaria")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasDiscriminator().HasValue("CompraImportacion");
                 });
@@ -260,21 +278,29 @@ namespace Datos.Migrations
                     b.HasOne("Dominio.Entidades.FrecuenciaRiego", "frecuenciaRiego")
                         .WithMany("Fichas")
                         .HasForeignKey("frecuenciaRiegoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Entidades.TipoIluminacion", "tipoIluminacion")
                         .WithMany("Fichas")
                         .HasForeignKey("tipoIluminacionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Dominio.Entidades.Item", b =>
                 {
-                    b.HasOne("Dominio.Entidades.Compra", null)
-                        .WithMany("lineas")
-                        .HasForeignKey("Compraid");
+                    b.HasOne("Dominio.Entidades.Compra", "Compra")
+                        .WithMany("Items")
+                        .HasForeignKey("CompraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Dominio.Entidades.Planta", "Planta")
+                        .WithMany()
+                        .HasForeignKey("PlantaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Dominio.Entidades.Planta", b =>
@@ -282,19 +308,19 @@ namespace Datos.Migrations
                     b.HasOne("Dominio.Entidades.Ficha", "Ficha")
                         .WithMany("Plantas")
                         .HasForeignKey("FichaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Entidades.TipoPlanta", "TipoPlanta")
-                        .WithMany()
+                        .WithMany("Plantas")
                         .HasForeignKey("TipoPlantaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Entidades.Usuario", "Usuario")
                         .WithMany("PlantasIngresadas")
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

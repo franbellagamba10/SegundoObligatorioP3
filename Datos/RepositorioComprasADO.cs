@@ -49,7 +49,7 @@ namespace Datos
 
         public Item FindByIds(int idPlanta, int idCompra) //CAMBIAR !!
         {
-            Item miItem = new Item { idCompra = 1, idPlanta = 1, cantidad = 1, precioUnidad = 200 };
+            Item miItem = new Item { CompraId = 1, PlantaId = 1, cantidad = 1, precioUnidad = 200 };
             return miItem;
         
         }

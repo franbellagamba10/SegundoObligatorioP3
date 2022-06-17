@@ -24,7 +24,7 @@ namespace Dominio.Entidades
         [RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$")] //testear Regex, no se si la precisamos asi de desarrollada
         public string Contrasenia { get; set; }
         public bool Activo { get; set; }
-        public IEnumerable<Planta> PlantasIngresadas { get; set; }
+        public List<Planta> PlantasIngresadas { get; set; }
         public Usuario()
         {
             Activo = true;

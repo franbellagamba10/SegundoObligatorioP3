@@ -2,14 +2,6 @@
 ====================================================================================================================
 |	REFACTOR DE ADO.NET A ENTITY FRAMEWORK
 |
-
-
-!!!!   SE ESTAN BORRANDO PLANTAS CON PKS DE TIPO PLANTA EXISTENTES, CONTROLAR ANTES DE BORRAR
-!!!!   SEGURAMENTE PASA CON OTROS OBJETOS: FICHA, TIPOILU, USUARIO ETC
-		Revisar el .Include cuando obtengo la planta para borrar
-
-
-
 |	1-	DATA ANNOTATIONS de clases que manejamos en primero obligatorio ---> Borramos Validaciones de clase (IValidate y metodos) y reemplazamos por data annotations
 |		- Usuario	 -> Contraseña -> Usar REGEX?
 |		- Planta	 -> No estabamos controlando la ficha como obligatoria, ahora se le puso [Required] pero revisar si es necesario
@@ -23,8 +15,7 @@
 |   2- Implementar clases que no manejamos en primer obligatorio con sus data annotations
 |
 |	3- Refactorizar metodos de repositorios para implementar Entity Framework
-|
-|	4- Crear migracion una vez (1) este terminado
+||	
 |
 |	5-  FindByName() de TipoIluminacion devuelve un objeto unico. No deberia devolver un Enumerable? Pueden haber varias coincidencias porque nombre no es Key
 |		Todos los FindByName() Validar en el INPUT que la cadena enviada para el metodo no sea vacia
@@ -48,14 +39,37 @@
 |	12 - WEB API -  public IActionResult Get() obtiene una lista de plantas, uso null para ver si la lista tiene algo. Usar null o count == 0?
 |
 |
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
+=======================================================================================================================================
+
+	Lista nueva Jueves 16/6
+	0. Hacer repo, y manejador de compras <-----------
+		PROBAR METODOS DE CLASE VARIABLESGLOBALES !!!!
+	1- Precarga de Usuarios con link en vista de Login.
+		Genera 3 usuarios que siga reglas de validez --> Si ya existen 3, genera 3 con nuevos ids, etc.
+
+	2- Input de Descripcion de TipoPlanta (en create) solo permite 30 caracteres, ampliar a maximo. Usar textfield?
+
+	
+
+	5- !!!! ALTA COMPRAS CON WebAPI, no requiere usuario logueado porque no tenemos API Token
+		Respuestas HTTP especificas!!
+
+	6- Listado de Compras a traves de MVC --> controller solo con ListarCompras() y vista Index
+					Listar todas las compras que incluyan un TipoPlanta especifico --> service WebApi
+
+	7- Compras retronadas: fechas, montos, datos de plantas compradas, cantidades de unidades, impuestos, precio unitario
+		
+		
+	8- idCompra, fecha, MontoTotal, nombres cientificos de items contenidos en compra, cantidad de cada planta comprada --> no se necesita estar logueado.
+				NO SE DEBE RETORNAR NINGUN DATO QUE NO SEAN ESTOS
+	=======================================================================================================================================================
+
+	PREGUNTAS A PLINIO
+
+	1. Podemos borrar el comportamiento de borrado en el MigrationSnapshot?
+			Nos permitiria controlar que cuando se borre una Compra, tambien se borre el item, pero cuando se borre una planta, no se borre el item
+			y quede como un recibo.
+
+	2. Que tipo de dato deberiamos usar para los impuestos, aranceles, bonificaciones? decimal o double? decimal no nos admite 
+
+	

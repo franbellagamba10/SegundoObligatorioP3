@@ -109,27 +109,25 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    frecuenciaRiegoid = table.Column<int>(nullable: false),
-                    idFrecuenciaRiego = table.Column<int>(nullable: false),
-                    tipoIluminacionid = table.Column<int>(nullable: false),
-                    idTipoIluminacion = table.Column<int>(nullable: false),
+                    frecuenciaRiegoId = table.Column<int>(nullable: false),
+                    tipoIluminacionId = table.Column<int>(nullable: false),
                     temperatura = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fichas", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Fichas_FrecuenciasRiego_frecuenciaRiegoid",
-                        column: x => x.frecuenciaRiegoid,
+                        name: "FK_Fichas_FrecuenciasRiego_frecuenciaRiegoId",
+                        column: x => x.frecuenciaRiegoId,
                         principalTable: "FrecuenciasRiego",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Fichas_TiposIluminacion_tipoIluminacionid",
-                        column: x => x.tipoIluminacionid,
+                        name: "FK_Fichas_TiposIluminacion_tipoIluminacionId",
+                        column: x => x.tipoIluminacionId,
                         principalTable: "TiposIluminacion",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,13 +155,13 @@ namespace Datos.Migrations
                         column: x => x.FichaId,
                         principalTable: "Fichas",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Plantas_TiposPlanta_TipoPlantaId",
                         column: x => x.TipoPlantaId,
                         principalTable: "TiposPlanta",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Plantas_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
@@ -173,14 +171,14 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fichas_frecuenciaRiegoid",
+                name: "IX_Fichas_frecuenciaRiegoId",
                 table: "Fichas",
-                column: "frecuenciaRiegoid");
+                column: "frecuenciaRiegoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fichas_tipoIluminacionid",
+                name: "IX_Fichas_tipoIluminacionId",
                 table: "Fichas",
-                column: "tipoIluminacionid");
+                column: "tipoIluminacionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_Compraid",

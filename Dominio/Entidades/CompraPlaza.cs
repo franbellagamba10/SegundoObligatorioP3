@@ -9,6 +9,7 @@ namespace Dominio.Entidades
     {
         [Required]
         public decimal IVA { get; set; }
+        [Required]
         public bool cobroFlete { get; set; }
         [Required]        
         public decimal costoEnvio { get; set; }
