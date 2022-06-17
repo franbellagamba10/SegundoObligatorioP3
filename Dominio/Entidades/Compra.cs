@@ -18,7 +18,7 @@ namespace Dominio.Entidades
 
         [Required]
         [MinLength(1)]
-        public List<Item> lineas { get; set; }
+        public List<Item> Items { get; set; }
 
 
         public abstract double GetTotal();

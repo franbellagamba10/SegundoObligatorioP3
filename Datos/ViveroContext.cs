@@ -28,14 +28,14 @@ namespace Datos
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Item>().HasKey(a => new { a.idPlanta, a.idCompra });
+            modelBuilder.Entity<Item>().HasKey(a => new { a.PlantaId, a.CompraId }).IsClustered(); 
 
             modelBuilder.Entity<TipoIluminacion>().HasMany(ti => ti.Fichas).WithOne(f => f.tipoIluminacion).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<FrecuenciaRiego>().HasMany(ti => ti.Fichas).WithOne(f => f.frecuenciaRiego).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<TipoPlanta>().HasMany(p => p.Plantas).WithOne(f => f.TipoPlanta).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<Ficha>().HasMany(p => p.Plantas).WithOne(f => f.Ficha).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<Usuario>().HasMany(p => p.PlantasIngresadas).WithOne(u => u.Usuario).OnDelete(DeleteBehavior.ClientCascade);
-
+            
             base.OnModelCreating(modelBuilder);
         
         }

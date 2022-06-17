@@ -4,16 +4,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 namespace Dominio.Entidades
 {
-    
+
     public class Item
     {
-        [Key]
-        [Required]
-        public int idPlanta { get; set; }
 
+        public Planta Planta { get; set; }
         [Key]
         [Required]
-        public int idCompra { get; set; }
+        public int PlantaId { get; set; }
+
+        public Compra Compra{get;set;}
+        [Key]
+        [Required]
+        public int CompraId { get; set; }
 
         [Required]
         [Range(0,int.MaxValue)]

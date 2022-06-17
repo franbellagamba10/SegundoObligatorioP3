@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Dominio.Entidades
 {
     public class CompraImportacion : Compra
     {
-        public static decimal impustoImportacion { get; set; }
+        [Required]
+        public decimal impuestoImportacion { get; set; }
+        [Required]
         public bool esSudamericana { get; set; }
-        public static decimal tasaArancelaria { get; set; }
+        [Required]
+        public decimal tasaArancelaria { get; set; }        
         public string medidasSanitarias { get; set; }
 
         public CompraImportacion()
