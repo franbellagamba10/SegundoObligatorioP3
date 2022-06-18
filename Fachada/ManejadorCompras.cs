@@ -28,5 +28,10 @@ namespace Fachada
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Compra> ObtenerTodasLasCompras()
+        {
+           return RepoCompras.GetAll();
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Datos.Utilitarios;
 
 namespace Datos
 {
@@ -13,15 +14,18 @@ namespace Datos
     {
         IRepositorioPlantas repoPlantas { get; set; }
         ViveroContext db { get; set; }
-        public RepositorioComprasEF(IRepositorioPlantas repoPlantas, ViveroContext ctx)
+        VariablesGlobales vg { get; set; }
+        public RepositorioComprasEF(IRepositorioPlantas repoPlantas, ViveroContext ctx,VariablesGlobales vg)
         {
             this.repoPlantas = repoPlantas;
             db = ctx;
+            this.vg = vg;
         }
 
         public bool Create(Compra obj)
         {
-            bool resultado = false;
+            bool resultado = false; //agregar validacion de COMPRA
+
             try
             {
                 db.Add(obj);
@@ -60,7 +64,7 @@ namespace Datos
             List<Compra> comprasBD = null;
             try
             {                
-                comprasBD = db.Compras.ToList();                
+                comprasBD = db.Compras.Include(c=>c.Items).ThenInclude(i=>i.Planta).ThenInclude(p=>p.TipoPlanta).ToList();                
             }
             catch (Exception ex)
             {
@@ -84,9 +88,7 @@ namespace Datos
             List<Compra> comprasDB = null;
             try
             {
-                comprasDB = db.Compras.Include(c => c.Items)
-                                  .ThenInclude(i => i.Planta)
-                                  .Where(c => c.Items
+                comprasDB = GetAll().Where(c => c.Items
                                         .Any(i => i.Planta.TipoPlantaId == idTP)).ToList();
             }
             catch (Exception)
@@ -95,6 +97,11 @@ namespace Datos
                 return null;
             }
             return comprasDB;
+        }
+
+        public decimal CalcularPrecioTotal(Compra compra)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -9,5 +9,6 @@ namespace Fachada
     {
         public IEnumerable<Compra> BuscarComprasPorTipoPlanta(int id);
         public bool DarDeAlta(Compra compraDatos);
+        public IEnumerable<Compra> ObtenerTodasLasCompras();
     }
 }

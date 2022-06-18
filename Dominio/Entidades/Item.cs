@@ -28,7 +28,7 @@ namespace Dominio.Entidades
                 
         public double GetSubTotal()
         {
-            double subtotal = 0;            
+            double subtotal = (double)Planta.precio * cantidad;           
             return subtotal;
         }        
     }

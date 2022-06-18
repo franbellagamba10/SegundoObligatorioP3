@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dominio.Entidades;
+using Dominio.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ViveroDTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,36 +15,98 @@ namespace Vivero.WebApi.Controllers
     [ApiController]
     public class ComprasController : ControllerBase
     {
-        // GET: api/<ComprasController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        public IRepositorioCompras RepoCompras { get; set; }
+
+        public ComprasController(IRepositorioCompras RepoCompras)
         {
-            return new string[] { "value1", "value2" };
+            this.RepoCompras = RepoCompras;
         }
 
-        // GET api/<ComprasController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        //[HttpGet("{id}")]
+        //[Route("{id}", Name = "Get")]
+        //public IActionResult FindById(int id)
+        //{
+        //    return RepoCompras.FindById(id);
+        //}
+
+
+        [HttpGet("compra/{idTipoPlanta}")]
+        public IActionResult Get(int idTipoPlanta)
         {
-            return "value";
+            try
+            {
+                if (idTipoPlanta == 0)
+                    return BadRequest();
+
+                IEnumerable<Compra> compraBD = RepoCompras.FindByTipoPlanta(idTipoPlanta);
+                IEnumerable<CompraDTO> dtos = compraBD.Select(compraBD => new CompraDTO()
+                {
+                    id = compraBD.id,
+                    fecha = compraBD.fecha,
+                    Items = compraBD.Items,
+
+                    impuestoImportacion = compraBD is CompraImportacion ? (compraBD as CompraImportacion).impuestoImportacion : 0,
+                    esSudamericana = compraBD is CompraImportacion ? (compraBD as CompraImportacion).esSudamericana : false,
+                    tasaArancelaria = compraBD is CompraImportacion ? (compraBD as CompraImportacion).tasaArancelaria : 0,
+                    medidasSanitarias = compraBD is CompraImportacion ? (compraBD as CompraImportacion).medidasSanitarias : string.Empty,
+
+                    IVA = compraBD is CompraPlaza ? (compraBD as CompraPlaza).IVA : 0,
+                    cobroFlete = compraBD is CompraPlaza ? (compraBD as CompraPlaza).cobroFlete : false,
+                    costoEnvio = compraBD is CompraPlaza ? (compraBD as CompraPlaza).costoEnvio : 0,
+                    
+                });
+
+                return Ok(dtos);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         // POST api/<ComprasController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("alta/compraImportacion")]
+        public IActionResult Post([FromBody] CompraImportacion compraImportacion)
         {
+            try
+            {
+                if (!ModelState.IsValid )
+                    return BadRequest();
+                //if (!ModelState.IsValid) return BadRequest();
+
+                bool ok = RepoCompras.Create(compraImportacion);
+                if (!ok) return Conflict();
+
+                return CreatedAtRoute("Get", new { id = compraImportacion.id }, compraImportacion);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
         }
 
-        // PUT api/<ComprasController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // POST api/<ComprasController>
+        [HttpPost]
+        [Route("alta/compraPlaza")]
+        public IActionResult Post([FromBody] CompraPlaza compraPlaza)
         {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest();
+                //if (!ModelState.IsValid) return BadRequest();
+
+                bool ok = RepoCompras.Create(compraPlaza);
+                if (!ok) return Conflict();
+
+                return CreatedAtRoute("Get", new { id = compraPlaza.id }, compraPlaza);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
         }
 
-        // DELETE api/<ComprasController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

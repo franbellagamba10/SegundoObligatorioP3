@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace ViveroDTOs
 {
-    public class ComprasDTO
+    public class CompraDTO
     {       
         public int id { get; set; }                
         public DateTime fecha { get; set; }        
-        public List<ItemDTO> Items { get; set; }        
+        public List<Item> Items { get; set; }        
         public decimal impuestoImportacion { get; set; }        
         public bool esSudamericana { get; set; }        
         public decimal tasaArancelaria { get; set; }
