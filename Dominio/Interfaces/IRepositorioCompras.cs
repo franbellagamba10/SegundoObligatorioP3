@@ -5,10 +5,8 @@ using System.Text;
 
 namespace Dominio.Interfaces
 {
-    public interface IRepositorioCompras
-    {   
-        public Item FindByIds(int idPlanta, int idCompra);
-        public IEnumerable<Item> FindAllById(int idCompra);
-        public IEnumerable<Item> GetAllItems();
+    public interface IRepositorioCompras : IRepositorio<Compra>
+    {
+        public IEnumerable<Compra> FindByTipoPlanta(int idTP);
     }
 }
