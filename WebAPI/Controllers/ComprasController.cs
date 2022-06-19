@@ -9,7 +9,7 @@ using ViveroDTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Vivero.WebApi.Controllers
+namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -31,6 +31,7 @@ namespace Vivero.WebApi.Controllers
 
 
         [HttpGet("compra/{idTipoPlanta}")]
+        [Route("{idTipoPlanta}", Name = "Get")]
         public IActionResult Get(int idTipoPlanta)
         {
             try
@@ -53,7 +54,7 @@ namespace Vivero.WebApi.Controllers
                     IVA = compraBD is CompraPlaza ? (compraBD as CompraPlaza).IVA : 0,
                     cobroFlete = compraBD is CompraPlaza ? (compraBD as CompraPlaza).cobroFlete : false,
                     costoEnvio = compraBD is CompraPlaza ? (compraBD as CompraPlaza).costoEnvio : 0,
-                    
+
                 });
 
                 return Ok(dtos);
@@ -71,7 +72,7 @@ namespace Vivero.WebApi.Controllers
         {
             try
             {
-                if (!ModelState.IsValid )
+                if (!ModelState.IsValid)
                     return BadRequest();
                 //if (!ModelState.IsValid) return BadRequest();
 

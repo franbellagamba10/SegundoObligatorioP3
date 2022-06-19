@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 //using Libreria.Dominio.InterfacesRepositorios;
 //using AccesoDatos.EF;
 
-namespace Libreria.WebApi
+namespace Vivero.WebApi
 {
     public class Startup
     {
@@ -36,7 +36,7 @@ namespace Libreria.WebApi
             string strCon = Configuration.GetConnectionString("ConexionApi");
             services.AddDbContext<ViveroContext>(options => options.UseSqlServer(strCon));
 
-            services.AddScoped<IRepositorioPlantas,RepositorioPlantasEF>();
+            services.AddScoped<IRepositorioCompras,RepositorioComprasEF>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +49,7 @@ namespace Libreria.WebApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

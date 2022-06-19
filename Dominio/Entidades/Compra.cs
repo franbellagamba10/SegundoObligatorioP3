@@ -23,8 +23,8 @@ namespace Dominio.Entidades
 
         public abstract double GetTotal();
         public Compra()
-        { 
+        {
 
-        }        
+        }
     }
 }

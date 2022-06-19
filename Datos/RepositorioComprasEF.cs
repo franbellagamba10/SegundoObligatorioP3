@@ -6,20 +6,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Datos.Utilitarios;
+using Dominio.Entidades.EntidadesAuxiliares;
 
 namespace Datos
 {
     public class RepositorioComprasEF : IRepositorioCompras
-    {
-        IRepositorioPlantas repoPlantas { get; set; }
-        ViveroContext db { get; set; }
-        VariablesGlobales vg { get; set; }
-        public RepositorioComprasEF(IRepositorioPlantas repoPlantas, ViveroContext ctx,VariablesGlobales vg)
+    {       
+        ViveroContext Db { get; set; }
+        public RepositorioComprasEF(ViveroContext ctx)
         {
-            this.repoPlantas = repoPlantas;
-            db = ctx;
-            this.vg = vg;
+            Db = ctx;
         }
 
         public bool Create(Compra obj)
@@ -28,8 +24,8 @@ namespace Datos
 
             try
             {
-                db.Add(obj);
-                db.SaveChanges();
+                Db.Add(obj);
+                Db.SaveChanges();
                 resultado = true;
             }
             catch
@@ -49,12 +45,12 @@ namespace Datos
             Compra compraBD = null;
             try
             {
-                compraBD = db.Compras.Include(c=>c.Items).Where(c => c.id == id).SingleOrDefault();
+                compraBD = Db.Compras.Include(c=>c.Items).Where(c => c.id == id).SingleOrDefault();
             }
             catch (Exception ex)
             {
                 //log de error
-                //notificacion               
+                //notificacion
             }
             return compraBD;
         }
@@ -63,8 +59,9 @@ namespace Datos
         {
             List<Compra> comprasBD = null;
             try
-            {                
-                comprasBD = db.Compras.Include(c=>c.Items).ThenInclude(i=>i.Planta).ThenInclude(p=>p.TipoPlanta).ToList();                
+            {
+                var test = Db.Plantas.ToList(); //<<----- BORRAR!!
+                comprasBD = Db.Compras.Include(c=>c.Items).ThenInclude(i=>i.Planta).ThenInclude(p=>p.TipoPlanta).ToList();                
             }
             catch (Exception ex)
             {
@@ -97,6 +94,12 @@ namespace Datos
                 return null;
             }
             return comprasDB;
+        }
+
+        public VariablesGlobales ObtenerVariablesGlobales()
+        {
+            var VG = Db.VariablesGlobales.FirstOrDefault();
+            return VG;
         }
 
         public decimal CalcularPrecioTotal(Compra compra)
