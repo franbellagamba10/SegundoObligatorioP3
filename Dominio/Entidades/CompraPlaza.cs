@@ -16,7 +16,7 @@ namespace Dominio.Entidades
 
         public CompraPlaza()
         {
-            
+            IVA = GetIVA();
         }
         public override double GetTotal()
         {
@@ -25,7 +25,7 @@ namespace Dominio.Entidades
             return total;
         }
 
-        public decimal UpdateIVA()
+        public decimal GetIVA()
         {
             decimal IVA = 0;
 

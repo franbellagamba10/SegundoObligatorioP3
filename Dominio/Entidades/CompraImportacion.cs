@@ -12,12 +12,12 @@ namespace Dominio.Entidades
         [Required]
         public bool esSudamericana { get; set; }
         [Required]
-        public decimal tasaArancelaria { get; set; }        
+        public decimal tasaArancelaria { get; set; }
         public string medidasSanitarias { get; set; }
 
         public CompraImportacion()
         {
-            
+
         }
         public override double GetTotal()
         {
@@ -25,19 +25,5 @@ namespace Dominio.Entidades
 
             return total;
         }
-
-        public decimal GetPuestoImportacion()
-        {
-            decimal total = 0;
-
-            return total;
-        }
-
-        public decimal GetTasaArancelaria()
-        {
-            decimal total = 0;
-
-            return total;
-        }
-    }
+    }        
 }

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Fachada;
 using Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
+using Dominio.Entidades.EntidadesAuxiliares;
 
 namespace ProyectoWeb
 {
@@ -37,7 +38,11 @@ namespace ProyectoWeb
             services.AddScoped<IRepositorio<Ficha>, RepositorioFichasEF>();
             services.AddScoped<IRepositorio<TipoIluminacion>, RepositorioTipoIluminacionEF>();
             services.AddScoped<IRepositorio<FrecuenciaRiego>, RepositorioFrecuenciaRiegoEF>();
-         
+            services.AddScoped<IRepositorioCompras, RepositorioComprasEF>();
+            
+          
+
+
             services.AddSession();
 
             services.AddDbContext<ViveroContext>(options =>

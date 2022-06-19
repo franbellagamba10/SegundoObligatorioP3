@@ -1,5 +1,6 @@
-﻿using Datos.Utilitarios;
+﻿using Datos;
 using Dominio.Entidades;
+using Dominio.Entidades.EntidadesAuxiliares;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -31,17 +32,17 @@ namespace Datos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Item>().HasKey(a => new { a.PlantaId, a.CompraId }).IsClustered();
+
             modelBuilder.Entity<VariablesGlobales>().HasNoKey();
             modelBuilder.Entity<TipoIluminacion>().HasMany(ti => ti.Fichas).WithOne(f => f.tipoIluminacion).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<FrecuenciaRiego>().HasMany(ti => ti.Fichas).WithOne(f => f.frecuenciaRiego).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<TipoPlanta>().HasMany(p => p.Plantas).WithOne(f => f.TipoPlanta).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<Ficha>().HasMany(p => p.Plantas).WithOne(f => f.Ficha).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<Usuario>().HasMany(p => p.PlantasIngresadas).WithOne(u => u.Usuario).OnDelete(DeleteBehavior.ClientCascade);
-            
-            base.OnModelCreating(modelBuilder);
-        
-        }
-    }    
+            modelBuilder.Entity<Compra>().HasMany(i => i.Items).WithOne(i=>i.Compra); //revisar si es necesario hacer esto
 
+            base.OnModelCreating(modelBuilder);        
+        }
+    }
 }
 
