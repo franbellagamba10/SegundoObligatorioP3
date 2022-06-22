@@ -23,7 +23,7 @@ namespace Dominio.Entidades
         public int cantidad { get; set; }
 
         [Required]
-        [Range(1, (double)decimal.MaxValue)]
+        [Range(1, int.MaxValue)]
         public decimal precioUnidad { get; set; }
 
 
@@ -32,9 +32,9 @@ namespace Dominio.Entidades
 
         }
 
-        public double GetSubTotal()
+        public decimal GetSubTotal()
         {
-            double subtotal = (double)Planta.precio * cantidad;
+            decimal subtotal = precioUnidad * cantidad;
             return subtotal;
         }
     }

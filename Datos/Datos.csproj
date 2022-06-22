@@ -43,6 +43,8 @@
     <Compile Remove="Migrations\20220621195513_OtroFix.Designer.cs" />
     <Compile Remove="Migrations\20220621235100_Nueva.cs" />
     <Compile Remove="Migrations\20220621235100_Nueva.Designer.cs" />
+    <Compile Remove="Migrations\20220622213814_Final.cs" />
+    <Compile Remove="Migrations\20220622213814_Final.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

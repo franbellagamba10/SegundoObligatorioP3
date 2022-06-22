@@ -24,7 +24,7 @@ namespace Dominio.Entidades
         {
             decimal total = 0;
             foreach (var item in base.Items)
-                total += item.precioUnidad * item.cantidad;
+                total += item.GetSubTotal();
  
             decimal precioTasaArancelaria = total * (tasaArancelaria / 100);
             total += precioTasaArancelaria;
