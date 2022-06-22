@@ -2,10 +2,13 @@
 using Fachada;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using ViveroDTOs;
 
 namespace ProyectoWeb.Controllers
 {
@@ -96,6 +99,27 @@ namespace ProyectoWeb.Controllers
         public IEnumerable<Compra> ObtenerTodasLasCompras()
         {
             return manejadorCompras.ObtenerTodasLasCompras();           
+        }
+        public ActionResult ComprasPorTipoPlantaId(int id)
+        {
+
+            HttpClient cliente = new HttpClient();
+            List<CompraDTO> dtos = new List<CompraDTO>();
+            Task<HttpResponseMessage> respuesta = cliente.GetAsync("http://localhost:5000/api/compras/ComprasTipoPlanta/"+ id);
+            respuesta.Wait();
+
+            if (respuesta.Result.IsSuccessStatusCode)
+            {
+                Task<string> contenido = respuesta.Result.Content.ReadAsStringAsync();
+                contenido.Wait();
+
+                string json = contenido.Result;
+                dtos = JsonConvert.DeserializeObject<List<CompraDTO>>(json);
+            }
+            else
+                ViewBag.Error = "No se han podido obtener las compras solicitadas";
+
+            return View(dtos);
         }
     }
 }

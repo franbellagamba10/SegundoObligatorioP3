@@ -4,14 +4,16 @@ using Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Datos.Migrations
 {
     [DbContext(typeof(ViveroContext))]
-    partial class ViveroContextModelSnapshot : ModelSnapshot
+    [Migration("20220621200735_PlantaModelFix")]
+    partial class PlantaModelFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,6 @@ namespace Datos.Migrations
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("costoTotal")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("fecha")
                         .HasColumnType("datetime2");
@@ -312,7 +311,7 @@ namespace Datos.Migrations
                         .IsRequired();
 
                     b.HasOne("Dominio.Entidades.TipoPlanta", "TipoPlanta")
-                        .WithMany()
+                        .WithMany("Plantas")
                         .HasForeignKey("TipoPlantaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

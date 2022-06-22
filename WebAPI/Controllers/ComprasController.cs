@@ -22,16 +22,16 @@ namespace WebAPI.Controllers
             this.RepoCompras = RepoCompras;
         }
 
-        //[HttpGet("{id}")]
-        //[Route("{id}", Name = "Get")]
-        //public IActionResult FindById(int id)
-        //{
-        //    return RepoCompras.FindById(id);
-        //}
+        [HttpGet]
+        [Route("ComprasId/{id}", Name = "FindById")]
+        public IActionResult FindById(int id)
+        {
+            return Ok(RepoCompras.FindById(id));
+        }
 
+        [HttpGet("{idTipoPlanta}")]
+        [Route("ComprasTipoPlanta/{idTipoPlanta}", Name = "Get")]
 
-        [HttpGet("compra/{idTipoPlanta}")]
-        [Route("{idTipoPlanta}", Name = "Get")]
         public IActionResult Get(int idTipoPlanta)
         {
             try
@@ -55,6 +55,7 @@ namespace WebAPI.Controllers
                     cobroFlete = compraBD is CompraPlaza ? (compraBD as CompraPlaza).cobroFlete : false,
                     costoEnvio = compraBD is CompraPlaza ? (compraBD as CompraPlaza).costoEnvio : 0,
 
+                    costoTotal = compraBD.costoTotal,
                 });
 
                 return Ok(dtos);
@@ -65,21 +66,19 @@ namespace WebAPI.Controllers
             }
         }
 
-        // POST api/<ComprasController>
-        [HttpPost]
-        [Route("alta/compraImportacion")]
+        [HttpPost("alta/compraImportacion")]
+        [Route("compraImportacion")]
         public IActionResult Post([FromBody] CompraImportacion compraImportacion)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest();
-                //if (!ModelState.IsValid) return BadRequest();
 
                 bool ok = RepoCompras.Create(compraImportacion);
                 if (!ok) return Conflict();
 
-                return CreatedAtRoute("Get", new { id = compraImportacion.id }, compraImportacion);
+                return CreatedAtRoute("FindById", new { id = compraImportacion.id }, compraImportacion);
             }
             catch (Exception ex)
             {
@@ -87,21 +86,20 @@ namespace WebAPI.Controllers
             }
         }
 
-        // POST api/<ComprasController>
-        [HttpPost]
-        [Route("alta/compraPlaza")]
+
+        [HttpPost("alta/CompraPlaza")]
+        [Route("CompraPlaza")]
         public IActionResult Post([FromBody] CompraPlaza compraPlaza)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest();
-                //if (!ModelState.IsValid) return BadRequest();
 
                 bool ok = RepoCompras.Create(compraPlaza);
                 if (!ok) return Conflict();
 
-                return CreatedAtRoute("Get", new { id = compraPlaza.id }, compraPlaza);
+                return CreatedAtRoute("FindById", new { id = compraPlaza.id}, compraPlaza);
             }
             catch (Exception ex)
             {

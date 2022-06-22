@@ -22,6 +22,19 @@ namespace Datos
         {
             bool resultado = false; //agregar validacion de COMPRA
 
+            VariablesGlobales VGs = ObtenerVariablesGlobales();
+            if (obj is CompraPlaza)
+            {
+                (obj as CompraPlaza).IVA = VGs.IVA;
+                obj.costoTotal = obj.CalcularTotal(VGs.IVA, 0);
+            }                
+            else
+            {
+                (obj as CompraImportacion).impuestoImportacion = VGs.ImpuestoImportacion;
+                (obj as CompraImportacion).tasaArancelaria = VGs.TasaArancelaria;
+                obj.costoTotal = obj.CalcularTotal(VGs.ImpuestoImportacion, VGs.TasaArancelaria);
+            }
+
             try
             {
                 Db.Add(obj);
@@ -45,7 +58,7 @@ namespace Datos
             Compra compraBD = null;
             try
             {
-                compraBD = Db.Compras.Include(c=>c.Items).Where(c => c.id == id).SingleOrDefault();
+                compraBD = Db.Compras.Include(c=>c.Items).ThenInclude(i=>i.Planta).ThenInclude(p=>p.Ficha).ThenInclude(f=>f.tipoIluminacion).Where(c => c.id == id).SingleOrDefault();
             }
             catch (Exception ex)
             {
@@ -60,8 +73,7 @@ namespace Datos
             List<Compra> comprasBD = null;
             try
             {
-                var test = Db.Plantas.ToList(); //<<----- BORRAR!!
-                comprasBD = Db.Compras.Include(c=>c.Items).ThenInclude(i=>i.Planta).ThenInclude(p=>p.TipoPlanta).ToList();                
+                comprasBD = Db.Compras.Select(x=>x).Include(c=>c.Items).ThenInclude(i=>i.Planta).ThenInclude(p=>p.TipoPlanta).ToList();                
             }
             catch (Exception ex)
             {
@@ -102,9 +114,6 @@ namespace Datos
             return VG;
         }
 
-        public decimal CalcularPrecioTotal(Compra compra)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

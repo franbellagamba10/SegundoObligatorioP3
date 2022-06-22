@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,13 +28,16 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddControllers().AddNewtonsoftJson(options =>
+            //         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddControllers().AddNewtonsoftJson(options =>
-                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             string strCon = Configuration.GetConnectionString("ConexionApi");
             services.AddDbContext<ViveroContext>(options => options.UseSqlServer(strCon));
 
             services.AddScoped<IRepositorioCompras, RepositorioComprasEF>();
+            //services.AddScoped<IRepositorioPlantas, RepositorioPlantasEF>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

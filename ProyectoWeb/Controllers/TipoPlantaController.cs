@@ -147,6 +147,10 @@ namespace ProyectoWeb.Controllers
         {
             return HttpContext.Session.GetInt32("userId") != null;
         }
+        public ActionResult IndexSinLogin()
+        {
+            return View(CargarTiposPlantaIndexFormateado());
+        }
     }
 }
 

@@ -16,20 +16,22 @@ namespace Dominio.Entidades
 
         public CompraPlaza()
         {
-            IVA = GetIVA();
+
         }
-        public override double GetTotal()
+
+        public override decimal CalcularTotal(decimal Iva, decimal parametroSinuso)
         {
-            double total = 0;
+            decimal total = 0;
+            foreach (var item in base.Items)
+                total += item.precioUnidad * item.cantidad;
+
+            var precioIVA = total * (Iva / 100);
+            total += precioIVA;
+            total += costoEnvio;
+ 
 
             return total;
         }
-
-        public decimal GetIVA()
-        {
-            decimal IVA = 0;
-
-            return IVA;
-        }
+       
     }
 }
