@@ -26,7 +26,7 @@ namespace ProyectoWeb.Controllers
         }
         [HttpGet]
         public ActionResult Login()
-        {            
+        {
             return View("Login");
         }
 
@@ -35,22 +35,30 @@ namespace ProyectoWeb.Controllers
         {
             Usuario user = null;
             user = manejadorUsuarios.BuscarUsuarioPorSuEmail(email);
-            if (user != null && user.Activo && user.Contrasenia == contrasenia)
+
+            if (user == null || user.Contrasenia != contrasenia)
             {
-                HttpContext.Session.SetInt32("userId", user.id);
-                
-                HttpContext.Session.SetString("userEmail", user.Email);
-                return RedirectToAction("Index", "Plantas");
-            }           
-            return View();
+                ViewBag.Error = "Usuario o contraseña incorrectos.";
+                return View();
+            }
+            if (user.Activo != true)
+            {
+                ViewBag.Error = "El usuario se encuentra desactivado.";
+                return View();
+            }
+
+           HttpContext.Session.SetInt32("userId", user.id);
+           HttpContext.Session.SetString("userEmail", user.Email);
+           return RedirectToAction("Index", "Plantas");
         }
-        
+
         public ActionResult Logout()
         {
             HttpContext.Session.Clear();
             var valor = HttpContext.Session.GetInt32("userId");
             return RedirectToAction("Login");
         }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -133,7 +141,11 @@ namespace ProyectoWeb.Controllers
         {
             return HttpContext.Session.GetInt32("userId") != null;
         }
+
+        [HttpGet]
+        public ActionResult GenerarUsuarios()
+        {
+            return View(manejadorUsuarios.GenerarUsuarios());
+        }
     }
-
-
 }

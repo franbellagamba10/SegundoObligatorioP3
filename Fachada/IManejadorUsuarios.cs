@@ -10,6 +10,7 @@ namespace Fachada
         bool AgregarNuevoUsuario(Usuario usuario);
         bool DarDeBajaUsuario(int id);
         public Usuario BuscarUsuarioPorSuEmail(string email);
-        public bool ActualizarUsuario(Usuario user);                
+        public bool ActualizarUsuario(Usuario user);
+        public List<string> GenerarUsuarios();
     }
 }

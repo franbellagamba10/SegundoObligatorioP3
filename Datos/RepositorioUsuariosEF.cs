@@ -16,12 +16,11 @@ namespace Datos
         public RepositorioUsuariosEF(ViveroContext ctx)
         {
             Db = ctx;
-           
         }
 
         public bool Create(Usuario obj)
         {
-            bool resultado = false;            
+            bool resultado = false;
             try
             {
                 Usuario unUser = FindByName(obj.Email);
@@ -68,12 +67,12 @@ namespace Datos
             Usuario user = null;
             try
             {
-                user = Db.Usuarios.Find(id);                
+                user = Db.Usuarios.Find(id);
             }
             catch (Exception ex)
             {
                 //log de error
-                //notificacion               
+                //notificacion
             }
             return user;
         }
@@ -88,7 +87,7 @@ namespace Datos
             catch (Exception ex)
             {
                 //log de error
-                //notificacion               
+                //notificacion
             }
             return users;
         }
@@ -107,9 +106,9 @@ namespace Datos
             catch (Exception ex)
             {
                 return false;
-            }            
+            }
         }
-               
+
         public Usuario FindByName(string mail) //Por Email
         {
             return Db.Usuarios.Where(x => x.Email.Equals(mail)).SingleOrDefault();
@@ -118,6 +117,30 @@ namespace Datos
         public bool YaExisteString(string cadena)
         {
             throw new NotImplementedException();
+        }
+
+        public List<string> GenerarUsuarios()
+        {
+            List<string> datos = new List<string>();
+            string datosUsuario = "";
+
+            for (int i = 0; i < 3; i++)
+            {
+                Usuario unUser = new Usuario()
+                {
+                    Email = "usuario{id}@email.com",
+                    Contrasenia = "UNpassword{id}"
+                };
+                Create(unUser);
+                unUser.Email = unUser.Email.Replace("{id}", unUser.id.ToString());
+                unUser.Contrasenia = unUser.Contrasenia.Replace("{id}", unUser.id.ToString());
+                Update(unUser);
+
+                datosUsuario = unUser.Email+" - "+unUser.Contrasenia;
+                datos.Add(datosUsuario);
+            }
+
+            return datos;
         }
     }
 }
