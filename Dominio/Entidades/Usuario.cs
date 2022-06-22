@@ -15,7 +15,7 @@ namespace Dominio.Entidades
         [Required]
         [EmailAddress(ErrorMessage = "El correo no es válido")]
         [MaxLength(50)]
-        [Display(Name = "Correo electrónico")]        
+        [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]

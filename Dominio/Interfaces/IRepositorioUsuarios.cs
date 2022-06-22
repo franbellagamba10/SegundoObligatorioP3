@@ -8,5 +8,6 @@ namespace Dominio.Interfaces
     public interface IRepositorioUsuarios : IRepositorio<Usuario>
     {
         public Usuario FindByName(string mail);
+        List<string> GenerarUsuarios();
     }
 }

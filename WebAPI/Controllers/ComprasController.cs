@@ -40,6 +40,9 @@ namespace WebAPI.Controllers
                     return BadRequest();
 
                 IEnumerable<Compra> compraBD = RepoCompras.FindByTipoPlanta(idTipoPlanta);
+                if (compraBD == null || compraBD.Count() == 0)
+                    return NotFound();
+
                 IEnumerable<CompraDTO> dtos = compraBD.Select(compraBD => new CompraDTO()
                 {
                     id = compraBD.id,

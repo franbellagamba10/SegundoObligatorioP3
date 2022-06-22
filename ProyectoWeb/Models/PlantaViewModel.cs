@@ -18,6 +18,7 @@ namespace ProyectoWeb.Models
         [Display(Name = "Nombres vulgares")]
         public string nombresVulgares { get; set; }
         [Display(Name = "Descripción")]
+        [StringLength(500, ErrorMessage = "La descripción debe tener entre {2} y {0} caracteres.", MinimumLength = 10)]
         public string descripcion { get; set; }
         [Display(Name = "Ambiente")]
         public Ambiente ambiente { get; set; }
@@ -26,6 +27,7 @@ namespace ProyectoWeb.Models
         [Display(Name = "Imágen")]
         public string foto { get; set; }
         [Display(Name = "Precio (UYU)")]
+        [Range(0.0, Double.MaxValue, ErrorMessage = "Precio inválido")]
         public decimal precio { get; set; }
         [Display(Name = "Autor")]
         public Usuario ingresadoPor { get; set; }

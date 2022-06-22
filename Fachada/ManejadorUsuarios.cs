@@ -33,6 +33,10 @@ namespace Fachada
         public bool ActualizarUsuario(Usuario user)
         {
             return RepoUsuarios.Update(user);
-        }        
+        }
+        public List<string> GenerarUsuarios()
+        {
+            return RepoUsuarios.GenerarUsuarios();
+        }
     }
 }
