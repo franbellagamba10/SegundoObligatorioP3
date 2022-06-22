@@ -38,6 +38,7 @@ namespace ProyectoWeb
             services.AddScoped<IRepositorio<Ficha>, RepositorioFichasEF>();
             services.AddScoped<IRepositorio<TipoIluminacion>, RepositorioTipoIluminacionEF>();
             services.AddScoped<IRepositorio<FrecuenciaRiego>, RepositorioFrecuenciaRiegoEF>();
+            services.AddScoped<IManejadorCompras, ManejadorCompras>();
             services.AddScoped<IRepositorioCompras, RepositorioComprasEF>();
             
           

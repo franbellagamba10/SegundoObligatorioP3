@@ -23,6 +23,26 @@
     <Compile Remove="Migrations\20220615234702_CorreccionModel1.Designer.cs" />
     <Compile Remove="Migrations\20220617001020_ItemCluster.cs" />
     <Compile Remove="Migrations\20220617001020_ItemCluster.Designer.cs" />
+    <Compile Remove="Migrations\20220620235118_ModelFinal.cs" />
+    <Compile Remove="Migrations\20220620235118_ModelFinal.Designer.cs" />
+    <Compile Remove="Migrations\20220621001937_OtroModel.cs" />
+    <Compile Remove="Migrations\20220621001937_OtroModel.Designer.cs" />
+    <Compile Remove="Migrations\20220621004014_ModelFinal.cs" />
+    <Compile Remove="Migrations\20220621004014_ModelFinal.Designer.cs" />
+    <Compile Remove="Migrations\20220621021055_ModelFinal.cs" />
+    <Compile Remove="Migrations\20220621021055_ModelFinal.Designer.cs" />
+    <Compile Remove="Migrations\20220621021342_Otrama.cs" />
+    <Compile Remove="Migrations\20220621021342_Otrama.Designer.cs" />
+    <Compile Remove="Migrations\20220621143634_ItemModelFix.cs" />
+    <Compile Remove="Migrations\20220621143634_ItemModelFix.Designer.cs" />
+    <Compile Remove="Migrations\20220621161656_ModelFinal.cs" />
+    <Compile Remove="Migrations\20220621161656_ModelFinal.Designer.cs" />
+    <Compile Remove="Migrations\20220621191649_ItemModelFix.cs" />
+    <Compile Remove="Migrations\20220621191649_ItemModelFix.Designer.cs" />
+    <Compile Remove="Migrations\20220621195513_OtroFix.cs" />
+    <Compile Remove="Migrations\20220621195513_OtroFix.Designer.cs" />
+    <Compile Remove="Migrations\20220621235100_Nueva.cs" />
+    <Compile Remove="Migrations\20220621235100_Nueva.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

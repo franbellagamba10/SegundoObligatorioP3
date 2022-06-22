@@ -43,16 +43,18 @@
                             @Html.DisplayFor(modelItem => item.descripcion)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.id })
-                            @Html.ActionLink("Details", "Details", new { id = item.id })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id }) | 
+                            @Html.ActionLink("Details", "Details", new { id = item.id }) | 
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id }) | 
+                            @Html.ActionLink("Ver Compras", "ComprasPorTipoPlantaId", "Compras", new { id = item.id},null )
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-        }
-        else
-        {
-        <h3 style="color:red">Lo sentimos, no hay ningun tipo de planta disponible</h3>}
+ }
+else
+{
+        <h3 style="color:red">Lo sentimos, no hay ningun tipo de planta disponible</h3>
+}
 

@@ -19,10 +19,18 @@ namespace Dominio.Entidades
         {
 
         }
-        public override double GetTotal()
-        {
-            double total = 0;
 
+        public override decimal CalcularTotal(decimal impuestoImportacion, decimal tasaArancelaria)
+        {
+            decimal total = 0;
+            foreach (var item in base.Items)
+                total += item.precioUnidad * item.cantidad;
+ 
+            decimal precioTasaArancelaria = total * (tasaArancelaria / 100);
+            total += precioTasaArancelaria;
+
+            total += impuestoImportacion;
+            
             return total;
         }
     }        

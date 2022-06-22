@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ViveroDTOs.CompraDTO>
+
+@{
+    ViewData["Title"] = "ComprasPorTipoPlantaId";
+}
+@if (Model.Count() != 0)
+{
+<h1>Compras por Tipo de Planta</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                @*El id de la compra, la fecha, el total, los nombres científicos y la cantidad de cada planta comprada.*@
+                <th>
+                    @Html.DisplayNameFor(model => model.id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fecha)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.costoEnvio)
+                </th>
+                <th>
+                    @*//Html.DisplayNameFor(model=> model.CalcularTotal())*@
+                    @Html.DisplayNameFor(model => model.costoTotal)
+                </th>
+                <th>
+                    @Html.DisplayName("Nombres cientificos / cantidad")
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.costoEnvio)
+                    </td>
+                    <th>
+                        @item.costoTotal
+                    </th>
+                    <td>
+                        @item.ObtenerNombresCientificosYCantidades()
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3 style="color:red">No hay resultados para el criterio de búsqueda.</h3>
+}
+
+

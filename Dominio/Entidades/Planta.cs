@@ -56,7 +56,7 @@ namespace Dominio.Entidades
         public Ficha Ficha { get; set; }
         public int FichaId { get; set; }
 
-
+        public List<Item> Items { get; set; }
         public Planta()
         {
             

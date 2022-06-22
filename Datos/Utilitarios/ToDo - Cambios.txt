@@ -66,10 +66,8 @@
 
 	PREGUNTAS A PLINIO
 
-	1. Podemos borrar el comportamiento de borrado en el MigrationSnapshot?
-			Nos permitiria controlar que cuando se borre una Compra, tambien se borre el item, pero cuando se borre una planta, no se borre el item
-			y quede como un recibo.
+		1. ALTA COMPRA EN POSTMAN: La devolucion no devuelve el objeto Planta dentro del item. Es necesaria? No estoy estableciendo relacion entre Item -> Planta
 
-	2. Que tipo de dato deberiamos usar para los impuestos, aranceles, bonificaciones? decimal o double? decimal no nos admite 
-
-	
+		2. Borre el objeto Compra de Item y deje solo el CompraId, porque esto genera problemas con el serializador cuando tiene que pasar la data a CompraDTO. 
+			El problema es que Compra es abstracto, y cuando el serializador lo construye no puede instanciarlo.
+				HAY QUE PROBAR CREAR ITEMS (POSTMAN) Y VER QUE QUEDEN CON EL CompraId bien asignado, se deberia asignar automaticamente despues de ingresar la Compra

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Text.Json.Serialization;
+
 namespace Dominio.Entidades
 {
 
@@ -12,8 +14,6 @@ namespace Dominio.Entidades
         [Key]
         [Required]
         public int PlantaId { get; set; }
-
-        public Compra Compra{get;set;}
         [Key]
         [Required]
         public int CompraId { get; set; }
@@ -25,11 +25,17 @@ namespace Dominio.Entidades
         [Required]
         [Range(1, (double)decimal.MaxValue)]
         public decimal precioUnidad { get; set; }
-                
+
+
+        Item()
+        {
+
+        }
+
         public double GetSubTotal()
         {
-            double subtotal = (double)Planta.precio * cantidad;           
+            double subtotal = (double)Planta.precio * cantidad;
             return subtotal;
-        }        
+        }
     }
 }

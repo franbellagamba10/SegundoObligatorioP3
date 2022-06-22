@@ -33,7 +33,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Datos\Datos.csproj" />
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
-    <ProjectReference Include="..\Fachada\Fachada.csproj" />    
+    <ProjectReference Include="..\Fachada\Fachada.csproj" />
+    <ProjectReference Include="..\ViveroDTOs\ViveroDTOs.csproj" />    
   </ItemGroup>
 
   <ItemGroup>

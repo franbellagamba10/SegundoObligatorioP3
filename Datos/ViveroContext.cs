@@ -27,21 +27,28 @@ namespace Datos
 
         public ViveroContext(DbContextOptions<ViveroContext> opciones) : base(opciones)
         {
-            
+
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Item>().HasKey(a => new { a.PlantaId, a.CompraId }).IsClustered();
+            modelBuilder.Entity<Item>().HasKey(a => new { a.PlantaId, a.CompraId});
+            modelBuilder.Entity<Compra>().HasMany(i => i.Items);
 
             modelBuilder.Entity<VariablesGlobales>().HasNoKey();
             modelBuilder.Entity<TipoIluminacion>().HasMany(ti => ti.Fichas).WithOne(f => f.tipoIluminacion).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<FrecuenciaRiego>().HasMany(ti => ti.Fichas).WithOne(f => f.frecuenciaRiego).OnDelete(DeleteBehavior.ClientCascade);
-            modelBuilder.Entity<TipoPlanta>().HasMany(p => p.Plantas).WithOne(f => f.TipoPlanta).OnDelete(DeleteBehavior.ClientCascade);
-            modelBuilder.Entity<Ficha>().HasMany(p => p.Plantas).WithOne(f => f.Ficha).OnDelete(DeleteBehavior.ClientCascade);
-            modelBuilder.Entity<Usuario>().HasMany(p => p.PlantasIngresadas).WithOne(u => u.Usuario).OnDelete(DeleteBehavior.ClientCascade);
-            modelBuilder.Entity<Compra>().HasMany(i => i.Items).WithOne(i=>i.Compra); //revisar si es necesario hacer esto
+            //modelBuilder.Entity<TipoPlanta>().HasMany(p => p.Plantas).WithOne(f => f.TipoPlanta).OnDelete(DeleteBehavior.ClientCascade);
+            //modelBuilder.Entity<Ficha>().HasMany(p => p.Plantas).WithOne(f => f.Ficha).OnDelete(DeleteBehavior.ClientCascade);
+            //modelBuilder.Entity<Usuario>().HasMany(p => p.PlantasIngresadas).WithOne(u => u.Usuario).OnDelete(DeleteBehavior.ClientCascade);
 
-            base.OnModelCreating(modelBuilder);        
+            modelBuilder.Entity<Planta>().HasOne(p=>p.Ficha);
+            modelBuilder.Entity<Planta>().HasOne(p => p.TipoPlanta);
+            modelBuilder.Entity<Planta>().HasOne(p => p.Usuario);
+
+            modelBuilder.Entity<Item>().HasOne(i => i.Planta).WithMany(p => p.Items);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

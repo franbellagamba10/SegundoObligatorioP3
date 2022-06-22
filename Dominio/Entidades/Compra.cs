@@ -20,11 +20,19 @@ namespace Dominio.Entidades
         [MinLength(1)]
         public List<Item> Items { get; set; }
 
-
-        public abstract double GetTotal();
+        public decimal costoTotal { get; set; }
         public Compra()
         {
-
+            fecha = DateTime.Now;
         }
+        public abstract decimal CalcularTotal(decimal impuestoUno, decimal impuestoDos);
+
+
+
+
+
+
+
+
     }
 }
