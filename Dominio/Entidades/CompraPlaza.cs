@@ -23,12 +23,11 @@ namespace Dominio.Entidades
         {
             decimal total = 0;
             foreach (var item in base.Items)
-                total += item.precioUnidad * item.cantidad;
+                total += item.GetSubTotal();
 
             var precioIVA = total * (Iva / 100);
             total += precioIVA;
-            total += costoEnvio;
- 
+            total += costoEnvio; 
 
             return total;
         }

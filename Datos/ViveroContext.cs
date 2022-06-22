@@ -38,13 +38,13 @@ namespace Datos
             modelBuilder.Entity<VariablesGlobales>().HasNoKey();
             modelBuilder.Entity<TipoIluminacion>().HasMany(ti => ti.Fichas).WithOne(f => f.tipoIluminacion).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<FrecuenciaRiego>().HasMany(ti => ti.Fichas).WithOne(f => f.frecuenciaRiego).OnDelete(DeleteBehavior.ClientCascade);
-            //modelBuilder.Entity<TipoPlanta>().HasMany(p => p.Plantas).WithOne(f => f.TipoPlanta).OnDelete(DeleteBehavior.ClientCascade);
-            //modelBuilder.Entity<Ficha>().HasMany(p => p.Plantas).WithOne(f => f.Ficha).OnDelete(DeleteBehavior.ClientCascade);
-            //modelBuilder.Entity<Usuario>().HasMany(p => p.PlantasIngresadas).WithOne(u => u.Usuario).OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<TipoPlanta>().HasMany(p => p.Plantas).WithOne(f => f.TipoPlanta).OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<Ficha>().HasMany(p => p.Plantas).WithOne(f => f.Ficha).OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<Usuario>().HasMany(p => p.PlantasIngresadas).WithOne(u => u.Usuario).OnDelete(DeleteBehavior.ClientCascade);
 
-            modelBuilder.Entity<Planta>().HasOne(p=>p.Ficha);
-            modelBuilder.Entity<Planta>().HasOne(p => p.TipoPlanta);
-            modelBuilder.Entity<Planta>().HasOne(p => p.Usuario);
+            //modelBuilder.Entity<Planta>().HasOne(p=>p.Ficha);
+            //modelBuilder.Entity<Planta>().HasOne(p => p.TipoPlanta);
+            //modelBuilder.Entity<Planta>().HasOne(p => p.Usuario);
 
             modelBuilder.Entity<Item>().HasOne(i => i.Planta).WithMany(p => p.Items);
 

@@ -98,7 +98,7 @@ namespace ProyectoWeb.Controllers
         }
         public IEnumerable<Compra> ObtenerTodasLasCompras()
         {
-            return manejadorCompras.ObtenerTodasLasCompras();           
+            return manejadorCompras.ObtenerTodasLasCompras();
         }
         public ActionResult ComprasPorTipoPlantaId(int id)
         {

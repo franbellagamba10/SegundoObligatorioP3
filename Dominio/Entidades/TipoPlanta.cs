@@ -21,10 +21,10 @@ namespace Dominio.Entidades
         [StringLength(200, ErrorMessage = "La descripción debe tener entre {2} y {0} caracteres.", MinimumLength = 10)]
         [Display(Name = "Descripción")]
         public string descripcion { get; set; }
-        //public List<Planta> Plantas { get; set; } 
+        public List<Planta> Plantas { get; set; } 
         public TipoPlanta()
         {
-            
-        }        
+
+        }
     }
 }

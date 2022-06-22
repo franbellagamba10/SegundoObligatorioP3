@@ -41,7 +41,7 @@ namespace Datos
                 Db.SaveChanges();
                 resultado = true;
             }
-            catch
+            catch(Exception ex)
             {
                 return resultado;
             }
